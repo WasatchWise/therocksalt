@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, type FormEvent, type ChangeEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import { submitMusicSubmission } from '@/app/submit/actions'
 import { GENRE_OPTIONS, REFERRAL_SOURCE_OPTIONS } from '@/types/submission'
 
@@ -9,6 +10,7 @@ interface FormErrors {
 }
 
 export default function MusicSubmissionForm() {
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null)
   const [errors, setErrors] = useState<FormErrors>({})
@@ -151,13 +153,18 @@ export default function MusicSubmissionForm() {
       const result = await submitMusicSubmission(formData)
 
       if (result.success) {
-        setSubmitStatus({ type: 'success', message: result.message || 'Submission successful!' })
-        formRef.current?.reset()
-        setPhotoPreview(null)
-        setMusicFileName(null)
-        setSelectedAdditionalGenres([])
-        setBioLength(0)
-        setDescriptionLength(0)
+        // Redirect to success page if redirectUrl is provided
+        if (result.redirectUrl) {
+          router.push(result.redirectUrl)
+        } else {
+          setSubmitStatus({ type: 'success', message: result.message || 'Submission successful!' })
+          formRef.current?.reset()
+          setPhotoPreview(null)
+          setMusicFileName(null)
+          setSelectedAdditionalGenres([])
+          setBioLength(0)
+          setDescriptionLength(0)
+        }
       } else {
         setSubmitStatus({ type: 'error', message: result.error || 'Submission failed' })
       }

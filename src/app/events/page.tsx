@@ -18,6 +18,15 @@ export default async function EventsPage() {
   const upcomingEvents = events.filter(e => e.start_time && new Date(e.start_time) >= now)
   const pastEvents = events.filter(e => e.start_time && new Date(e.start_time) < now)
 
+  // Sort by tier (hof -> featured -> free) then by start_time
+  const tierOrder = { hof: 0, featured: 1, free: 2 }
+  upcomingEvents.sort((a, b) => {
+    const tierA = tierOrder[a.tier as keyof typeof tierOrder] ?? 2
+    const tierB = tierOrder[b.tier as keyof typeof tierOrder] ?? 2
+    if (tierA !== tierB) return tierA - tierB
+    return new Date(a.start_time!).getTime() - new Date(b.start_time!).getTime()
+  })
+
   return (
     <Container className="py-12">
       <div className="mb-12 text-center">
@@ -39,7 +48,136 @@ export default async function EventsPage() {
               const month = eventDate.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
               const day = eventDate.getDate()
               const time = eventDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).toUpperCase()
+              const tier = event.tier || 'free'
 
+              // FREE TIER - Simple, compact listing
+              if (tier === 'free') {
+                return (
+                  <article
+                    key={event.id}
+                    className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-lg p-4 shadow hover:shadow-md transition-all"
+                  >
+                    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                          {event.name}
+                        </h3>
+                        {event.venue && (
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            {event.venue.name} • {month} {day} at {time}
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-black text-gray-900 dark:text-white">$10</div>
+                        <div className="text-xs text-gray-500">At Door</div>
+                      </div>
+                    </div>
+                  </article>
+                )
+              }
+
+              // ROCK & ROLL HOF TIER - MASSIVE, premium treatment
+              if (tier === 'hof') {
+                return (
+                  <article
+                    key={event.id}
+                    className="relative bg-gradient-to-br from-red-900 via-purple-900 to-red-900 border-8 border-yellow-400 rounded-3xl overflow-hidden shadow-2xl hover:shadow-yellow-400/70 transition-all duration-500 hover:scale-[1.03] animate-pulse"
+                  >
+                    {/* PREMIUM BADGE */}
+                    <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 text-gray-900 px-8 py-3 rounded-full font-black text-xl uppercase shadow-2xl border-4 border-white animate-bounce">
+                      ⭐ ROCK & ROLL HALL OF FAME ⭐
+                    </div>
+
+                    {/* SPOTLIGHT ANIMATION */}
+                    <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-yellow-400 via-red-500 via-purple-500 to-yellow-400 animate-pulse"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-r from-yellow-400 via-red-500 via-purple-500 to-yellow-400 animate-pulse"></div>
+
+                    <div className="p-8 md:p-12 pt-20">
+                      <div className="flex flex-col lg:flex-row gap-8 items-start">
+                        {/* LEFT: GIANT DATE BOX */}
+                        <div className="flex-shrink-0 bg-gradient-to-br from-red-600 to-red-800 text-white rounded-2xl p-6 text-center shadow-2xl border-4 border-yellow-400">
+                          <div className="text-lg font-bold">{dayOfWeek}</div>
+                          <div className="text-2xl font-black">{month}</div>
+                          <div className="text-7xl font-black leading-none my-2">{day}</div>
+                          <div className="text-4xl font-black text-yellow-300">{time}</div>
+                        </div>
+
+                        {/* MIDDLE: EVENT INFO */}
+                        <div className="flex-1">
+                          <h3 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400 mb-6 leading-tight tracking-tight uppercase">
+                            {event.name}
+                          </h3>
+
+                          {event.venue && (
+                            <div className="flex items-center gap-3 text-yellow-300 mb-6 text-2xl font-bold">
+                              <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                              </svg>
+                              <span>{event.venue.name}</span>
+                              {event.venue.city && (
+                                <span className="text-white">• {event.venue.city}</span>
+                              )}
+                            </div>
+                          )}
+
+                          {event.description && (
+                            <p className="text-white text-xl mb-6 leading-relaxed">
+                              {event.description}
+                            </p>
+                          )}
+
+                          {event.event_bands && event.event_bands.length > 0 && (
+                            <div className="flex flex-wrap gap-3 mb-6">
+                              <span className="text-lg font-black text-yellow-300 uppercase tracking-wide">
+                                Featuring:
+                              </span>
+                              {event.event_bands
+                                .map(eb => eb.band?.name)
+                                .filter(Boolean)
+                                .map((bandName, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="px-6 py-3 text-lg bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-full font-black uppercase shadow-xl border-2 border-white"
+                                  >
+                                    {bandName}
+                                  </span>
+                                ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* RIGHT: MASSIVE PRICE */}
+                        <div className="flex-shrink-0 text-center lg:text-right">
+                          <div className="bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-400 text-gray-900 rounded-3xl p-8 mb-6 shadow-2xl border-8 border-white">
+                            <div className="text-lg font-black uppercase tracking-wider">Tickets</div>
+                            <div className="text-8xl md:text-9xl font-black leading-none my-3">
+                              $10
+                            </div>
+                            <div className="text-lg font-bold uppercase">At Door</div>
+                          </div>
+
+                          {event.ticket_url && (
+                            <a
+                              href={event.ticket_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-3 px-10 py-6 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white text-2xl font-black rounded-2xl transition-all duration-200 shadow-2xl hover:shadow-yellow-400/50 hover:scale-110 uppercase border-4 border-yellow-400"
+                            >
+                              GET TICKETS NOW
+                              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                              </svg>
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                )
+              }
+
+              // FEATURED TIER - Current marquee style
               return (
                 <article
                   key={event.id}

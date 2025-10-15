@@ -187,7 +187,8 @@ export async function submitMusicSubmission(formData: FormData) {
     return {
       success: true,
       data,
-      message: 'Submission received! We\'ll review your music and be in touch soon.'
+      message: 'Submission received! We\'ll review your music and be in touch soon.',
+      redirectUrl: `/submit/success?band=${encodeURIComponent(bandName)}&email=${encodeURIComponent(contactEmail)}&id=${data.id}`
     }
   } catch (error) {
     if (process.env.NODE_ENV === 'development') {

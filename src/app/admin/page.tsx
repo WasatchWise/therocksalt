@@ -144,6 +144,9 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
           <div className="flex gap-4">
+            <Link href="/admin/music-submissions" className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+              Music Submissions
+            </Link>
             <Link href="/admin/venues" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
               Manage Venues
             </Link>
