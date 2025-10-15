@@ -20,166 +20,172 @@ export default async function EventsPage() {
 
   return (
     <Container className="py-12">
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-          Events
+      <div className="mb-12 text-center">
+        <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+          LIVE SHOWS
         </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          Catch live performances from Salt Lake City&apos;s best local talent.
+        <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-semibold">
+          Salt Lake City&apos;s Best Live Music
         </p>
       </div>
 
-      {/* Upcoming Events */}
+      {/* Upcoming Events - MARQUEE STYLE */}
       {upcomingEvents.length > 0 && (
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Upcoming Shows
-          </h2>
-          <div className="space-y-6">
-            {upcomingEvents.map((event) => (
-              <article
-                key={event.id}
-                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                      {event.name}
-                    </h3>
+          <div className="space-y-8">
+            {upcomingEvents.map((event) => {
+              const eventDate = new Date(event.start_time!)
+              const dayOfWeek = eventDate.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase()
+              const month = eventDate.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
+              const day = eventDate.getDate()
+              const time = eventDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).toUpperCase()
 
-                    {event.start_time && (
-                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-3">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <time>
-                          {new Date(event.start_time).toLocaleDateString('en-US', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                            hour: 'numeric',
-                            minute: '2-digit'
-                          })}
-                        </time>
+              return (
+                <article
+                  key={event.id}
+                  className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-4 border-yellow-400 rounded-2xl overflow-hidden shadow-2xl hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-[1.02]"
+                >
+                  {/* MARQUEE LIGHTS EFFECT */}
+                  <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 animate-pulse"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 animate-pulse"></div>
+
+                  <div className="p-6 md:p-8">
+                    <div className="flex flex-col lg:flex-row gap-6 items-start">
+                      {/* LEFT: DATE BOX */}
+                      <div className="flex-shrink-0 bg-red-600 text-white rounded-xl p-4 text-center shadow-xl border-2 border-yellow-400">
+                        <div className="text-sm font-bold">{dayOfWeek}</div>
+                        <div className="text-lg font-black">{month}</div>
+                        <div className="text-5xl font-black leading-none my-1">{day}</div>
+                        <div className="text-2xl font-black text-yellow-300">{time}</div>
                       </div>
-                    )}
 
-                    {event.venue && (
-                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-4">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="font-medium">{event.venue.name}</span>
-                        {event.venue.address && (
-                          <span className="text-sm">• {event.venue.address}</span>
+                      {/* MIDDLE: EVENT INFO */}
+                      <div className="flex-1">
+                        <h3 className="text-3xl md:text-5xl font-black text-white mb-3 leading-tight tracking-tight uppercase">
+                          {event.name}
+                        </h3>
+
+                        {event.venue && (
+                          <div className="flex items-center gap-2 text-yellow-300 mb-4 text-xl font-bold">
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <span>{event.venue.name}</span>
+                            {event.venue.city && (
+                              <span className="text-gray-300">• {event.venue.city}</span>
+                            )}
+                          </div>
+                        )}
+
+                        {event.description && (
+                          <p className="text-gray-300 text-lg mb-4 leading-relaxed">
+                            {event.description}
+                          </p>
+                        )}
+
+                        {event.event_bands && event.event_bands.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            <span className="text-sm font-black text-yellow-300 uppercase tracking-wide">
+                              Featuring:
+                            </span>
+                            {event.event_bands
+                              .map(eb => eb.band?.name)
+                              .filter(Boolean)
+                              .map((bandName, idx) => (
+                                <span
+                                  key={idx}
+                                  className="px-4 py-2 text-sm bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-full font-black uppercase shadow-lg"
+                                >
+                                  {bandName}
+                                </span>
+                              ))}
+                          </div>
                         )}
                       </div>
-                    )}
 
-                    {event.description && (
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {event.description}
-                      </p>
-                    )}
+                      {/* RIGHT: PRICE & TICKETS */}
+                      <div className="flex-shrink-0 text-center lg:text-right">
+                        {/* PRICE - BIG AND BOLD */}
+                        <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 rounded-2xl p-6 mb-4 shadow-2xl border-4 border-white">
+                          <div className="text-sm font-black uppercase tracking-wider">Tickets</div>
+                          <div className="text-6xl md:text-7xl font-black leading-none my-2">
+                            $10
+                          </div>
+                          <div className="text-sm font-bold uppercase">At Door</div>
+                        </div>
 
-                    {event.event_bands && event.event_bands.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                          Featuring:
-                        </span>
-                        {event.event_bands
-                          .map(eb => eb.band?.name)
-                          .filter(Boolean)
-                          .map((bandName, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-1 text-sm bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 rounded-full font-medium"
-                            >
-                              {bandName}
-                            </span>
-                          ))}
+                        {event.ticket_url && (
+                          <a
+                            href={event.ticket_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white text-xl font-black rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 uppercase border-2 border-yellow-400"
+                          >
+                            GET TICKETS
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                          </a>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
 
-                  {event.ticket_url && (
-                    <a
-                      href={event.ticket_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors self-start"
-                    >
-                      Get Tickets
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
+                  {/* CORNER ACCENT */}
+                  <div className="absolute top-4 right-4 bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg font-black text-sm uppercase shadow-lg rotate-3">
+                    LIVE
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </section>
       )}
 
-      {/* Past Events */}
+      {/* Past Events - Minimized */}
       {pastEvents.length > 0 && (
-        <section>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+        <section className="mt-20">
+          <h2 className="text-2xl font-bold text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wide">
             Past Shows
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-2">
             {pastEvents.map((event) => (
-              <article
+              <div
                 key={event.id}
-                className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4 opacity-75"
+                className="bg-gray-100 dark:bg-gray-800/30 border border-gray-300 dark:border-gray-700 rounded-lg p-3 opacity-60"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                      {event.name}
-                    </h3>
-                    {event.start_time && (
-                      <time className="text-sm text-gray-500 dark:text-gray-400">
-                        {new Date(event.start_time).toLocaleDateString('en-US', {
-                          month: 'long',
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
-                      </time>
-                    )}
-                  </div>
-                  {event.venue && (
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                      {event.venue.name}
-                    </span>
-                  )}
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">{event.name}</span>
+                  <span className="text-sm text-gray-500">
+                    {event.start_time && new Date(event.start_time).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </span>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </section>
       )}
 
       {events.length === 0 && (
-        <div className="text-center py-20">
-          <div className="text-6xl mb-4">🎫</div>
-          <p className="text-xl text-gray-500 dark:text-gray-400">
-            No events scheduled yet. Check back soon!
+        <div className="text-center py-20 bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl border-4 border-yellow-400">
+          <div className="text-8xl mb-6">🎸</div>
+          <p className="text-3xl font-black text-white uppercase">
+            No Shows Yet!
+          </p>
+          <p className="text-xl text-gray-300 mt-2">
+            Check back soon for upcoming events
           </p>
         </div>
       )}
 
       {/* Submit Your Event Section */}
-      <section id="submit" className="mt-20 pt-12 border-t border-gray-200 dark:border-gray-700">
+      <section id="submit" className="mt-20 pt-12 border-t-4 border-yellow-400">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Submit Your Event
+          <h2 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4 uppercase">
+            Submit Your Show
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Hosting a music event in Salt Lake City? Share it with our community! We&apos;ll review your submission and feature it on our events calendar.
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-semibold">
+            Got a show? Get it on the calendar! We&apos;ll review and feature it here.
           </p>
         </div>
 
