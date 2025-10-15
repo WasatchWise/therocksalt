@@ -1,0 +1,678 @@
+{
+  "bands": [
+    {
+      "slug": "chelsea-grin",
+      "name": "Chelsea Grin",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2007,
+      "status": "active",
+      "description": "Deathcore metal band signed to major labels (Artery/Rise Records), one of Utah's most globally recognized metal acts.",
+      "history": "Formed in 2007 in SLC, Chelsea Grin has released 6 studio albums and toured internationally. Known for aggressive live shows and millions of streams, they represent Utah on the world metal stage.",
+      "genres": ["Deathcore", "Metal"]
+    },
+    {
+      "slug": "cult-leader",
+      "name": "Cult Leader",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2013,
+      "status": "active",
+      "description": "Hardcore/metal band spawned from the ashes of Gaza, signed to Deathwish Inc.",
+      "history": "Formed in 2013 after Gaza disbanded. Members were veterans of the local hardcore community. Gained national recognition in the hardcore/metal scene with multiple albums on Jacob Bannon's Deathwish Inc. label. Have toured the U.S. and Europe.",
+      "genres": ["Hardcore", "Metal"]
+    },
+    {
+      "slug": "eagle-twin",
+      "name": "Eagle Twin",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2007,
+      "status": "active",
+      "description": "Two-piece experimental doom/blues metal band on Southern Lord Records.",
+      "history": "Formed in 2007 as a two-piece experimental doom/blues metal band. Earned critical acclaim on Southern Lord Records and have toured internationally. Their sludgy sound and longevity (15+ years) make them stalwarts of the local heavy music scene.",
+      "genres": ["Doom Metal", "Experimental"]
+    },
+    {
+      "slug": "fictionist",
+      "name": "Fictionist",
+      "origin_city": "Provo",
+      "state": "UT",
+      "formed_year": 2008,
+      "disbanded_year": 2018,
+      "status": "dissolved",
+      "description": "Provo-based indie rock band that nearly signed with Atlantic Records.",
+      "history": "Active 2008-2018, often played in SLC venues. Released multiple albums, nearly signed with Atlantic Records, and opened for acts like Imagine Dragons. Regularly featured in local press and on KRCL. Had regional name recognition.",
+      "genres": ["Indie Rock"]
+    },
+    {
+      "slug": "form-of-rocket",
+      "name": "Form of Rocket",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2000,
+      "status": "dissolved",
+      "description": "Post-hardcore/math rock band, a local favorite noted for high-energy sound.",
+      "history": "Active in the 2000s, this SLC band was a local favorite noted for their high-energy math-rock sound. One of co-owner Will Sartain's favorites at Kilby Court. With two acclaimed albums and appearances at local festivals (like Crucialfest), they influenced the 2000s SLC underground rock scene.",
+      "genres": ["Post-Hardcore", "Math Rock"]
+    },
+    {
+      "slug": "iceburn",
+      "name": "Iceburn",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1991,
+      "status": "active",
+      "description": "Pioneering jazz-core/post-hardcore band signed to Revelation Records.",
+      "history": "Formed in 1991 blending hardcore, metal, and jazz. Signed to Revelation Records in the '90s. Gained an international cult following for their experimental style and are regarded as local legends. Their innovative fusion style put SLC on the map in the post-hardcore underground.",
+      "genres": ["Jazz-Core", "Post-Hardcore", "Experimental"]
+    },
+    {
+      "slug": "imagine-dragons",
+      "name": "Imagine Dragons",
+      "origin_city": "Las Vegas",
+      "state": "NV",
+      "formed_year": 2008,
+      "status": "active",
+      "description": "Multi-platinum pop/rock band with Utah roots (Dan Reynolds from Utah).",
+      "history": "While formed in Las Vegas, the band's early lineup had roots in Utah's music scene. Singer Dan Reynolds is from Utah and the band cut its teeth playing Provo venues. By 2012 they achieved multi-platinum worldwide success. Famously played an early show at Kilby Court before breaking big.",
+      "genres": ["Pop", "Rock", "Alternative"]
+    },
+    {
+      "slug": "insight",
+      "name": "Insight",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1987,
+      "disbanded_year": 1990,
+      "status": "dissolved",
+      "description": "The first SLC band to fully embrace straight-edge hardcore movement.",
+      "history": "Active 1987-1990, Insight was the first SLC band to fully embrace the straight-edge hardcore movement. Built a dedicated local and national following in the hardcore scene. They espoused drug-free and progressive ideals, influencing countless SLC hardcore bands that followed. Their 1989 EP Standing Strong on Soulforce Records is a touchstone of SLC hardcore history.",
+      "genres": ["Hardcore Punk", "Straight Edge"]
+    },
+    {
+      "slug": "idkhow",
+      "name": "I Don't Know How But They Found Me",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2016,
+      "status": "active",
+      "description": "Indie pop/alt rock duo featuring Dallon Weekes (ex-Panic! at the Disco) and Ryan Seaman.",
+      "history": "Formed in 2016 as a duo featuring Dallon Weekes (formerly of Panic! at the Disco and The Brobecks) and Ryan Seaman (also ex-Brobecks), both originating from SLC's music scene. IDKHBTFM has a huge online following and Billboard charting hits. They represent the modern wave of SLC-bred talent reaching national audiences.",
+      "genres": ["Indie Pop", "Alternative Rock"]
+    },
+    {
+      "slug": "the-national-parks",
+      "name": "The National Parks",
+      "origin_city": "Provo",
+      "state": "UT",
+      "formed_year": 2013,
+      "status": "active",
+      "description": "Indie folk band beloved statewide with dedicated national fanbase.",
+      "history": "Provo-based indie folk band formed in 2013, beloved statewide. Have several albums and a dedicated national fanbase, and have headlined regional festivals. They credit early gigs at Kilby Court for helping launch their career. Their uplifting folk-pop sound and touring success make them one of Utah's prominent musical exports in the 2010s.",
+      "genres": ["Folk Pop", "Indie"]
+    },
+    {
+      "slug": "neon-trees",
+      "name": "Neon Trees",
+      "origin_city": "Provo",
+      "state": "UT",
+      "formed_year": 2005,
+      "status": "active",
+      "description": "New wave/pop rock band with platinum hits in the early 2010s.",
+      "history": "Formed in Provo in 2005, Neon Trees exploded to fame with platinum hits in the early 2010s. They cut their teeth in Utah's all-ages venues and even played tiny Kilby Court before topping charts. With national tours (including opening for The Killers) and multiple Top-40 singles, they are among Utah's most successful modern rock bands.",
+      "genres": ["New Wave", "Pop Rock"]
+    },
+    {
+      "slug": "the-osmonds",
+      "name": "The Osmonds",
+      "origin_city": "Ogden",
+      "state": "UT",
+      "formed_year": 1958,
+      "status": "active",
+      "description": "Utah's original pop superstars with international fame in the '70s.",
+      "history": "Utah's original pop superstars from Ogden, active since the 1960s. While not part of the underground scene, their international fame in the '70s put Utah on the music industry's radar. They paved the way for Utah's entertainment industry and are cultural icons.",
+      "genres": ["Pop"]
+    },
+    {
+      "slug": "red-bennies",
+      "name": "Red Bennies",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1995,
+      "status": "active",
+      "description": "Long-running SLC garage/alternative rock band led by David Payne.",
+      "history": "A longtime SLC garage/alternative rock band led by singer/guitarist David Payne. Active from the mid-1990s through 2010s, releasing numerous albums and frequently headlining local clubs. They were a favorite local live act and helped sustain SLC's rock scene in the late '90s and 2000s.",
+      "genres": ["Garage Rock", "Alternative"]
+    },
+    {
+      "slug": "royal-bliss",
+      "name": "Royal Bliss",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1997,
+      "status": "active",
+      "description": "Hard rock band known for DIY ethos, played 1000+ shows.",
+      "history": "SLC rock band formed in 1997, known for a hard-working DIY ethos. They've played 1000+ shows, released 8 albums, and even scored a deal with Capitol Records in the 2000s. Royal Bliss regularly headlines local festivals and remains one of Utah's best-known rock bands regionally, with a loyal fanbase after 25+ years.",
+      "genres": ["Hard Rock"]
+    },
+    {
+      "slug": "subrosa",
+      "name": "SubRosa",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2005,
+      "disbanded_year": 2019,
+      "status": "dissolved",
+      "description": "Experimental doom metal band with electric violins, internationally acclaimed.",
+      "history": "Active 2005-2019, achieved international acclaim in the metal press. Their albums made Decibel Magazine's Top 40 lists, and they played major festivals (Roadburn, etc.). SubRosa's unique mix of crushing riffs and electric violins put Utah's doom scene on the map.",
+      "genres": ["Doom Metal", "Experimental"]
+    },
+    {
+      "slug": "swim-herschel-swim",
+      "name": "Swim Herschel Swim",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1987,
+      "disbanded_year": 1993,
+      "status": "dissolved",
+      "description": "Legendary SLC ska/punk band known for wild live shows.",
+      "history": "A legendary SLC ska/punk band active in the late '80s/early '90s. Known for wild live shows and helped establish Utah's ska scene. One of the first Utah ska bands to tour regionally, they hold a fond place in local music history.",
+      "genres": ["Ska", "Punk"]
+    },
+    {
+      "slug": "talia-keys",
+      "name": "Talia Keys",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2010,
+      "status": "active",
+      "description": "Prolific singer-songwriter and multi-instrumentalist known for high-energy funk/rock/soul.",
+      "history": "A prolific SLC singer-songwriter and multi-instrumentalist known for high-energy performances with her band (Talia Keys & The Love). Active since the 2010s, she's a staple at Utah music festivals and a vocal activist. Has been featured on KRCL and opened for national acts, making her one of the prominent faces of the current local music scene.",
+      "genres": ["Funk", "Rock", "Soul"]
+    },
+    {
+      "slug": "the-used",
+      "name": "The Used",
+      "origin_city": "Orem",
+      "state": "UT",
+      "formed_year": 2001,
+      "status": "active",
+      "description": "Emo/post-hardcore band with platinum debut in 2002, one of Utah's most famous exports.",
+      "history": "Though originating from Orem, The Used became one of Utah's most famous rock exports with their 2002 platinum debut. They emerged from the Utah County hardcore scene and quickly gained international fame, influencing a generation of post-hardcore bands. Their success opened industry eyes to Utah's music talent pool.",
+      "genres": ["Emo", "Post-Hardcore"]
+    },
+    {
+      "slug": "victims-willing",
+      "name": "Victims Willing",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1983,
+      "status": "active",
+      "description": "One of SLC's longest-running punk bands, mainstay of '80s hardcore.",
+      "history": "Formed in 1983, one of SLC's longest-running punk bands. Mainstay of the '80s hardcore scene, known for a crossover punk/metal sound and relentless DIY spirit. Played with punk legends (opening for Danzig and D.R.I.) and is revered as an OG band in SLC's punk history.",
+      "genres": ["Punk", "Hardcore"]
+    },
+    {
+      "slug": "clear",
+      "name": "Clear",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1995,
+      "disbanded_year": 2000,
+      "status": "dissolved",
+      "description": "Nationally significant straight-edge hardcore band, the only Utah hardcore band well-known out of state.",
+      "history": "Formed in 1995 and played their first show in February 1996. Produced a sound that was a fusion of heavy punk and heavy metal (metalcore). Released 'The Sickness Must End' (7\" record, 1996) and 'Deeper Than Blood' (full-length CD, 1999) on Stillborn Records. They were the only Utah hardcore band well-known out of state and seemed positioned to 'make it big.' The band dissolved in 2000 due to growing pains and diverging musical tastes.",
+      "genres": ["Straight Edge", "Hardcore", "Metalcore"]
+    },
+    {
+      "slug": "the-brobecks",
+      "name": "The Brobecks",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2002,
+      "disbanded_year": 2013,
+      "status": "reunited",
+      "description": "Indie rock band fronted by Dallon Weekes, precursor to IDKHOW.",
+      "history": "Formed in 2002 in Salt Lake City, growing out of the previous band 1000 West. Fronted by Dallon Weekes (lead vocals, bass, main songwriter). Released four studio albums. Ryan Seaman was drummer 2008-2009. Weekes later joined Panic! at the Disco (2009-2017) before founding IDKHOW. The Brobecks reunited in 2025 with a remastered album and new material.",
+      "genres": ["Indie Rock", "Power Pop"]
+    },
+    {
+      "slug": "gaza",
+      "name": "Gaza",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2004,
+      "disbanded_year": 2013,
+      "status": "dissolved",
+      "description": "Mathcore/grindcore band known for extreme sounds.",
+      "history": "Active 2004-2013. Influential Salt Lake City heavy music band known for extreme sounds. Released three albums before disbanding in March 2013. Members went on to form Cult Leader.",
+      "genres": ["Mathcore", "Grindcore", "Metalcore"]
+    },
+    {
+      "slug": "the-backseat-lovers",
+      "name": "The Backseat Lovers",
+      "origin_city": "Provo",
+      "state": "UT",
+      "formed_year": 2018,
+      "status": "active",
+      "description": "Indie rock band with viral hit 'Kilby Girl', signed to Capitol Records.",
+      "history": "Formed in Provo in 2018. Members: Joshua Harmon (vocals/guitar), Jonas Swanson (guitar), KJ Ward (bass), Juice Welch (drums). Achieved viral success with 'Kilby Girl', an ode to Kilby Court. The song broke into Billboard's rock airplay chart in 2021. Self-released debut before signing to Capitol Records. Released 'Waiting to Spill' in 2022.",
+      "genres": ["Indie Rock"]
+    },
+    {
+      "slug": "club-mungo",
+      "name": "CLUB MUNGO",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2023,
+      "status": "active",
+      "description": "Local hip-hop group, made first performance at Kilby Court in February 2023.",
+      "genres": ["Hip-Hop"]
+    },
+    {
+      "slug": "strawberry-cough",
+      "name": "Strawberry Cough",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2023,
+      "status": "active",
+      "description": "Local band that performed their first show at Kilby Court.",
+      "genres": ["Rock"]
+    },
+    {
+      "slug": "worlds-worst",
+      "name": "Worlds Worst",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 2020,
+      "status": "active",
+      "description": "Punk group with national buzz.",
+      "genres": ["Punk"]
+    },
+    {
+      "slug": "fancy-ladz",
+      "name": "Fancy Ladz",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "description": "Popular local punk band.",
+      "genres": ["Punk"]
+    },
+    {
+      "slug": "american-humor",
+      "name": "American Humor",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "description": "Favorite local punk band.",
+      "genres": ["Punk"]
+    },
+    {
+      "slug": "spitting-teeth",
+      "name": "Spitting Teeth",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1978,
+      "status": "dissolved",
+      "description": "1978 punk pioneers, hosted one of SLC's first punk shows at University of Utah.",
+      "genres": ["Punk"]
+    },
+    {
+      "slug": "the-atheists",
+      "name": "The Atheists",
+      "origin_city": "Salt Lake City",
+      "state": "UT",
+      "formed_year": 1979,
+      "status": "dissolved",
+      "description": "Late 1970s punk band.",
+      "genres": ["Punk"]
+    }
+  ],
+  "venues": [
+    {
+      "slug": "speedway-cafe",
+      "name": "The Speedway Café",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "closed",
+      "capacity": 290,
+      "address": "505 W. 500 S.",
+      "notes": "Perhaps the most legendary venue in SLC's underground history. A 7,000 sq ft former warehouse (1986-1990) that became a refuge for punk, hardcore, and alternative music. Founders Paul Maritsas and Zay Speed obtained a rare 'brown bag' permit (BYOB) allowing alcohol and under-21 kids at the same time - an ingenious workaround to Utah's strict liquor laws. Often packed 500-700 people into a space legally meant for 290. Hosted Dead Kennedys (infamous flag burning incident), GWAR, 7 Seconds, Fishbone, Soundgarden, Ministry and more. Closure in 1990 marked 'the end of anarchy in Salt Lake.'"
+    },
+    {
+      "slug": "kilby-court",
+      "name": "Kilby Court",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "capacity": 200,
+      "notes": "Established in 1999 by Phil Sherburne in a small garage down an alley. SLC's longest-running all-ages venue. Legendary for its intimate atmosphere and has hosted early shows by then-unknown artists like Vampire Weekend, Mitski, Mac Miller, Doja Cat, MGMT, My Chemical Romance. Sold to Will Sartain and Lance Saunders (S&S Presents) in 2008. Celebrated 25th anniversary in 2024. Spawned the annual Kilby Block Party festival at Utah State Fairpark."
+    },
+    {
+      "slug": "urban-lounge",
+      "name": "Urban Lounge",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "capacity": 300,
+      "notes": "Founded in 2001. A 21+ downtown SLC bar and music venue fostering local talent and touring acts. Formerly the 'Holy Cow' bar in the '90s. S&S Presents venue known for excellent sound. Hosts broad genres: indie acts (Tame Impala, Glass Animals) and hip-hop (Waka Flocka Flame, Big KRIT)."
+    },
+    {
+      "slug": "the-depot",
+      "name": "The Depot",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "capacity": 1200,
+      "notes": "Opened in 2006 in the historic Union Pacific Train Station downtown. Four-story layout with professional production. Early years featured indie/alt acts (Sigur Rós, My Morning Jacket, Built to Spill), later expanded to diverse headliners (Robert Plant, Dua Lipa, Snoop Dogg). Part of Live Nation circuit."
+    },
+    {
+      "slug": "metro-music-hall",
+      "name": "Metro Music Hall",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "capacity": 600,
+      "notes": "Formerly 'Club Sound/In The Venue' in the 2000s, re-launched as Metro in 2017. 21+ (occasionally all-ages). Preferred venue for metal, hardcore, and industrial shows - home for SLC's heavy music scene."
+    },
+    {
+      "slug": "the-complex",
+      "name": "The Complex",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "capacity": 2500,
+      "notes": "Opened c.2010. Warehouse-style venue complex with four stages (capacities 300-2500). Hosts indie, hip-hop, EDM, K-pop with flexible all-ages configurations. Rockwell room is one of the only indoor spaces in SLC for ~2,000+ attendees."
+    },
+    {
+      "slug": "the-state-room",
+      "name": "The State Room",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "capacity": 300,
+      "notes": "Opened in 2009. 21+, seated, cozy upscale venue known for excellent acoustics. Specializes in Americana, folk, jazz, and singer-songwriters."
+    },
+    {
+      "slug": "soundwell",
+      "name": "Soundwell",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "capacity": 600,
+      "notes": "Opened ~2018. 21+, newer downtown venue with focus on EDM, hip-hop, and dance nights. Modern club atmosphere for local DJs and electronic acts alongside national artists."
+    },
+    {
+      "slug": "liquid-joes",
+      "name": "Liquid Joe's",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "address": "1249 E 3300 S",
+      "notes": "Opened April 1996. Premier SLC club fostering local bands, known for paying and treating musicians fairly. Installed one of the best sound systems in town, becoming 'a haven for local bands.' Hosts Joe's Fest and nightly live music with open-mic events."
+    },
+    {
+      "slug": "the-roxy",
+      "name": "The Roxy",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "closed",
+      "notes": "Late 1970s basement club under a bookstore downtown. Allowed underaged punks in through the back door. An early clandestine venue for SLC's punk scene."
+    },
+    {
+      "slug": "club-dv8",
+      "name": "Club DV8",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "closed",
+      "address": "Pierpont Ave",
+      "notes": "Active late 1980s/early 1990s through mid-1990s (closed ~2004). Alternative dance club that mixed DJ nights with live concerts. Brought in touring industrial, goth, and punk bands. Hosted raves and shows by The Cure's side projects. Clear played their last show in DV8's basement in 2000."
+    },
+    {
+      "slug": "the-word",
+      "name": "The Word (Painted Word)",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "closed",
+      "notes": "Mid-1980s all-ages club. Short-lived but important venue for punk shows. Insight 'tore The Word up' in 1988. Located in the basement of the Raunch Records building."
+    },
+    {
+      "slug": "zephyr-club",
+      "name": "The Zephyr Club",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "closed",
+      "notes": "1990-2003. Famed downtown club that primarily featured jazz, blues, and jam-rock. National jazz legends (Mose Allison, Sonny Rollins) and blues acts played here. Building was demolished, now a parking lot."
+    },
+    {
+      "slug": "in-the-venue",
+      "name": "In The Venue / Bricks",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "closed",
+      "address": "600 West",
+      "notes": "Mid-1990s through late 2010s. Venue complex that went by many names (Bricks, In The Venue, Club Sound). Split into 'In the Venue' (21+) and 'Club Sound' (under-21) in 2004. Hosted early shows by The Used and Paramore. Important LGBTQ nightlife space. Closed June 2020 due to pandemic and earthquakes."
+    },
+    {
+      "slug": "velour",
+      "name": "Velour Live Music Gallery",
+      "city": "Provo",
+      "state": "UT",
+      "status": "active",
+      "capacity": 270,
+      "notes": "Active since 2006. All-ages venue in Provo (45 miles south of SLC) with outsized influence on Utah's music landscape. Fostered artists like Neon Trees, Imagine Dragons, and The Aces in their early years."
+    },
+    {
+      "slug": "black-lung-society",
+      "name": "Black Lung Society",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "status": "active",
+      "notes": "New DIY space opened post-COVID to help restart the scene."
+    }
+  ],
+  "musicians": [
+    {
+      "slug": "dallon-weekes",
+      "name": "Dallon Weekes",
+      "role": "Vocalist, Bassist, Songwriter",
+      "bio": "Fronted The Brobecks (2002-2013), joined Panic! at the Disco (2009-2017), founded I Don't Know How But They Found Me with Ryan Seaman in 2016. Key figure in SLC's indie rock scene."
+    },
+    {
+      "slug": "ryan-seaman",
+      "name": "Ryan Seaman",
+      "role": "Drummer",
+      "bio": "Drummer for The Brobecks (2008-2009) and co-founder of I Don't Know How But They Found Me with Dallon Weekes."
+    },
+    {
+      "slug": "jason-knott",
+      "name": "Jason Knott",
+      "role": "Vocalist",
+      "bio": "Vocalist for Clear (1995-2000), later vocalist for The Kill. Key figure in SLC's straight-edge hardcore scene."
+    },
+    {
+      "slug": "brad-collins",
+      "name": "Brad Collins",
+      "role": "Radio DJ, Promoter, Store Owner",
+      "bio": "Early punk DJ on KRCL 90.9FM in late 1970s/early 1980s. Hosted legendary radio show 'Behind the Zion Curtain' (ended 1991). Co-founded Raunch Records in July 1984, which became the essential hub for the punk scene. Store closed 1997, reopened December 2009."
+    },
+    {
+      "slug": "susan-brown",
+      "name": "Susan Brown",
+      "role": "Radio DJ",
+      "bio": "One of the first punk DJs on KRCL 90.9FM in late 1970s/early 1980s. Alongside Brad Collins, exposed Utahns to punk and new wave bands, helping lay groundwork for SLC's alternative scene."
+    },
+    {
+      "slug": "phil-sherburne",
+      "name": "Phil Sherburne",
+      "role": "Venue Owner",
+      "bio": "Founded Kilby Court in 1999 in a tiny garage in an industrial alley. Sold to Lance Saunders and Will Sartain in 2008. His DIY vision created Utah's longest-running all-ages venue."
+    },
+    {
+      "slug": "will-sartain",
+      "name": "Will Sartain",
+      "role": "Promoter, Venue Owner",
+      "bio": "Co-owner of S&S Presents with Lance Saunders. Purchased Kilby Court in 2008. Former musician turned promoter who now runs multiple SLC venues (Kilby, Urban Lounge, Metro)."
+    },
+    {
+      "slug": "lance-saunders",
+      "name": "Lance Saunders",
+      "role": "Promoter, Venue Owner",
+      "bio": "Co-owner of S&S Presents with Will Sartain. Purchased Kilby Court in 2008. Musician turned promoter who helped build SLC's current venue circuit."
+    },
+    {
+      "slug": "paul-maritsas",
+      "name": "Paul Maritsas",
+      "role": "Venue Owner",
+      "bio": "Co-founder of The Speedway Café (1986-1990) with Zay Speed. Obtained the rare 'brown bag' permit that allowed all-ages punk shows with alcohol."
+    },
+    {
+      "slug": "zay-speed",
+      "name": "Zay Speed",
+      "role": "Venue Owner",
+      "bio": "Co-founder of The Speedway Café (1986-1990) with Paul Maritsas. Helped create SLC's most legendary underground venue."
+    }
+  ],
+  "local_resources": [
+    {
+      "name": "Raunch Records",
+      "type": "Record Store & DIY Space",
+      "focus_area": "Punk rock community hub, record sales, show promotion",
+      "notes": "Opened July 1984 by Brad Collins and Daphne Menden at 4th South & 4th West. More than a shop - it was the beating heart of the '80s/'90s scene. Sold underground punk and noise records, distributed early SLUG Magazine issues, and acted as networking spot. The basement housed The Painted Word all-ages venue. Closed 1997, reopened December 2009.",
+      "website_url": null
+    },
+    {
+      "name": "KRCL 90.9 FM",
+      "type": "Community Radio Station",
+      "focus_area": "Alternative music, local artist support, diverse programming",
+      "notes": "Went on air December 3, 1979. 501(c)(3) nonprofit with mission to provide variety of musical programs counter to commercial radio. Key shows: Fret 'N Fiddle (folk, started 1979), Maximum Distortion (metal), RadioACTive (weekly live music hour Fridays 6-7 PM). Partners with SLUG Magazine on podcast SLUG Soundwaves.",
+      "website_url": "https://krcl.org"
+    },
+    {
+      "name": "S&S Presents",
+      "type": "Venue Management & Promotion",
+      "focus_area": "Concert promotion, venue management",
+      "notes": "Founded by Will Sartain and Lance Saunders, two local musicians turned promoters. Own and operate Kilby Court, Urban Lounge, and Metro Music Hall. Dominant force in SLC's mid-sized venue circuit post-2008.",
+      "website_url": null
+    },
+    {
+      "name": "SLUG Magazine",
+      "type": "Music Magazine",
+      "focus_area": "Local music coverage, scene documentation",
+      "notes": "Salt Lake UnderGround magazine founded 1989. Longtime scene chronicler covering local music extensively. Organizes SLUG Localized (monthly showcase started 2001). Celebrated 30 years in 2019. Partners with KRCL on SLUG Soundwaves podcast.",
+      "website_url": "https://slugmag.com"
+    }
+  ],
+  "articles": [
+    {
+      "slug": "slc-music-timeline-1960s-2020s",
+      "title": "Historical Timeline of the SLC Music Scene",
+      "article_type": "history",
+      "summary": "Comprehensive timeline outlining the evolution of Salt Lake City's music scene by decade, highlighting key movements, bands, and cultural moments from the 1960s through 2020s.",
+      "content": "1960s: Utah's music presence defined by The Osmonds. Late '60s counterculture touches SLC lightly. Salt Palace opened 1965 allowing big tours.\n\n1970s: Underground begins. 1978: Spitting Teeth hosts one of SLC's first punk shows at U of U. KRCL 90.9FM launched 1979 becomes lifeline for punk. The Roxy basement club allows underage punks via back door.\n\n1980s: Alternative scene explodes. Victims Willing, Massacre Guys, Bad Yodelers emerge. The Speedway Café (1986-1990) becomes locus of punk/hardcore. Insight forms 1987 as SLC's first straight-edge band. 'America's Most Wanted' features SLC straight-edge.\n\n1990s: Speedway closes 1990 ('end of anarchy'). Clear and Iceburn take straight-edge hardcore national. Club DV8 hosts alternative/raves. Phil Sherburne opens Kilby Court 1999.\n\n2000s: The Used explodes 2002 with platinum album. SLUG Magazine organizes Localized showcases. Gaza gains cult following. S&S Presents (Sartain/Saunders) buys Kilby 2008.\n\n2010s: Neon Trees multi-platinum hits. Imagine Dragons mega-success. Festivals flourish: Twilight, Crucialfest. The Backseat Lovers form 2018. SubRosa plays Europe.\n\n2020s: COVID shutdown 2020, venues dark for months. Community rallies. In The Venue closes June 2020. Kilby celebrates 25 years 2024. New DIY spaces emerge (Black Lung Society). Vinyl revival among youth.",
+      "tags": ["history", "timeline", "comprehensive"]
+    },
+    {
+      "slug": "speedway-cafe-legendary-venue",
+      "title": "The Speedway Café: SLC's Legendary Underground Venue",
+      "article_type": "history",
+      "summary": "The story of SLC's most legendary venue (1986-1990), the 7,000 sq ft warehouse that became the focal point for punk, hardcore, and alternative music.",
+      "content": "The Speedway Café was perhaps the most legendary venue in SLC's underground history. A 7,000 sq ft former warehouse at 505 W. 500 S., it operated from 1986-1990 as a refuge for punk, hardcore, and alternative music.\n\nFounders Paul Maritsas and Zay Speed obtained a rare 'brown bag' permit (BYOB) allowing alcohol and under-21 kids at the same time - an ingenious workaround to Utah's strict liquor laws that made all-ages shows possible. The venue often packed 500-700 people into a space legally meant for 290.\n\nThe Speedway hosted legendary shows: Dead Kennedys (infamous flag burning incident), GWAR, 7 Seconds, Fishbone, Soundgarden, Ministry, Circle Jerks, Minor Threat. For $5, kids could see shows from 6pm-2am nearly every night. It was a godsend for 'wayward kids with rough home lives' who found refuge there.\n\nThe venue was known for its anything-goes vibe - 'a concrete warehouse meant to be trashed' where mosh pits raged freely. It gave the '80s SLC punk/alt scene a physical home and focal point for its community.\n\nThe Speedway shut abruptly in 1990 when the building was sold. Longtime scenesters recall the closing as the day 'anarchy died in Salt Lake,' underscoring how pivotal it was. Dozens of punk kids were left 'wandering around...like they were lost.'",
+      "tags": ["venues", "1980s", "punk", "history"],
+      "source_url": "https://archive.sltrib.com/article.php?id=3827047&itype=CMSID"
+    },
+    {
+      "slug": "straight-edge-movement-slc",
+      "title": "The Straight-Edge Movement in Salt Lake City",
+      "article_type": "history",
+      "summary": "How Salt Lake City became a national hub for the straight-edge hardcore movement in the late 1980s and 1990s, from Insight to militant straight-edge.",
+      "content": "In the late 1980s, Salt Lake City became known as a hub of the Straight Edge movement (drug-free hardcore punk). Insight, formed in 1987, was SLC's first outspoken straight-edge hardcore band. Their 1989 EP 'Standing Strong' on Soulforce Records became a touchstone.\n\nInsight and contemporaries (Clear, Better Way, Reality) brought positive ideals (anti-drug, anti-racism, unity) into the punk scene, galvanizing youth. Many were ex-Mormon or non-Mormon kids in a heavily Mormon state, creating unique rebellious energy.\n\nBy the mid-1990s, Utah became the 'dominant face of militant straight edge' nationally. Some militant elements committed violent acts (attacks on smokers/drinkers), drawing media attention. An 'America's Most Wanted' episode featured SLC straight-edge gang activity. FBI listed SLC straight edge as gang activity, with ties to extremist groups (ALF) and Olympic-era security concerns.\n\nBands like Clear (1995-2000) were the only Utah hardcore band well-known out of state in the '90s. Their metalcore sound influenced the national scene.\n\nToday, the straight-edge movement still exists but is far less dominant. The legacy persists in a generally supportive, substance-aware hardcore scene. One can attend SLC hardcore shows with beer now - unimaginable in the '90s.",
+      "tags": ["straight-edge", "hardcore", "1980s", "1990s", "movement"]
+    },
+    {
+      "slug": "kilby-court-25-years",
+      "title": "25 Years of Kilby Court: The Heart of Salt Lake's Music Scene",
+      "article_type": "history",
+      "summary": "The story of Utah's longest-running all-ages venue, from Phil Sherburne's DIY garage vision in 1999 to its 25th anniversary and spawning the Kilby Block Party festival.",
+      "content": "Founded by Phil Sherburne in 1999 in a small garage down an alley, Kilby Court is SLC's longest-running all-ages venue with ~200 capacity. It's legendary for its intimate DIY atmosphere.\n\nKilby has hosted early shows by then-unknown artists who later became huge: Vampire Weekend, Mitski, Mac Miller, Doja Cat, MGMT, My Chemical Romance, Diplo. Local bands often play their first shows here.\n\nIn 2008, Sherburne sold to Lance Saunders and Will Sartain (S&S Presents), two local musicians turned promoters. They maintained Kilby's classic aesthetic and mission with no major changes to vibe.\n\nKilby celebrated its 25th anniversary in 2024 with the huge Kilby Block Party festival at Utah State Fairpark, headlined by The Strokes and Phoebe Bridgers. The festival (started as Kilby Court Block Party) now draws ~20,000 daily attendees and features major acts like New Order, Beach House, Weezer, Justice, while still giving local bands prime slots.\n\nKilby Court remains a cornerstone venue for fostering up-and-coming talent and serves as the first step in SLC's venue circuit: start at Kilby Court, move up to Urban Lounge or Metro, then The Depot or festivals as bands reach Gold/Platinum status.",
+      "tags": ["venues", "kilby-court", "all-ages", "history"],
+      "source_url": "https://slugmag.com/music/interviews/music-interviews/celebrating-25-years-of-kilby-court-the-heart-of-salt-lakes-music-scene/"
+    }
+  ],
+  "rock_facts": [
+    {
+      "title": "The Speedway's Brown Bag Permit",
+      "fact": "The Speedway Café obtained a rare 'brown bag' permit allowing BYOB and under-21 attendance simultaneously - an ingenious workaround to Utah's strict liquor laws that made all-ages punk shows possible in a club setting (1986-1990).",
+      "source_name": "Salt Lake Tribune Archives",
+      "tags": ["venues", "1980s", "punk", "liquor-laws"]
+    },
+    {
+      "title": "Utah's Militant Straight Edge",
+      "fact": "In the mid-1990s, Utah became the 'dominant face' of militant straight edge nationally. The FBI listed SLC straight edge as gang activity, with violent episodes and Olympic-era security concerns.",
+      "source_name": "SubculturesList.com, SLUG Magazine",
+      "tags": ["straight-edge", "hardcore", "1990s"]
+    },
+    {
+      "title": "Kilby Court's Famous Alumni",
+      "fact": "Before they were famous, Kilby Court (capacity 200) hosted early shows by Vampire Weekend, Mitski, Mac Miller, Doja Cat, MGMT, My Chemical Romance, and Diplo.",
+      "source_name": "SLUG Magazine",
+      "tags": ["kilby-court", "venues", "indie"]
+    },
+    {
+      "title": "Clear: Utah's Only Nationally Known Hardcore Band",
+      "fact": "In the 1990s, Clear (1995-2000) was described as 'the only Utah hardcore band well-known out of state' and seemed positioned to 'make it big' before dissolving due to creative differences.",
+      "source_name": "Various sources",
+      "tags": ["hardcore", "straight-edge", "1990s"]
+    },
+    {
+      "title": "KRCL: Punk's Radio Lifeline",
+      "fact": "KRCL 90.9FM, launched December 3, 1979, became a lifeline for Utah's punk scene. Early DJs Brad Collins and Susan Brown spun import records of Ramones and Sex Pistols when no one else would.",
+      "source_name": "KRCL, SLUG Magazine",
+      "tags": ["radio", "punk", "1970s"]
+    },
+    {
+      "title": "Raunch Records: More Than a Store",
+      "fact": "Raunch Records (opened July 1984) was more than a shop - it distributed SLUG Magazine, hosted networking, and its basement contained The Painted Word all-ages venue. It was the beating heart of SLC's '80s punk scene.",
+      "source_name": "SLUG Magazine",
+      "tags": ["record-store", "punk", "1980s"]
+    },
+    {
+      "title": "The Backseat Lovers' Viral Ode",
+      "fact": "'Kilby Girl' by The Backseat Lovers is an ode to Kilby Court venue. The song went viral and broke into Billboard's rock airplay chart in 2021, demonstrating the venue's cultural impact.",
+      "source_name": "Various sources",
+      "tags": ["kilby-court", "indie-rock", "2020s"]
+    }
+  ],
+  "genres": [
+    "Deathcore",
+    "Metal",
+    "Hardcore",
+    "Metalcore",
+    "Doom Metal",
+    "Experimental",
+    "Indie Rock",
+    "Post-Hardcore",
+    "Math Rock",
+    "Jazz-Core",
+    "Pop",
+    "Rock",
+    "Alternative",
+    "Hardcore Punk",
+    "Straight Edge",
+    "Indie Pop",
+    "Folk Pop",
+    "New Wave",
+    "Pop Rock",
+    "Garage Rock",
+    "Hard Rock",
+    "Ska",
+    "Punk",
+    "Funk",
+    "Soul",
+    "Emo",
+    "Power Pop",
+    "Grindcore",
+    "Hip-Hop"
+  ]
+}
