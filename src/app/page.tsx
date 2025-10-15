@@ -26,10 +26,10 @@ export default async function Home() {
           <div className="text-center">
             <Logo className="mb-12" priority />
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              The Rock Salt - Salt Lake Music Hub
+              Salt Lake's Music Hub
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
-              Discover the vibrant Salt Lake City music scene. Local artists, live episodes, and upcoming shows.
+              Local artists, live episodes, and upcoming shows.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/submit">
