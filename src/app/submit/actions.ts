@@ -158,11 +158,9 @@ export async function submitMusicSubmission(formData: FormData) {
     }
 
     // Insert into database
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('music_submissions')
       .insert(submissionData)
-      .select()
-      .single()
 
     if (error) {
       if (process.env.NODE_ENV === 'development') {
@@ -186,9 +184,8 @@ export async function submitMusicSubmission(formData: FormData) {
 
     return {
       success: true,
-      data,
       message: 'Submission received! We\'ll review your music and be in touch soon.',
-      redirectUrl: `/submit/success?band=${encodeURIComponent(bandName)}&email=${encodeURIComponent(contactEmail)}&id=${data.id}`
+      redirectUrl: `/submit/success?band=${encodeURIComponent(bandName)}&email=${encodeURIComponent(contactEmail)}`
     }
   } catch (error) {
     if (process.env.NODE_ENV === 'development') {

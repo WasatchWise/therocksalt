@@ -18,7 +18,9 @@ type EventWithRelations = Tables<'events'> & {
   event_bands: Array<{
     slot_order: number | null
     is_headliner: boolean | null
-    band: Pick<Tables<'bands'>, 'id' | 'name' | 'slug'> | null
+    band: (Pick<Tables<'bands'>, 'id' | 'name' | 'slug'> & {
+      band_tracks?: Array<Pick<Tables<'band_tracks'>, 'id' | 'title' | 'file_url' | 'is_featured'>> | null
+    }) | null
   }> | null
 }
 
@@ -46,7 +48,6 @@ export async function getBands(limit = 20): Promise<BandWithRelations[]> {
         genre:genres ( id, name )
       )
     `)
-    .order('featured', { ascending: false })
     .order('name', { ascending: true })
     .limit(limit)
 
@@ -89,7 +90,17 @@ export async function getEvents(limit = 20): Promise<EventWithRelations[]> {
       event_bands (
         slot_order,
         is_headliner,
-        band:bands ( id, name, slug )
+        band:bands (
+          id,
+          name,
+          slug,
+          band_tracks (
+            id,
+            title,
+            file_url,
+            is_featured
+          )
+        )
       )
     `)
     .order('start_time', { ascending: true })
@@ -154,6 +165,32 @@ export async function getBandBySlug(slug: string): Promise<BandWithFullDetails |
         source_attribution,
         is_primary,
         photo_order
+      ),
+      band_members (
+        instrument,
+        role,
+        tenure_start,
+        tenure_end,
+        musician:musicians (
+          id,
+          name,
+          slug,
+          role,
+          bio,
+          website_url,
+          instagram_handle
+        )
+      ),
+      releases (
+        id,
+        title,
+        release_year,
+        release_date,
+        format,
+        cover_image_url,
+        spotify_url,
+        bandcamp_url,
+        slug
       )
     `)
     .eq('slug', slug)
@@ -180,7 +217,17 @@ export async function getBandEvents(bandId: string, limit = 10): Promise<EventWi
         event_bands (
           slot_order,
           is_headliner,
-          band:bands ( id, name, slug )
+          band:bands (
+            id,
+            name,
+            slug,
+            band_tracks (
+              id,
+              title,
+              file_url,
+              is_featured
+            )
+          )
         )
       )
     `)
@@ -242,7 +289,6 @@ export async function getVenues(limit = 50): Promise<VenueWithRelations[]> {
       venue_links ( * ),
       venue_photos ( * )
     `)
-    .order('featured', { ascending: false })
     .order('name', { ascending: true })
     .limit(limit)
 
@@ -287,7 +333,17 @@ export async function getVenueEvents(venueId: string): Promise<EventWithRelation
       event_bands (
         slot_order,
         is_headliner,
-        band:bands ( id, name, slug )
+        band:bands (
+          id,
+          name,
+          slug,
+          band_tracks (
+            id,
+            title,
+            file_url,
+            is_featured
+          )
+        )
       )
     `)
     .eq('venue_id', venueId)

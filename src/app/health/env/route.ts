@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
+  // Only allow in development - never expose env config in production
+  if (process.env.NODE_ENV !== 'development') {
+    return NextResponse.json(
+      { error: 'Not available in production' },
+      { status: 403 }
+    )
+  }
+
   const required = [
     'NEXT_PUBLIC_SUPABASE_URL',
     'NEXT_PUBLIC_SUPABASE_ANON_KEY',

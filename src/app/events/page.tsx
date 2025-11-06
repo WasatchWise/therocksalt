@@ -1,6 +1,7 @@
 import { getEvents } from '@/lib/supabase/queries'
 import Container from '@/components/Container'
 import EventSubmissionForm from '@/components/EventSubmissionForm'
+import EventBandCard from '@/components/EventBandCard'
 import type { Metadata } from 'next'
 
 export const revalidate = 60
@@ -128,21 +129,37 @@ export default async function EventsPage() {
                           )}
 
                           {event.event_bands && event.event_bands.length > 0 && (
-                            <div className="flex flex-wrap gap-3 mb-6">
-                              <span className="text-lg font-black text-yellow-300 uppercase tracking-wide">
-                                Featuring:
-                              </span>
-                              {event.event_bands
-                                .map(eb => eb.band?.name)
-                                .filter(Boolean)
-                                .map((bandName, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="px-6 py-3 text-lg bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-full font-black uppercase shadow-xl border-2 border-white"
-                                  >
-                                    {bandName}
-                                  </span>
-                                ))}
+                            <div className="space-y-4 mb-6">
+                              {/* Headliners */}
+                              {event.event_bands.filter(eb => eb.is_headliner && eb.band).length > 0 && (
+                                <div>
+                                  {event.event_bands
+                                    .filter(eb => eb.is_headliner && eb.band)
+                                    .sort((a, b) => (a.slot_order || 0) - (b.slot_order || 0))
+                                    .map((eb, idx) => eb.band && (
+                                      <div key={eb.band.id || idx} className="mb-3">
+                                        <EventBandCard band={eb.band} isHeadliner={true} />
+                                      </div>
+                                    ))}
+                                </div>
+                              )}
+
+                              {/* Supporting Acts */}
+                              {event.event_bands.filter(eb => !eb.is_headliner && eb.band).length > 0 && (
+                                <div>
+                                  <div className="text-sm font-black text-yellow-300 uppercase tracking-wide mb-2">
+                                    With Special Guests:
+                                  </div>
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    {event.event_bands
+                                      .filter(eb => !eb.is_headliner && eb.band)
+                                      .sort((a, b) => (a.slot_order || 0) - (b.slot_order || 0))
+                                      .map((eb, idx) => eb.band && (
+                                        <EventBandCard key={eb.band.id || idx} band={eb.band} isHeadliner={false} />
+                                      ))}
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
@@ -222,21 +239,37 @@ export default async function EventsPage() {
                         )}
 
                         {event.event_bands && event.event_bands.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            <span className="text-sm font-black text-yellow-300 uppercase tracking-wide">
-                              Featuring:
-                            </span>
-                            {event.event_bands
-                              .map(eb => eb.band?.name)
-                              .filter(Boolean)
-                              .map((bandName, idx) => (
-                                <span
-                                  key={idx}
-                                  className="px-4 py-2 text-sm bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-full font-black uppercase shadow-lg"
-                                >
-                                  {bandName}
-                                </span>
-                              ))}
+                          <div className="space-y-3 mb-4">
+                            {/* Headliners */}
+                            {event.event_bands.filter(eb => eb.is_headliner && eb.band).length > 0 && (
+                              <div>
+                                {event.event_bands
+                                  .filter(eb => eb.is_headliner && eb.band)
+                                  .sort((a, b) => (a.slot_order || 0) - (b.slot_order || 0))
+                                  .map((eb, idx) => eb.band && (
+                                    <div key={eb.band.id || idx} className="mb-2">
+                                      <EventBandCard band={eb.band} isHeadliner={true} />
+                                    </div>
+                                  ))}
+                              </div>
+                            )}
+
+                            {/* Supporting Acts */}
+                            {event.event_bands.filter(eb => !eb.is_headliner && eb.band).length > 0 && (
+                              <div>
+                                <div className="text-xs font-black text-yellow-300 uppercase tracking-wide mb-2">
+                                  With Special Guests:
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                  {event.event_bands
+                                    .filter(eb => !eb.is_headliner && eb.band)
+                                    .sort((a, b) => (a.slot_order || 0) - (b.slot_order || 0))
+                                    .map((eb, idx) => eb.band && (
+                                      <EventBandCard key={eb.band.id || idx} band={eb.band} isHeadliner={false} />
+                                    ))}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>

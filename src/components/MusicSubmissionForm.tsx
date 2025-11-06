@@ -245,7 +245,9 @@ export default function MusicSubmissionForm() {
             onChange={(e) => setBioLength(e.target.value.length)}
           />
           <div className="flex justify-between text-sm mt-1">
-            <p className="text-gray-500">One-liner that captures your sound (appears in listings)</p>
+            <p className="text-gray-500">
+              Minimum 50 characters helps fans discover your unique sound. Example: "Indie-folk duo blending dreamy vocals with fingerstyle guitar"
+            </p>
             <p className={`${bioLength < 50 ? 'text-red-500' : bioLength > 300 ? 'text-red-500' : 'text-gray-500'}`}>
               {bioLength}/300 (min 50)
             </p>

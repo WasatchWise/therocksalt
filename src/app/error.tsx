@@ -13,9 +13,10 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    if (process.env.NODE_ENV === 'development') {
-      console.error(error)
-    }
+    console.error('Page error:', error)
+    console.error('Error message:', error?.message)
+    console.error('Error digest:', error?.digest)
+    console.error('Error stack:', error?.stack)
     // TODO: Add production error reporting (e.g., Sentry)
   }, [error])
 
@@ -31,6 +32,11 @@ export default function Error({
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
           We encountered an unexpected error. Don&apos;t worry, our team has been notified.
         </p>
+        {process.env.NODE_ENV !== 'production' && error?.message && (
+          <pre className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded text-left text-sm overflow-auto">
+            {error.message}
+          </pre>
+        )}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" onClick={reset}>
             Try Again
