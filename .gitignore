@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backup files
+*.bak
+*.backup
+*.bak.*
+node_modules.bak.*/
+.next.bak.*/
+
+# supabase branches (development)
+supabase/.branches/
