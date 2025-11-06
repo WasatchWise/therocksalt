@@ -514,5 +514,3 @@ do $$ begin
 exception when duplicate_object then null; end $$;
 
 -- Service role bypasses RLS, so no public read policy is defined yet.
-
-*** End of File

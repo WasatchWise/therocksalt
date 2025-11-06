@@ -1,0 +1,43 @@
+-- Create storage bucket for event flyers
+
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES (
+  'event-flyers',
+  'event-flyers',
+  true,
+  10485760, -- 10MB limit
+  ARRAY['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage policy: Allow public to read flyers
+DO $$ BEGIN
+  CREATE POLICY "Public can view event flyers"
+  ON storage.objects FOR SELECT
+  TO public
+  USING (bucket_id = 'event-flyers');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+-- Storage policy: Allow anonymous users to upload flyers (for event submissions)
+DO $$ BEGIN
+  CREATE POLICY "Anyone can upload event flyers"
+  ON storage.objects FOR INSERT
+  TO public
+  WITH CHECK (bucket_id = 'event-flyers');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+-- Storage policy: Allow users to update their own uploads
+DO $$ BEGIN
+  CREATE POLICY "Users can update their own flyers"
+  ON storage.objects FOR UPDATE
+  TO public
+  USING (bucket_id = 'event-flyers');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+-- Storage policy: Allow users to delete their own uploads
+DO $$ BEGIN
+  CREATE POLICY "Users can delete their own flyers"
+  ON storage.objects FOR DELETE
+  TO public
+  USING (bucket_id = 'event-flyers');
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
