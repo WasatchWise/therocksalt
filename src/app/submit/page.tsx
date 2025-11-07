@@ -1,4 +1,3 @@
-import MusicSubmissionForm from '@/components/MusicSubmissionForm'
 import Container from '@/components/Container'
 
 export const metadata = {
@@ -41,9 +40,21 @@ export default function SubmitPage() {
           </ul>
         </div>
 
-        {/* Form */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <MusicSubmissionForm />
+        {/* CTA to Google Form */}
+        <div className="bg-white rounded-lg shadow-lg p-12 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to Submit?</h2>
+          <p className="text-gray-600 mb-8">
+            Click the button below to fill out our submission form
+          </p>
+          <a
+            href="https://forms.gle/cHvGrhdVRKBCuYRm6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
+          >
+            Open Submission Form →
+          </a>
+          <p className="text-sm text-gray-500 mt-4">Opens in a new tab</p>
         </div>
 
         {/* Footer Note */}

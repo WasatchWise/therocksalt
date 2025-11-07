@@ -1,18 +1,18 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { limit } from '@/lib/rateLimit'
+// import { limit } from '@/lib/rateLimit' // TODO: Re-enable when Upstash is configured
 import { revalidatePath } from 'next/cache'
 import type { MusicSubmissionData } from '@/types/submission'
 
 export async function submitMusicSubmission(formData: FormData) {
   try {
-    // Basic rate limit keyed by email or IP contained in the form (fallback)
-    const ipOrEmail = (formData.get('contactEmail') as string) || 'anonymous'
-    const { success } = await limit(ipOrEmail, 'submit')
-    if (!success) {
-      return { success: false, error: 'Too many submissions. Please try again later.' }
-    }
+    // TODO: Re-enable rate limiting when Upstash is configured
+    // const ipOrEmail = (formData.get('contactEmail') as string) || 'anonymous'
+    // const { success } = await limit(ipOrEmail, 'submit')
+    // if (!success) {
+    //   return { success: false, error: 'Too many submissions. Please try again later.' }
+    // }
     const supabase = await createClient()
 
     // Extract form fields
