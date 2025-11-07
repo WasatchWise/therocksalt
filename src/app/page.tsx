@@ -63,7 +63,7 @@ export default function HomePage() {
         {/* Discord Link */}
         <div className="max-w-2xl mx-auto mb-16 text-center">
           <a
-            href="https://discord.gg/therocksalt"
+            href="https://discord.gg/QWW5uD25r5"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xl rounded-lg shadow-lg transform transition-all hover:scale-105"
