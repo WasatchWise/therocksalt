@@ -2,6 +2,19 @@
 
 import { useState, useRef, useEffect } from 'react'
 
+interface NowPlayingData {
+  song: {
+    title: string
+    artist: string
+    album?: string
+    art?: string
+  }
+  live: {
+    is_live: boolean
+    streamer_name?: string
+  }
+}
+
 interface LiveStreamPlayerProps {
   streamUrl: string
   title?: string
@@ -17,6 +30,30 @@ export default function LiveStreamPlayer({
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [nowPlaying, setNowPlaying] = useState<NowPlayingData | null>(null)
+
+  // Fetch Now Playing data
+  useEffect(() => {
+    const fetchNowPlaying = async () => {
+      try {
+        const response = await fetch('/api/now-playing')
+        if (response.ok) {
+          const data = await response.json()
+          setNowPlaying(data)
+        }
+      } catch (err) {
+        console.error('Failed to fetch now playing data:', err)
+      }
+    }
+
+    // Fetch immediately
+    fetchNowPlaying()
+
+    // Then fetch every 15 seconds
+    const interval = setInterval(fetchNowPlaying, 15000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -125,10 +162,37 @@ export default function LiveStreamPlayer({
           </div>
         )}
 
-        {/* Stream Info */}
-        {isPlaying && (
+        {/* Now Playing Info */}
+        {nowPlaying && (
           <div className="mt-8 pt-8 border-t border-indigo-400/30 w-full">
-            <p className="text-indigo-100 text-sm">
+            <div className="flex items-center gap-4">
+              {nowPlaying.song.art && (
+                <img
+                  src={nowPlaying.song.art}
+                  alt="Album Art"
+                  className="w-16 h-16 rounded-lg shadow-lg"
+                />
+              )}
+              <div className="flex-1 text-left">
+                <p className="text-white font-bold text-lg">
+                  {nowPlaying.song.title}
+                </p>
+                <p className="text-indigo-200 text-sm">
+                  {nowPlaying.song.artist}
+                </p>
+                {nowPlaying.song.album && (
+                  <p className="text-indigo-300 text-xs">
+                    {nowPlaying.song.album}
+                  </p>
+                )}
+                {nowPlaying.live.is_live && nowPlaying.live.streamer_name && (
+                  <p className="text-red-300 text-xs mt-1 font-semibold">
+                    🎙️ Live: {nowPlaying.live.streamer_name}
+                  </p>
+                )}
+              </div>
+            </div>
+            <p className="text-indigo-100 text-xs mt-4">
               Broadcasting at 192 kbps MP3
             </p>
           </div>
