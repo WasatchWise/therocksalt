@@ -1,11 +1,9 @@
 'use client'
 
-import { Metadata } from 'next'
 import { useState } from 'react'
 import Logo from '@/components/Logo'
 import Container from '@/components/Container'
 import LiveStreamPlayer from '@/components/LiveStreamPlayer'
-import MusicSubmissionForm from '@/components/MusicSubmissionForm'
 
 const STREAM_URL = process.env.NEXT_PUBLIC_STREAM_URL || 'http://localhost:8000/rocksalt.mp3'
 
@@ -41,16 +39,24 @@ export default function HomePage() {
 
         {/* Music Submission Form */}
         <div className="max-w-4xl mx-auto mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 border border-gray-200 dark:border-gray-700">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                Submit Your Music
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
-                Are you a Salt Lake City artist? We want to hear from you!
-              </p>
-            </div>
-            <MusicSubmissionForm />
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 border border-gray-200 dark:border-gray-700 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Submit Your Music
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+              Are you a Salt Lake City artist? We want to hear from you!
+            </p>
+            <a
+              href="https://forms.gle/ZkniH6q2HZdEUJbo9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xl rounded-lg shadow-lg transform transition-all hover:scale-105"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 note 6l3-3m0 0l3 3m-3-3v12" />
+              </svg>
+              Submit Your Music
+            </a>
           </div>
         </div>
 
