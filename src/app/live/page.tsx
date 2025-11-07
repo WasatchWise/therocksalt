@@ -71,19 +71,10 @@ export default function LivePage() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Want to DJ?
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
-              If you're a local DJ or artist interested in hosting a show on The Rock Salt,
-              we'd love to hear from you!
-            </p>
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              <strong>Mixxx Connection Details:</strong><br />
-              <span className="text-sm font-mono bg-gray-100 dark:bg-gray-900 p-2 rounded block mt-2">
-                Host: localhost<br />
-                Port: 8000<br />
-                Mount: /rocksalt.mp3<br />
-                Login: source<br />
-                Password: rocksalt-source
-              </span>
+              If you're a local DJ or artist interested in hosting a show on The Rock Salt,
+              we'd love to hear from you! Contact us to receive secure streaming credentials
+              and setup instructions for broadcasting via Mixxx or other DJ software.
             </p>
             <a
               href="mailto:music@therocksalt.com"
