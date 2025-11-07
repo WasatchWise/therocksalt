@@ -14,7 +14,7 @@ export async function GET() {
 
     // Fetch now playing data from AzuraCast
     const response = await fetch(
-      `http://localhost/api/station/${stationId}/nowplaying`,
+      `https://a8.asurahosting.com/api/station/${stationId}/nowplaying`,
       {
         headers: {
           'X-API-Key': apiKey,
