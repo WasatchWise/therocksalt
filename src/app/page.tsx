@@ -53,7 +53,7 @@ export default function HomePage() {
               className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xl rounded-lg shadow-lg transform transition-all hover:scale-105"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 note 6l3-3m0 0l3 3m-3-3v12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3l6 6-6 6m0 0l3-3m-3 3v-12" />
               </svg>
               Submit Your Music
             </a>
