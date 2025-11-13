@@ -3,9 +3,6 @@
 import { useState } from 'react'
 import Logo from '@/components/Logo'
 import Container from '@/components/Container'
-import LiveStreamPlayer from '@/components/LiveStreamPlayer'
-
-const STREAM_URL = process.env.NEXT_PUBLIC_STREAM_URL || 'http://localhost:8000/rocksalt.mp3'
 
 export default function HomePage() {
   const [email, setEmail] = useState('')
@@ -24,17 +21,40 @@ export default function HomePage() {
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <Container className="py-12">
         {/* Logo */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <Logo className="w-64 md:w-80 h-auto" priority />
         </div>
 
-        {/* Radio Player */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <LiveStreamPlayer
-            streamUrl={STREAM_URL}
-            title="The Rock Salt Live"
-            description="Salt Lake City's Independent Music Radio"
-          />
+        {/* Promotional Banner */}
+        <div className="max-w-4xl mx-auto mb-8">
+          <div className="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 rounded-2xl p-8 shadow-2xl text-center">
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
+              ALL LOCAL - ALL DAY
+            </h2>
+            <div className="text-white">
+              <p className="text-2xl md:text-3xl font-bold mb-2">Rock Salt Radio Live</p>
+              <p className="text-xl md:text-2xl font-semibold">Tuesday & Thursday</p>
+              <p className="text-xl md:text-2xl font-semibold">11 - 1p</p>
+            </div>
+          </div>
+        </div>
+
+        {/* AzuraCast Radio Player - Full Featured */}
+        <div className="max-w-6xl mx-auto mb-16">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-700 p-4 text-center">
+              <h3 className="text-2xl font-bold text-white">Listen Live - Request Songs Below!</h3>
+            </div>
+            <div className="aspect-[16/9] md:aspect-[21/9]">
+              <iframe
+                src="https://a8.asurahosting.com:9130/public/rocksalt/embed?theme=dark"
+                frameBorder="0"
+                allowTransparency={true}
+                className="w-full h-full min-h-[600px]"
+                title="The Rock Salt Radio Player"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Music Submission Form */}
@@ -105,6 +125,29 @@ export default function HomePage() {
                 Thanks for subscribing!
               </p>
             )}
+          </div>
+        </div>
+
+        {/* YouTube Live/Video Section */}
+        <div className="max-w-6xl mx-auto mb-16">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">
+              Watch Live Sessions & Music Videos
+            </h3>
+            <div className="aspect-video rounded-lg overflow-hidden bg-gray-900">
+              {/* Replace with your YouTube channel live stream or playlist embed */}
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID"
+                title="YouTube Live Stream"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400 mt-4 text-sm">
+              Catch live performances, interviews, and music videos from SLC's best artists
+            </p>
           </div>
         </div>
       </Container>
