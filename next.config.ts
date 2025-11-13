@@ -18,6 +18,7 @@ const securityHeaders = [
       "font-src 'self' data:",
       "connect-src 'self' https://*.supabase.co https://api.unsplash.com https://a8.asurahosting.com",
       "media-src 'self' blob: https://*.supabase.co https://a8.asurahosting.com:9130",
+      "frame-src 'self' https://a8.asurahosting.com:9130 https://www.youtube.com https://www.youtube-nocookie.com",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
