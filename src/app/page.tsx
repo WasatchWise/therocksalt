@@ -47,12 +47,23 @@ export default function HomePage() {
             </div>
             <div>
               <iframe
+                src="https://a8.asurahosting.com/public/therocksalt/embed?theme=dark"
+                frameBorder="0"
+                allowTransparency={true}
+                className="w-full border-0"
+                style={{ minHeight: '150px' }}
+                title="The Rock Salt Radio Player"
+              />
+            </div>
+            {/* Song Request Form - Separate from player due to AzuraCast config */}
+            <div className="mt-4">
+              <iframe
                 src="https://a8.asurahosting.com/public/therocksalt/embed-requests?theme=dark"
                 frameBorder="0"
                 allowTransparency={true}
                 className="w-full border-0"
-                style={{ minHeight: '850px' }}
-                title="The Rock Salt Radio Player with Requests"
+                style={{ minHeight: '700px' }}
+                title="Request Songs"
               />
             </div>
           </div>
