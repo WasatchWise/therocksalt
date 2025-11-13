@@ -47,7 +47,7 @@ export default function HomePage() {
             </div>
             <div className="aspect-[16/9] md:aspect-[21/9]">
               <iframe
-                src="https://a8.asurahosting.com/public/therocksalt/embed?theme=dark"
+                src="https://a8.asurahosting.com/public/therocksalt/embeds/player?theme=dark"
                 frameBorder="0"
                 allowTransparency={true}
                 className="w-full h-full min-h-[600px]"
