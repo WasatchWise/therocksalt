@@ -167,14 +167,14 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* YouTube Live/Video Section */}
+        {/* YouTube Live/Video Section - Temporarily hidden until channel ID provided */}
+        {/* Uncomment when ready:
         <div className="max-w-6xl mx-auto mb-16">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">
               Watch Live Sessions & Music Videos
             </h3>
             <div className="aspect-video rounded-lg overflow-hidden bg-gray-900">
-              {/* Replace with your YouTube channel live stream or playlist embed */}
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID"
@@ -189,6 +189,7 @@ export default function HomePage() {
             </p>
           </div>
         </div>
+        */}
       </Container>
     </main>
   )
