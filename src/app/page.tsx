@@ -39,12 +39,13 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* AzuraCast Radio Player - Full Featured */}
+        {/* AzuraCast Radio Player */}
         <div className="max-w-6xl mx-auto mb-16">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
             <div className="bg-gradient-to-r from-indigo-600 to-purple-700 p-4 text-center">
-              <h3 className="text-2xl font-bold text-white">Listen Live - Request Songs Below!</h3>
+              <h3 className="text-2xl font-bold text-white">Listen Live</h3>
             </div>
+            {/* Main Player */}
             <div>
               <iframe
                 src="https://a8.asurahosting.com/public/therocksalt/embed?theme=dark"
@@ -55,14 +56,40 @@ export default function HomePage() {
                 title="The Rock Salt Radio Player"
               />
             </div>
-            {/* Song Request Form - Separate from player due to AzuraCast config */}
-            <div className="mt-4">
+          </div>
+        </div>
+
+        {/* Recently Played & Song Requests */}
+        <div className="max-w-6xl mx-auto mb-16 grid md:grid-cols-2 gap-6">
+          {/* Recent History */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 text-center">
+              <h4 className="text-lg font-bold text-white">Recently Played</h4>
+            </div>
+            <div>
+              <iframe
+                src="https://a8.asurahosting.com/public/therocksalt/history?theme=dark"
+                frameBorder="0"
+                allowTransparency={true}
+                className="w-full border-0"
+                style={{ minHeight: '400px' }}
+                title="Recently Played"
+              />
+            </div>
+          </div>
+
+          {/* Song Requests */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="bg-gradient-to-r from-pink-600 to-red-600 p-3 text-center">
+              <h4 className="text-lg font-bold text-white">Request a Song</h4>
+            </div>
+            <div>
               <iframe
                 src="https://a8.asurahosting.com/public/therocksalt/embed-requests?theme=dark"
                 frameBorder="0"
                 allowTransparency={true}
                 className="w-full border-0"
-                style={{ minHeight: '700px' }}
+                style={{ minHeight: '400px' }}
                 title="Request Songs"
               />
             </div>
