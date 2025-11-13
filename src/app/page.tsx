@@ -45,13 +45,14 @@ export default function HomePage() {
             <div className="bg-gradient-to-r from-indigo-600 to-purple-700 p-4 text-center">
               <h3 className="text-2xl font-bold text-white">Listen Live - Request Songs Below!</h3>
             </div>
-            <div className="aspect-[16/9] md:aspect-[21/9]">
+            <div>
               <iframe
-                src="https://a8.asurahosting.com/public/therocksalt/embeds/player?theme=dark"
+                src="https://a8.asurahosting.com/public/therocksalt/embed-requests?theme=dark"
                 frameBorder="0"
                 allowTransparency={true}
-                className="w-full h-full min-h-[600px]"
-                title="The Rock Salt Radio Player"
+                className="w-full border-0"
+                style={{ minHeight: '850px' }}
+                title="The Rock Salt Radio Player with Requests"
               />
             </div>
           </div>
