@@ -62,10 +62,8 @@ export default function InstallPrompt() {
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-r from-indigo-600 to-purple-700 text-white shadow-2xl animate-slide-up">
       <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 flex-1">
-          <div className="bg-white rounded-lg p-2 flex-shrink-0">
-            <svg className="w-8 h-8 text-indigo-600" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/>
-            </svg>
+          <div className="bg-white rounded-full p-1 flex-shrink-0">
+            <img src="/icon-192.png" alt="Rock Salt" className="w-10 h-10 rounded-full" />
           </div>
           <div className="flex-1">
             <h3 className="font-bold text-lg">Install The Rock Salt</h3>
