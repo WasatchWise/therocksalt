@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Logo from '@/components/Logo'
 import Container from '@/components/Container'
+import LiveStreamPlayer from '@/components/LiveStreamPlayer'
 
 export default function HomePage() {
   const [email, setEmail] = useState('')
@@ -39,24 +40,13 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* AzuraCast Radio Player */}
+        {/* Live Stream Player */}
         <div className="max-w-6xl mx-auto mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-700 p-4 text-center">
-              <h3 className="text-2xl font-bold text-white">Listen Live</h3>
-            </div>
-            {/* Main Player */}
-            <div>
-              <iframe
-                src="https://a8.asurahosting.com/public/therocksalt/embed?theme=dark"
-                frameBorder="0"
-                allowTransparency={true}
-                className="w-full border-0"
-                style={{ minHeight: '150px' }}
-                title="The Rock Salt Radio Player"
-              />
-            </div>
-          </div>
+          <LiveStreamPlayer
+            streamUrl="https://a8.asurahosting.com/listen/therocksalt/radio.mp3"
+            title="The Rock Salt Live"
+            description="Salt Lake City's Independent Music Radio"
+          />
         </div>
 
         {/* Recently Played & Song Requests */}
