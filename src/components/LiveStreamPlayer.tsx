@@ -105,10 +105,29 @@ export default function LiveStreamPlayer({
   }
 
   return (
-    <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl p-8 shadow-2xl">
+    <div className="bg-gradient-to-br from-yellow-400 via-orange-400 to-orange-500 rounded-2xl p-8 shadow-2xl border-4 border-cyan-500">
       <audio ref={audioRef} src={streamUrl} preload="none" />
 
       <div className="flex flex-col items-center text-center">
+        {/* Utah Music Radio Logo */}
+        <div className="mb-6">
+          <img
+            src="/UMR.png"
+            alt="Utah Music Radio"
+            className="h-32 w-auto"
+          />
+        </div>
+
+        {/* Powered By / Stream Info */}
+        <div className="mb-6 px-6 py-3 bg-cyan-500 rounded-lg shadow-lg">
+          <p className="text-white text-sm font-semibold mb-1">
+            Currently Streaming:
+          </p>
+          <p className="text-white text-xl font-bold">
+            The Rock Salt
+          </p>
+        </div>
+
         {/* Live Indicator */}
         {isPlaying && (
           <div className="mb-6 flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-full font-bold text-sm animate-pulse">
@@ -118,10 +137,10 @@ export default function LiveStreamPlayer({
         )}
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
           {title}
         </h2>
-        <p className="text-indigo-100 mb-8 text-lg">
+        <p className="text-white mb-8 text-lg drop-shadow-md">
           {description}
         </p>
 
@@ -129,7 +148,7 @@ export default function LiveStreamPlayer({
         <button
           onClick={togglePlay}
           disabled={isLoading}
-          className="w-24 h-24 flex items-center justify-center bg-white hover:bg-gray-100 text-indigo-600 rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed mb-6"
+          className="w-24 h-24 flex items-center justify-center bg-white hover:bg-gray-100 text-orange-600 rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed mb-6 border-4 border-cyan-500"
           aria-label={isPlaying ? 'Pause stream' : 'Play stream'}
         >
           {isLoading ? (
@@ -149,10 +168,31 @@ export default function LiveStreamPlayer({
         </button>
 
         {/* Status Text */}
-        <div className="text-white text-sm">
+        <div className="text-white text-sm font-semibold drop-shadow-md">
           {isLoading && <p>Connecting to stream...</p>}
           {isPlaying && !isLoading && <p>Now streaming live from Salt Lake City</p>}
           {!isPlaying && !isLoading && !error && <p>Click play to start listening</p>}
+        </div>
+
+        {/* Utah Music Radio Link */}
+        <div className="mt-6 px-6 py-4 bg-white/90 rounded-lg shadow-lg">
+          <p className="text-gray-800 text-sm mb-2">
+            Want to explore more streams?
+          </p>
+          <a
+            href="https://www.utahmusicradio.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-bold text-lg transition-colors"
+          >
+            Visit Utah Music Radio
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <p className="text-gray-600 text-xs mt-2">
+            Discover multiple music streams and genres
+          </p>
         </div>
 
         {/* Error Message */}
@@ -164,35 +204,35 @@ export default function LiveStreamPlayer({
 
         {/* Now Playing Info */}
         {nowPlaying && (
-          <div className="mt-8 pt-8 border-t border-indigo-400/30 w-full">
+          <div className="mt-8 pt-8 border-t border-white/30 w-full">
             <div className="flex items-center gap-4">
               {nowPlaying.song.art && (
                 <img
                   src={nowPlaying.song.art}
                   alt="Album Art"
-                  className="w-16 h-16 rounded-lg shadow-lg"
+                  className="w-16 h-16 rounded-lg shadow-lg border-2 border-cyan-500"
                 />
               )}
               <div className="flex-1 text-left">
-                <p className="text-white font-bold text-lg">
+                <p className="text-white font-bold text-lg drop-shadow-md">
                   {nowPlaying.song.title}
                 </p>
-                <p className="text-indigo-200 text-sm">
+                <p className="text-white/90 text-sm">
                   {nowPlaying.song.artist}
                 </p>
                 {nowPlaying.song.album && (
-                  <p className="text-indigo-300 text-xs">
+                  <p className="text-white/80 text-xs">
                     {nowPlaying.song.album}
                   </p>
                 )}
                 {nowPlaying.live.is_live && nowPlaying.live.streamer_name && (
-                  <p className="text-red-300 text-xs mt-1 font-semibold">
+                  <p className="text-red-200 text-xs mt-1 font-semibold">
                     🎙️ Live: {nowPlaying.live.streamer_name}
                   </p>
                 )}
               </div>
             </div>
-            <p className="text-indigo-100 text-xs mt-4">
+            <p className="text-white text-xs mt-4 font-semibold">
               Broadcasting at 192 kbps MP3
             </p>
           </div>
