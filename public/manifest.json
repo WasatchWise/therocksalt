@@ -1,0 +1,27 @@
+{
+  "name": "The Rock Salt",
+  "short_name": "Rock Salt",
+  "description": "Salt Lake City's premier independent music platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logotransparent.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logotransparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "entertainment"],
+  "scope": "/",
+  "lang": "en-US"
+}

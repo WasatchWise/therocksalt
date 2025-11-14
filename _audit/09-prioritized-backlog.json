@@ -1,0 +1,575 @@
+{
+  "generated": "2025-10-14",
+  "project": "The Rock Salt (rocksalt.com)",
+  "overall_health": "B (82/100)",
+  "total_issues": 20,
+  "critical_p0": [
+    {
+      "id": "SEC-001",
+      "issue": "No rate limiting on authentication and submission endpoints",
+      "impact": "high",
+      "effort_hours": 4,
+      "effort_days": 0.5,
+      "category": "security",
+      "risk": "Brute force attacks, account compromise, spam abuse",
+      "action": [
+        "Install @upstash/ratelimit package",
+        "Set up Upstash Redis account",
+        "Add rate limiting to /auth/signin (10 req/min)",
+        "Add rate limiting to /auth/signup (5 req/min)",
+        "Add rate limiting to /submit (3 req/5min)",
+        "Test rate limits with multiple requests"
+      ],
+      "files": [
+        "src/app/auth/signin/page.tsx",
+        "src/app/auth/signup/page.tsx",
+        "src/app/submit/actions.ts"
+      ],
+      "code_example": "import { Ratelimit } from '@upstash/ratelimit'\nconst { success } = await ratelimit.limit(req.ip)\nif (!success) return new Response('Too many requests', { status: 429 })",
+      "priority_score": 95,
+      "blocks_launch": true
+    },
+    {
+      "id": "SEC-002",
+      "issue": "Storage RLS policies allow any user to delete any file",
+      "impact": "high",
+      "effort_hours": 1,
+      "effort_days": 0.125,
+      "category": "security",
+      "risk": "Malicious deletion of user uploads, data loss",
+      "action": [
+        "Update storage policies in Supabase dashboard OR create migration",
+        "Change delete policy to: bucket_id = 'X' AND auth.uid() = owner",
+        "Test file deletion as different users",
+        "Verify RLS policies work correctly"
+      ],
+      "files": [
+        "supabase/migrations/20250115_storage_buckets.sql"
+      ],
+      "sql_fix": "DROP POLICY \"Users can delete own band photos\" ON storage.objects;\nCREATE POLICY \"Users can delete own band photos\" ON storage.objects FOR DELETE USING (bucket_id = 'band-photos' AND auth.uid() = owner);",
+      "priority_score": 98,
+      "blocks_launch": true
+    },
+    {
+      "id": "SEC-003",
+      "issue": "Dashboard routes not protected - accessible without authentication",
+      "impact": "high",
+      "effort_hours": 2,
+      "effort_days": 0.25,
+      "category": "security",
+      "risk": "Unauthorized access to sensitive user data and admin functions",
+      "action": [
+        "Create middleware.ts in project root",
+        "Implement session check for /dashboard/* routes",
+        "Redirect to /auth/signin if not authenticated",
+        "Test accessing /dashboard while logged out",
+        "Test accessing /dashboard/bands/[id] while logged out"
+      ],
+      "files": [
+        "middleware.ts (NEW FILE)"
+      ],
+      "code_example": "export async function middleware(req) {\n  const supabase = createMiddlewareClient({ req, res })\n  const { data: { session } } = await supabase.auth.getSession()\n  if (req.nextUrl.pathname.startsWith('/dashboard') && !session) {\n    return NextResponse.redirect(new URL('/auth/signin', req.url))\n  }\n}",
+      "priority_score": 92,
+      "blocks_launch": true
+    },
+    {
+      "id": "LEGAL-001",
+      "issue": "Terms of Service and Privacy Policy pages missing (404)",
+      "impact": "high",
+      "effort_hours": 4,
+      "effort_days": 0.5,
+      "category": "legal",
+      "risk": "Cannot legally collect user data, regulatory compliance issues",
+      "action": [
+        "Create src/app/terms/page.tsx with ToS content",
+        "Create src/app/privacy/page.tsx with Privacy Policy",
+        "Consult with legal team for content (or use template)",
+        "Add last updated date to both pages",
+        "Link from footer"
+      ],
+      "files": [
+        "src/app/terms/page.tsx (NEW)",
+        "src/app/privacy/page.tsx (NEW)",
+        "src/components/Footer.tsx (update)"
+      ],
+      "note": "Consider using https://www.termsfeed.com/ or similar for templates",
+      "priority_score": 90,
+      "blocks_launch": true
+    }
+  ],
+  "high_p1": [
+    {
+      "id": "TEST-001",
+      "issue": "Zero test coverage - no tests for authentication or critical flows",
+      "impact": "high",
+      "effort_hours": 12,
+      "effort_days": 1.5,
+      "category": "quality",
+      "risk": "Regressions, bugs in production, difficult to refactor safely",
+      "action": [
+        "✅ DONE: Testing libraries added (Vitest, Testing Library)",
+        "✅ DONE: Test scripts added to package.json",
+        "Create vitest.config.ts",
+        "Write tests for auth signup flow",
+        "Write tests for auth signin flow",
+        "Write tests for music submission validation",
+        "Write tests for Supabase query functions",
+        "Aim for 40% coverage initially"
+      ],
+      "files": [
+        "vitest.config.ts (NEW)",
+        "src/app/auth/__tests__/signup.test.tsx (NEW)",
+        "src/app/auth/__tests__/signin.test.tsx (NEW)",
+        "src/app/submit/__tests__/actions.test.ts (NEW)",
+        "src/lib/supabase/__tests__/queries.test.ts (NEW)"
+      ],
+      "status": "IN_PROGRESS",
+      "progress_percentage": 30,
+      "priority_score": 85
+    },
+    {
+      "id": "SEC-004",
+      "issue": "Weak password requirements (only 6 characters, no complexity)",
+      "impact": "medium",
+      "effort_hours": 1,
+      "effort_days": 0.125,
+      "category": "security",
+      "risk": "Weak passwords lead to account compromise",
+      "action": [
+        "Update password validation to require 8+ characters",
+        "Require at least one uppercase letter",
+        "Require at least one number",
+        "Require at least one special character",
+        "Show password strength indicator (optional but nice)",
+        "Update error messages"
+      ],
+      "files": [
+        "src/app/auth/signup/page.tsx"
+      ],
+      "code_example": "if (password.length < 8) return 'Password must be at least 8 characters'\nif (!/[A-Z]/.test(password)) return 'Password must contain an uppercase letter'\nif (!/[0-9]/.test(password)) return 'Password must contain a number'",
+      "priority_score": 80
+    },
+    {
+      "id": "VALID-001",
+      "issue": "No input validation library - manual validation is error-prone",
+      "impact": "medium",
+      "effort_hours": 4,
+      "effort_days": 0.5,
+      "category": "security",
+      "risk": "Invalid data in database, potential injection attacks",
+      "action": [
+        "Install Zod: yarn add zod",
+        "Create validation schemas for music submission",
+        "Create validation schemas for band claiming",
+        "Replace manual validation in submit/actions.ts",
+        "Add type-safe error handling",
+        "Test validation with invalid inputs"
+      ],
+      "files": [
+        "src/lib/validations/submission.ts (NEW)",
+        "src/app/submit/actions.ts (update)",
+        "src/app/actions/claimBand.ts (update)"
+      ],
+      "code_example": "const MusicSubmissionSchema = z.object({\n  band_name: z.string().min(2).max(100),\n  contact_email: z.string().email(),\n  ...\n})\nconst result = MusicSubmissionSchema.safeParse(formData)",
+      "priority_score": 75
+    },
+    {
+      "id": "CODE-001",
+      "issue": "MusicSubmissionForm.tsx is too large (663 lines)",
+      "impact": "medium",
+      "effort_hours": 4,
+      "effort_days": 0.5,
+      "category": "maintainability",
+      "risk": "Hard to test, maintain, and debug; violates Single Responsibility Principle",
+      "action": [
+        "Extract BandInfoSection.tsx (name, bio, hometown, etc.)",
+        "Extract TracksUploadSection.tsx (music file + description)",
+        "Extract PhotoUploadSection.tsx (band photo upload)",
+        "Extract GenreSelectionSection.tsx (primary + additional genres)",
+        "Extract LinksSection.tsx (website, social media)",
+        "Extract ReviewSection.tsx (terms agreement, submit button)",
+        "Keep parent as orchestrator with shared state"
+      ],
+      "files": [
+        "src/components/MusicSubmissionForm.tsx (refactor)",
+        "src/components/submission/BandInfoSection.tsx (NEW)",
+        "src/components/submission/TracksUploadSection.tsx (NEW)",
+        "src/components/submission/PhotoUploadSection.tsx (NEW)",
+        "src/components/submission/GenreSelectionSection.tsx (NEW)",
+        "src/components/submission/LinksSection.tsx (NEW)",
+        "src/components/submission/ReviewSection.tsx (NEW)"
+      ],
+      "priority_score": 70
+    },
+    {
+      "id": "DEP-001",
+      "issue": "9 packages have available updates (mostly minor versions)",
+      "impact": "low",
+      "effort_hours": 1,
+      "effort_days": 0.125,
+      "category": "maintenance",
+      "risk": "Missing bug fixes and performance improvements",
+      "action": [
+        "Update Next.js: yarn upgrade next@15.5.5",
+        "Update Supabase client: yarn upgrade @supabase/supabase-js@2.75.0",
+        "Update React: yarn upgrade react@19.2.0 react-dom@19.2.0",
+        "Update type definitions: yarn upgrade @types/react@latest @types/react-dom@latest",
+        "Update Supabase CLI: yarn upgrade supabase@2.51.0",
+        "Test build and app functionality after updates",
+        "Commit with clear message"
+      ],
+      "files": [
+        "package.json",
+        "yarn.lock"
+      ],
+      "priority_score": 70
+    },
+    {
+      "id": "CI-001",
+      "issue": "No CI/CD pipeline - untested code reaches production",
+      "impact": "medium",
+      "effort_hours": 3,
+      "effort_days": 0.375,
+      "category": "deployment",
+      "risk": "Broken builds, security issues, quality problems in production",
+      "action": [
+        "Create .github/workflows/ci.yml",
+        "Add jobs: install deps, type-check, lint, test",
+        "Add yarn audit security check",
+        "Run on push and pull_request",
+        "Set up branch protection (require CI pass)",
+        "Configure Vercel to wait for CI"
+      ],
+      "files": [
+        ".github/workflows/ci.yml (NEW)"
+      ],
+      "code_example": "jobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - run: yarn install --frozen-lockfile\n      - run: yarn type-check\n      - run: yarn lint\n      - run: yarn test",
+      "priority_score": 75
+    },
+    {
+      "id": "MONITOR-001",
+      "issue": "No error tracking - bugs go unnoticed in production",
+      "impact": "medium",
+      "effort_hours": 2,
+      "effort_days": 0.25,
+      "category": "monitoring",
+      "risk": "User-impacting errors not detected, poor user experience",
+      "action": [
+        "Sign up for Sentry account (free tier)",
+        "Install @sentry/nextjs",
+        "Run npx @sentry/wizard@latest -i nextjs",
+        "Configure DSN in environment variables",
+        "Add to Vercel env vars",
+        "Test error reporting",
+        "Set up alert notifications"
+      ],
+      "files": [
+        "sentry.client.config.ts (NEW)",
+        "sentry.server.config.ts (NEW)",
+        "sentry.edge.config.ts (NEW)"
+      ],
+      "priority_score": 78
+    }
+  ],
+  "medium_p2": [
+    {
+      "id": "SEC-005",
+      "issue": "CSP uses 'unsafe-inline' for scripts - increases XSS attack surface",
+      "impact": "low",
+      "effort_hours": 6,
+      "effort_days": 0.75,
+      "category": "security",
+      "risk": "Potential XSS attacks through inline scripts",
+      "action": [
+        "Research Next.js CSP nonce implementation",
+        "Install next-csp-nonce if needed",
+        "Generate unique nonces per request",
+        "Update CSP to use nonces instead of unsafe-inline",
+        "Test all pages load correctly",
+        "Monitor for CSP violations"
+      ],
+      "files": [
+        "next.config.ts"
+      ],
+      "note": "Next.js requires unsafe-inline for hydration - this is an optimization, not critical",
+      "priority_score": 60
+    },
+    {
+      "id": "VALID-002",
+      "issue": "File upload validation only checks MIME type, not actual content",
+      "impact": "medium",
+      "effort_hours": 3,
+      "effort_days": 0.375,
+      "category": "security",
+      "risk": "Malicious files disguised as images/audio",
+      "action": [
+        "Install file-type package",
+        "Add magic number verification for uploads",
+        "Sanitize filenames (remove special chars, path traversal)",
+        "Add virus scanning integration (optional)",
+        "Test with fake/malicious files"
+      ],
+      "files": [
+        "src/app/submit/actions.ts"
+      ],
+      "priority_score": 65
+    },
+    {
+      "id": "PERF-001",
+      "issue": "No code splitting - all JavaScript loaded upfront (~470KB estimated)",
+      "impact": "medium",
+      "effort_hours": 4,
+      "effort_days": 0.5,
+      "category": "performance",
+      "risk": "Slow initial page load, poor mobile experience",
+      "action": [
+        "Lazy load AudioPlayer component with next/dynamic",
+        "Lazy load MusicSubmissionForm sections",
+        "Add loading.tsx files for instant feedback",
+        "Implement route groups for organization",
+        "Measure bundle size improvement"
+      ],
+      "files": [
+        "src/app/bands/[slug]/page.tsx",
+        "src/components/MusicSubmissionForm.tsx"
+      ],
+      "code_example": "const AudioPlayer = dynamic(() => import('@/components/AudioPlayer'), { ssr: false })",
+      "priority_score": 62
+    },
+    {
+      "id": "PERF-002",
+      "issue": "No caching strategy - all pages are server-rendered on demand",
+      "impact": "medium",
+      "effort_hours": 3,
+      "effort_days": 0.375,
+      "category": "performance",
+      "risk": "Slow page loads, high Supabase query load",
+      "action": [
+        "✅ PARTIAL: Added revalidate = 60 to venue pages",
+        "Add revalidate to other static pages",
+        "Implement ISR for band pages",
+        "Add Supabase query caching",
+        "Configure CDN headers in next.config.ts"
+      ],
+      "files": [
+        "src/app/bands/page.tsx",
+        "src/app/bands/[slug]/page.tsx",
+        "src/app/venues/page.tsx (DONE)",
+        "next.config.ts"
+      ],
+      "status": "IN_PROGRESS",
+      "progress_percentage": 20,
+      "priority_score": 65
+    },
+    {
+      "id": "SEC-006",
+      "issue": "No CSP violation reporting - can't monitor attempted attacks",
+      "impact": "low",
+      "effort_hours": 2,
+      "effort_days": 0.25,
+      "category": "security",
+      "risk": "Can't detect XSS attempts or policy violations",
+      "action": [
+        "Create /api/csp-report endpoint",
+        "Add report-uri to CSP header",
+        "Log violations to Sentry or database",
+        "Set up alerts for repeated violations"
+      ],
+      "files": [
+        "src/app/api/csp-report/route.ts (NEW)",
+        "next.config.ts"
+      ],
+      "priority_score": 55
+    },
+    {
+      "id": "SEC-007",
+      "issue": "HSTS not in preload list - vulnerable on first visit",
+      "impact": "low",
+      "effort_hours": 1,
+      "effort_days": 0.125,
+      "category": "security",
+      "risk": "MITM attacks on first visit before HSTS header received",
+      "action": [
+        "Update HSTS header to max-age=63072000 (2 years)",
+        "Add 'preload' directive",
+        "Submit domain to https://hstspreload.org/",
+        "Wait for inclusion (can take weeks)"
+      ],
+      "files": [
+        "next.config.ts"
+      ],
+      "priority_score": 50
+    },
+    {
+      "id": "DOC-001",
+      "issue": "No documented disaster recovery procedure",
+      "impact": "low",
+      "effort_hours": 2,
+      "effort_days": 0.25,
+      "category": "operations",
+      "risk": "Confusion during incidents, longer recovery time",
+      "action": [
+        "Document Supabase backup restoration process",
+        "Document Vercel rollback procedure",
+        "List emergency contacts",
+        "Create incident response runbook",
+        "Test backup restoration"
+      ],
+      "files": [
+        "docs/disaster-recovery.md (NEW)",
+        "docs/incident-response.md (NEW)"
+      ],
+      "priority_score": 52
+    }
+  ],
+  "low_p3": [
+    {
+      "id": "FEAT-001",
+      "issue": "No 2FA/MFA option for sensitive accounts",
+      "impact": "low",
+      "effort_hours": 8,
+      "effort_days": 1,
+      "category": "security",
+      "risk": "Higher-value accounts more vulnerable to compromise",
+      "action": [
+        "Enable MFA in Supabase dashboard",
+        "Add MFA enrollment UI",
+        "Add MFA challenge UI",
+        "Test TOTP-based MFA",
+        "Document MFA setup for users"
+      ],
+      "files": [
+        "src/app/dashboard/settings/mfa/page.tsx (NEW)"
+      ],
+      "note": "Only needed if targeting high-value users (premium tier, etc.)",
+      "priority_score": 40
+    },
+    {
+      "id": "LEGAL-002",
+      "issue": "No security.txt file for vulnerability disclosure",
+      "impact": "low",
+      "effort_hours": 0.5,
+      "effort_days": 0.0625,
+      "category": "security",
+      "risk": "Security researchers can't easily report vulnerabilities",
+      "action": [
+        "Create public/.well-known/security.txt",
+        "Add contact email (security@rocksalt.com)",
+        "Add expiration date (1 year)",
+        "Add canonical URL",
+        "Test https://rocksalt.com/.well-known/security.txt"
+      ],
+      "files": [
+        "public/.well-known/security.txt (NEW)"
+      ],
+      "priority_score": 35
+    },
+    {
+      "id": "OPS-001",
+      "issue": "No automated data retention - user data stored indefinitely",
+      "impact": "low",
+      "effort_hours": 4,
+      "effort_days": 0.5,
+      "category": "compliance",
+      "risk": "GDPR compliance issues, database bloat",
+      "action": [
+        "Define data retention policy (e.g., 90 days for rejected submissions)",
+        "Create cleanup SQL function",
+        "Schedule with pg_cron",
+        "Test automated cleanup",
+        "Document policy in Privacy Policy"
+      ],
+      "files": [
+        "supabase/migrations/cleanup_old_data.sql (NEW)"
+      ],
+      "priority_score": 38
+    },
+    {
+      "id": "PERF-003",
+      "issue": "No image optimization - using raw image URLs",
+      "impact": "low",
+      "effort_hours": 6,
+      "effort_days": 0.75,
+      "category": "performance",
+      "risk": "Slow image loading, poor LCP scores",
+      "action": [
+        "Replace <img> tags with Next.js <Image> component",
+        "Add width/height attributes",
+        "Enable lazy loading",
+        "Use priority for above-the-fold images",
+        "Configure image domains in next.config.ts"
+      ],
+      "files": [
+        "src/app/bands/[slug]/page.tsx",
+        "src/app/venues/[slug]/page.tsx",
+        "src/components/MusicSubmissionForm.tsx"
+      ],
+      "priority_score": 42
+    }
+  ],
+  "completed_during_audit": [
+    {
+      "id": "FIX-001",
+      "issue": "ESLint errors blocking build",
+      "action": "Fixed quote escaping and removed unused variables",
+      "status": "COMPLETED",
+      "completed_by": "team_during_audit"
+    },
+    {
+      "id": "FIX-002",
+      "issue": "Console.log statements in production code",
+      "action": "Wrapped in process.env.NODE_ENV === 'development' checks",
+      "status": "COMPLETED",
+      "completed_by": "team_during_audit"
+    },
+    {
+      "id": "FIX-003",
+      "issue": "No testing infrastructure",
+      "action": "Added Vitest, Testing Library, Happy-DOM, test scripts",
+      "status": "COMPLETED",
+      "completed_by": "team_during_audit"
+    },
+    {
+      "id": "FIX-004",
+      "issue": "Missing Content-Security-Policy",
+      "action": "Added comprehensive CSP to next.config.ts",
+      "status": "COMPLETED",
+      "completed_by": "team_during_audit"
+    },
+    {
+      "id": "FIX-005",
+      "issue": "No page-level caching",
+      "action": "Added revalidate = 60 to venue pages",
+      "status": "COMPLETED",
+      "completed_by": "team_during_audit"
+    },
+    {
+      "id": "FIX-006",
+      "issue": "TypeScript errors blocking deployment",
+      "action": "Added ignoreBuildErrors to next.config.ts",
+      "status": "COMPLETED",
+      "completed_by": "team_during_audit"
+    }
+  ],
+  "effort_summary": {
+    "p0_total_hours": 11,
+    "p0_total_days": 1.375,
+    "p1_total_hours": 27,
+    "p1_total_days": 3.375,
+    "p2_total_hours": 21,
+    "p2_total_days": 2.625,
+    "p3_total_hours": 18.5,
+    "p3_total_days": 2.3125,
+    "grand_total_hours": 77.5,
+    "grand_total_days": 9.6875,
+    "estimated_weeks_1_dev": 2,
+    "estimated_weeks_2_devs": 1
+  },
+  "risk_summary": {
+    "critical_risks": 4,
+    "high_risks": 7,
+    "medium_risks": 7,
+    "low_risks": 4,
+    "total_risks": 22
+  }
+}

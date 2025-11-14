@@ -1,0 +1,6 @@
+yarn run v1.22.22
+$ next build
+   ▲ Next.js 15.5.4
+   - Environments: .env.local, .env.production
+
+   Creating an optimized production build ...

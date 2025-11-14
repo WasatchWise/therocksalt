@@ -1,0 +1,15 @@
+    6747 total
+    1373 src/types/supabase.ts
+     663 src/components/MusicSubmissionForm.tsx
+     358 src/app/venues/[slug]/page.tsx
+     303 src/app/page.tsx
+     302 src/app/bands/[slug]/page.tsx
+     284 src/types/database.ts
+     274 src/app/dashboard/bands/[id]/page.tsx
+     270 src/lib/supabase/queries.ts
+     215 src/components/UploadPhotoForm.tsx
+     191 src/components/UploadTrackForm.tsx
+     187 src/app/auth/signup/page.tsx
+     186 src/app/submit/actions.ts
+     185 src/app/dashboard/page.tsx
+     175 src/app/events/page.tsx
