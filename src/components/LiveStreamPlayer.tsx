@@ -155,7 +155,7 @@ export default function LiveStreamPlayer({
           <div className="flex items-end justify-between gap-4">
             {/* Now Playing Info */}
             <div className="flex-1">
-              {nowPlaying && (
+              {nowPlaying && nowPlaying.song.title !== 'Station Offline' && nowPlaying.song.artist !== 'Unknown Artist' && (
                 <div className="flex items-center gap-3">
                   {nowPlaying.song.art && (
                     <img
