@@ -35,9 +35,9 @@ export default function UMRPartnership({
           <Image
             src="/UMR.png"
             alt="Utah Music Radio"
-            width={120}
-            height={40}
-            className="h-8 w-auto object-contain"
+            width={200}
+            height={67}
+            className="h-14 w-auto object-contain"
           />
         </Link>
       </div>
