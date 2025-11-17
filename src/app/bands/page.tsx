@@ -7,7 +7,7 @@ export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Artists',
-  description: 'Discover talented local artists from Salt Lake City. Browse our directory of bands and musicians across all genres.',
+  description: 'Discover Utah\'s local artists and bands. Browse talented musicians across all genres from across the state and region.',
 }
 
 export default async function BandsPage() {
@@ -36,10 +36,10 @@ export default async function BandsPage() {
     <Container className="py-12">
       <div className="mb-8">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-          Artist Directory
+          Utah Artists
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-400">
-          Discover talented local artists from the Salt Lake City music scene
+          Discover talented local artists from across Utah and the region.
         </p>
       </div>
 

@@ -2,7 +2,7 @@ import Container from '@/components/Container'
 
 export const metadata = {
   title: 'Submit Your Music | The Rock Salt',
-  description: 'Submit your band to The Rock Salt - Utah\'s local music hub. Share your music with the community.',
+  description: 'Submit your band to Salt Lake\'s Music Hub. Get featured and share your music with Utah\'s music community.',
 }
 
 export default function SubmitPage() {
@@ -13,7 +13,7 @@ export default function SubmitPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Submit Your Music</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Share your music with Utah&apos;s local music community. We&apos;re always looking for new talent to feature on The Rock Salt.
+            Share your music with Utah&apos;s music community. We&apos;re always looking for new talent from across the state and region to feature.
           </p>
         </div>
 

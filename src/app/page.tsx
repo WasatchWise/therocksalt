@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Logo from '@/components/Logo'
 import Container from '@/components/Container'
 import LiveStreamPlayer from '@/components/LiveStreamPlayer'
+import UMRPartnership from '@/components/UMRPartnership'
+import Button from '@/components/Button'
 
 export default function HomePage() {
   const [email, setEmail] = useState('')
@@ -20,22 +22,79 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <Container className="py-12">
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <Logo className="w-64 md:w-80 h-auto" priority />
+      <Container className="py-8 md:py-12">
+        {/* Hero Section */}
+        <div className="flex flex-col items-center mb-16 animate-fade-in">
+          <Logo className="w-64 md:w-80 h-auto mb-8" priority />
+          <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 text-center tracking-tight">
+            Salt Lake's Music Hub
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 text-center max-w-2xl leading-relaxed px-4">
+            Discover local artists, live radio, upcoming shows, and everything happening in Utah's vibrant music scene.
+          </p>
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-xs text-gray-500 dark:text-gray-500 font-medium uppercase tracking-wide">
+              A show on
+            </p>
+            <UMRPartnership variant="inline" />
+          </div>
         </div>
 
         {/* Promotional Banner */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <div className="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 rounded-2xl p-8 shadow-2xl text-center">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
+        <div className="max-w-4xl mx-auto mb-16 animate-scale-in">
+          <div className="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 rounded-3xl p-10 md:p-14 shadow-2xl text-center transform hover:scale-[1.01] transition-all duration-300 border-4 border-white dark:border-gray-800">
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight drop-shadow-lg">
               ALL LOCAL - ALL DAY
             </h2>
-            <div className="text-white">
-              <p className="text-2xl md:text-3xl font-bold mb-2">Rock Salt Radio Live</p>
-              <p className="text-xl md:text-2xl font-semibold">Tuesday & Thursday</p>
-              <p className="text-xl md:text-2xl font-semibold">11 - 1p</p>
+            <div className="text-white space-y-3">
+              <p className="text-2xl md:text-3xl font-bold drop-shadow-md">Rock Salt Radio Live</p>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-xl md:text-2xl font-semibold">
+                <span>Tuesday & Thursday</span>
+                <span className="hidden md:inline">•</span>
+                <span>11 - 1p</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Upcoming Live Stream */}
+        <div className="max-w-6xl mx-auto mb-20 animate-fade-in">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300">
+            <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-5 md:p-7 text-center">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <svg className="w-5 h-5 text-white animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+                </svg>
+                <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-md tracking-tight">
+                  Live Stream Tomorrow
+                </h3>
+              </div>
+              <p className="text-white/90 text-sm md:text-base">
+                Watch Live on YouTube
+              </p>
+            </div>
+            <div className="aspect-video bg-gray-900">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/eGU3aMSN94c?autoplay=0&rel=0"
+                title="Live Stream Tomorrow"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <div className="p-4 text-center bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+              <a
+                href="https://www.youtube.com/live/eGU3aMSN94c?si=Ll_JzHFKPAdk08nt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold text-sm transition-colors"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Watch on YouTube
+              </a>
             </div>
           </div>
         </div>
@@ -50,11 +109,11 @@ export default function HomePage() {
         </div>
 
         {/* Recently Played & Song Requests */}
-        <div className="max-w-6xl mx-auto mb-16 grid md:grid-cols-2 gap-6">
+        <div className="max-w-6xl mx-auto mb-20 grid md:grid-cols-2 gap-8">
           {/* Recent History */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 text-center">
-              <h4 className="text-lg font-bold text-white">Recently Played</h4>
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 animate-slide-in-left">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-5 text-center">
+              <h4 className="text-lg md:text-xl font-bold text-white drop-shadow-md tracking-tight">Recently Played</h4>
             </div>
             <div>
               <iframe
@@ -69,9 +128,9 @@ export default function HomePage() {
           </div>
 
           {/* Song Requests */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-            <div className="bg-gradient-to-r from-pink-600 to-red-600 p-3 text-center">
-              <h4 className="text-lg font-bold text-white">Request a Song</h4>
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 animate-slide-in-left">
+            <div className="bg-gradient-to-r from-pink-600 to-red-600 p-5 text-center">
+              <h4 className="text-lg md:text-xl font-bold text-white drop-shadow-md tracking-tight">Request a Song</h4>
             </div>
             <div>
               <iframe
@@ -87,25 +146,25 @@ export default function HomePage() {
         </div>
 
         {/* Music Submission Form */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 border border-gray-200 dark:border-gray-700 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="max-w-4xl mx-auto mb-20 animate-fade-in">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-10 md:p-14 border border-gray-200 dark:border-gray-700 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-5 tracking-tight">
               Submit Your Music
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-              Are you a Salt Lake City artist? We want to hear from you!
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
+              Are you a Utah artist? We want to hear from you!
             </p>
-            <a
+            <Button
               href="https://forms.gle/ZkniH6q2HZdEUJbo9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xl rounded-lg shadow-lg transform transition-all hover:scale-105"
+              size="lg"
+              icon={
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3l6 6-6 6m0 0l3-3m-3 3v-12" />
+                </svg>
+              }
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3l6 6-6 6m0 0l3-3m-3 3v-12" />
-              </svg>
               Submit Your Music
-            </a>
+            </Button>
           </div>
         </div>
 
@@ -125,32 +184,29 @@ export default function HomePage() {
         </div>
 
         {/* Email Capture */}
-        <div className="max-w-2xl mx-auto mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-200 dark:border-gray-700 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="max-w-2xl mx-auto mb-20 animate-fade-in">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-10 md:p-12 border border-gray-200 dark:border-gray-700 text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-5 tracking-tight">
               Stay Updated
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
               Get notified about new shows, events, and featured artists
             </p>
-            <form onSubmit={handleEmailSubmit} className="flex gap-3">
+            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors"
-              >
+              <Button type="submit" size="md">
                 Subscribe
-              </button>
+              </Button>
             </form>
             {emailSubmitted && (
-              <p className="mt-4 text-green-600 dark:text-green-400 font-semibold">
+              <p className="mt-4 text-green-600 dark:text-green-400 font-semibold animate-fade-in">
                 Thanks for subscribing!
               </p>
             )}
@@ -158,12 +214,12 @@ export default function HomePage() {
         </div>
 
         {/* YouTube Live/Video Section */}
-        <div className="max-w-6xl mx-auto mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">
+        <div className="max-w-6xl mx-auto mb-20 animate-fade-in">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8 md:p-10 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center tracking-tight">
               Watch Live Sessions & Music Videos
             </h3>
-            <div className="aspect-video rounded-lg overflow-hidden bg-gray-900">
+            <div className="aspect-video rounded-lg overflow-hidden bg-gray-900 shadow-lg">
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/eGU3aMSN94c"
@@ -173,8 +229,8 @@ export default function HomePage() {
                 allowFullScreen
               />
             </div>
-            <p className="text-center text-gray-600 dark:text-gray-400 mt-4 text-sm">
-              Catch live performances, interviews, and music videos from SLC's best artists
+            <p className="text-center text-gray-600 dark:text-gray-400 mt-6 text-sm md:text-base">
+              Catch live performances, interviews, and music videos from Utah&apos;s best artists
             </p>
           </div>
         </div>

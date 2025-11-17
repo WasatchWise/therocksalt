@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Container from './Container'
+import UMRPartnership from './UMRPartnership'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -21,16 +22,20 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-auto">
+    <footer className="bg-gray-900 text-gray-300 mt-auto border-t border-gray-800">
       <Container>
         <div className="py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}
-            <div>
-              <h3 className="text-white font-bold text-lg mb-4">The Rock Salt</h3>
-              <p className="text-sm text-gray-400">
-                Salt Lake City&apos;s premier independent music platform.
+            <div className="md:col-span-1">
+              <h3 className="text-white font-bold text-lg mb-2">The Rock Salt</h3>
+              <p className="text-sm text-gray-400 mb-1 font-semibold">
+                Salt Lake&apos;s Music Hub
               </p>
+              <p className="text-sm text-gray-500 mb-6">
+                Your one-stop destination for Utah music.
+              </p>
+              <UMRPartnership variant="footer" />
             </div>
 
             {/* Site Links */}
@@ -80,8 +85,21 @@ export default function Footer() {
           </div>
 
           {/* Bottom */}
-          <div className="mt-12 pt-8 border-t border-gray-800 text-sm text-gray-500 text-center">
-            <p>&copy; {currentYear} The Rock Salt. Salt Lake Music Hub.</p>
+          <div className="mt-12 pt-8 border-t border-gray-800">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+              <p>&copy; {currentYear} The Rock Salt. Salt Lake&apos;s Music Hub.</p>
+              <p className="text-xs">
+                A show on{' '}
+                <a
+                  href="https://www.utahmusicradio.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  Utah Music Radio
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </Container>

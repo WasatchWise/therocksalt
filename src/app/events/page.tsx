@@ -8,7 +8,7 @@ export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Events',
-  description: 'Upcoming live music events and shows in Salt Lake City. Find out where and when your favorite local artists are performing.',
+  description: 'Upcoming live music events and shows across Utah. Find where and when your favorite local artists are performing.',
 }
 
 export default async function EventsPage() {
@@ -35,7 +35,7 @@ export default async function EventsPage() {
           LIVE SHOWS
         </h1>
         <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-semibold">
-          Salt Lake City&apos;s Best Live Music
+          Upcoming shows and live music across Utah
         </p>
       </div>
 

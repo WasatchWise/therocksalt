@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { getSavedBandsCount } from '@/lib/savedBands'
 import Logo from './Logo'
 import Container from './Container'
+import UMRPartnership from './UMRPartnership'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -50,13 +51,18 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 backdrop-blur-sm bg-opacity-95 dark:bg-opacity-95 shadow-sm">
       <Container>
         <nav className="flex items-center justify-between py-4">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Logo className="w-32 h-auto" priority />
-          </Link>
+          {/* Logo and UMR Partnership */}
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center transition-opacity hover:opacity-80">
+              <Logo className="w-32 h-auto" priority />
+            </Link>
+            <div className="hidden lg:block">
+              <UMRPartnership variant="badge" />
+            </div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
@@ -114,6 +120,11 @@ export default function Header() {
               </svg>
               Discord
             </a>
+
+            {/* UMR Partnership (mobile) */}
+            <div className="lg:hidden">
+              <UMRPartnership variant="badge" />
+            </div>
 
             {/* Auth buttons */}
             {user ? (

@@ -125,6 +125,38 @@ export default function MusicSubmissionsAdmin() {
     }
   }
 
+  async function approveAndAddToPlaylist(id: string) {
+    if (!confirm('Approve this submission and add it to the AzuraCast playlist? This will upload the track automatically.')) {
+      return;
+    }
+
+    try {
+      // First update status to accepted
+      await updateStatus(id, 'accepted');
+
+      // Then upload to AzuraCast
+      const response = await fetch('/api/azuracast/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ submissionId: id }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to upload to AzuraCast');
+      }
+
+      alert(`Success! Track uploaded to AzuraCast (Media ID: ${result.mediaId}). ${result.addedToPlaylist ? 'Added to playlist.' : 'Uploaded but not added to playlist.'}`);
+      fetchSubmissions();
+    } catch (error) {
+      console.error('Error uploading to AzuraCast:', error);
+      alert(`Failed to upload to AzuraCast: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
   async function bulkUpdateStatus(newStatus: 'accepted' | 'declined' | 'reviewed') {
     if (selectedSubmissions.size === 0) {
       alert('Please select at least one submission');
@@ -497,7 +529,16 @@ export default function MusicSubmissionsAdmin() {
                   )}
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2 pt-4 border-t ml-9">
+                  <div className="flex gap-2 pt-4 border-t ml-9 flex-wrap">
+                    {submission.status !== 'accepted' && submission.links.music_file && (
+                      <button
+                        onClick={() => approveAndAddToPlaylist(submission.id)}
+                        className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 font-semibold"
+                        title="Approve and automatically upload to AzuraCast playlist"
+                      >
+                        ✓ Approve & Add to Playlist
+                      </button>
+                    )}
                     {submission.status !== 'accepted' && (
                       <button
                         onClick={() => updateStatus(submission.id, 'accepted')}

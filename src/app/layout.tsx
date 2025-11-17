@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     default: "The Rock Salt | Salt Lake's Music Hub",
     template: "%s | The Rock Salt"
   },
-  description: "The Rock Salt is Salt Lake City's premier independent music platform. Discover local artists, upcoming shows, live episodes, and the vibrant SLC music scene.",
-  keywords: ["Salt Lake City music", "SLC bands", "local artists", "Utah music scene", "independent music", "live music"],
+  description: "Salt Lake's Music Hub. Discover local artists, upcoming shows, live radio, and everything happening in Utah's vibrant music scene.",
+  keywords: ["Utah music", "Salt Lake City music", "SLC bands", "local artists", "Utah music scene", "independent music", "live music", "regional music"],
   authors: [{ name: "The Rock Salt" }],
   creator: "The Rock Salt",
   publisher: "The Rock Salt",
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://www.therocksalt.com',
     title: "The Rock Salt | Salt Lake's Music Hub",
-    description: "Salt Lake City's premier independent music platform. Discover local artists, upcoming shows, and the vibrant SLC music scene.",
+    description: "Salt Lake's Music Hub. Discover local artists, upcoming shows, live radio, and everything happening in Utah's vibrant music scene.",
     siteName: 'The Rock Salt',
   },
   twitter: {
     card: 'summary_large_image',
     title: "The Rock Salt | Salt Lake's Music Hub",
-    description: "Salt Lake City's premier independent music platform.",
+    description: "Salt Lake's Music Hub. Your one-stop destination for Utah music.",
   },
   robots: {
     index: true,
@@ -70,11 +70,11 @@ export default function RootLayout({
       >
         <PWAInstall />
         <InstallPrompt />
-        {/* <Header /> */}
+        <Header />
         <main className="flex-1">
           {children}
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
