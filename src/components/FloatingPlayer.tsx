@@ -9,8 +9,7 @@ export default function FloatingPlayer() {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const hasValidTrack = nowPlaying &&
-    nowPlaying.song.title !== 'Station Offline' &&
-    nowPlaying.song.artist !== 'Unknown Artist'
+    nowPlaying.song.title !== 'Station Offline'
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 transition-all duration-300">
