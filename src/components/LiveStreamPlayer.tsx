@@ -114,7 +114,7 @@ export default function LiveStreamPlayer({
           <img
             src="/UMR.png"
             alt="Utah Music Radio"
-            className="w-full h-auto max-h-48"
+            className="w-full h-auto max-h-64 md:max-h-80"
           />
         </div>
 
