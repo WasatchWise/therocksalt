@@ -21,7 +21,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^8.5.1",
     "@supabase/ssr": "^0.7.0",
-    "@supabase/supabase-js": "^2.75.0",
+    "@supabase/supabase-js": "^2.81.1",
     "@upstash/ratelimit": "^1.1.3",
     "@upstash/redis": "^1.31.0",
     "next": "15.5.4",
