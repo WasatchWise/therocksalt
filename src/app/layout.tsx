@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PWAInstall from "@/components/PWAInstall";
 import InstallPrompt from "@/components/InstallPrompt";
+import { AudioPlayerProvider } from "@/contexts/AudioPlayerContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -68,13 +69,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <PWAInstall />
-        <InstallPrompt />
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <AudioPlayerProvider>
+          <PWAInstall />
+          <InstallPrompt />
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </AudioPlayerProvider>
       </body>
     </html>
   );

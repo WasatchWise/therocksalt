@@ -1,112 +1,20 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-
-interface NowPlayingData {
-  song: {
-    title: string
-    artist: string
-    album?: string
-    art?: string
-  }
-  live: {
-    is_live: boolean
-    streamer_name?: string
-  }
-}
+import { useAudioPlayer } from '@/contexts/AudioPlayerContext'
 
 interface LiveStreamPlayerProps {
-  streamUrl: string
   title?: string
   description?: string
 }
 
 export default function LiveStreamPlayer({
-  streamUrl,
   title = 'The Rock Salt Live',
   description = 'Salt Lake City\'s Independent Music Radio'
 }: LiveStreamPlayerProps) {
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [nowPlaying, setNowPlaying] = useState<NowPlayingData | null>(null)
-
-  // Fetch Now Playing data
-  useEffect(() => {
-    const fetchNowPlaying = async () => {
-      try {
-        const response = await fetch('/api/now-playing')
-        if (response.ok) {
-          const data = await response.json()
-          setNowPlaying(data)
-        }
-      } catch (err) {
-        console.error('Failed to fetch now playing data:', err)
-      }
-    }
-
-    // Fetch immediately
-    fetchNowPlaying()
-
-    // Then fetch every 15 seconds
-    const interval = setInterval(fetchNowPlaying, 15000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const handleWaiting = () => setIsLoading(true)
-    const handleCanPlay = () => setIsLoading(false)
-    const handleError = () => {
-      setError('Unable to connect to stream. The stream may be offline.')
-      setIsPlaying(false)
-      setIsLoading(false)
-    }
-    const handleEnded = () => setIsPlaying(false)
-
-    audio.addEventListener('waiting', handleWaiting)
-    audio.addEventListener('canplay', handleCanPlay)
-    audio.addEventListener('error', handleError)
-    audio.addEventListener('ended', handleEnded)
-
-    return () => {
-      audio.removeEventListener('waiting', handleWaiting)
-      audio.removeEventListener('canplay', handleCanPlay)
-      audio.removeEventListener('error', handleError)
-      audio.removeEventListener('ended', handleEnded)
-    }
-  }, [])
-
-  const togglePlay = async () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    setError(null)
-
-    if (isPlaying) {
-      audio.pause()
-      setIsPlaying(false)
-    } else {
-      setIsLoading(true)
-      try {
-        await audio.play()
-        setIsPlaying(true)
-      } catch (err) {
-        setError('Unable to start playback. Please try again.')
-        setIsPlaying(false)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-  }
+  const { isPlaying, isLoading, error, nowPlaying, togglePlay } = useAudioPlayer()
 
   return (
     <div className="bg-gradient-to-br from-yellow-400 via-orange-400 to-orange-500 rounded-xl p-4 md:p-6 shadow-2xl border-4 border-cyan-500">
-      <audio ref={audioRef} src={streamUrl} preload="none" />
 
       <div className="flex flex-col md:flex-row gap-6">
         {/* Left side: Large UMR Logo (1/3) */}

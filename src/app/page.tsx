@@ -102,7 +102,6 @@ export default function HomePage() {
         {/* Live Stream Player */}
         <div className="max-w-6xl mx-auto mb-16">
           <LiveStreamPlayer
-            streamUrl="https://a8.asurahosting.com/listen/therocksalt/radio.mp3"
             title="The Rock Salt Live"
             description="Salt Lake City's Independent Music Radio"
           />
