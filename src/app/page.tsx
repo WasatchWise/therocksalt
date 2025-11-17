@@ -147,6 +147,36 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* The Salt Vault */}
+        <div className="max-w-4xl mx-auto mb-20">
+          <div className="bg-gradient-to-r from-[#8b9b47] to-[#a4a654] rounded-3xl shadow-xl p-10 md:p-14 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-5">
+              The Salt Vault
+            </h2>
+            <p className="text-lg mb-8 text-white/90">
+              The forums are back. Not Discord. Not Facebook groups. An actual message board. Like it's 2002.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                href="https://therocksalt.discourse.group"
+                size="lg"
+                className="bg-white text-[#8b9b47] hover:bg-gray-100"
+              >
+                Enter The Vault
+              </Button>
+              <button
+                onClick={() => window.open('https://therocksalt.discourse.group/categories', '_blank')}
+                className="px-6 py-3 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold text-lg transition-colors"
+              >
+                Browse Categories
+              </button>
+            </div>
+            <p className="text-sm text-white/70 mt-6 italic">
+              First 100 members get the "Salt Miner" badge
+            </p>
+          </div>
+        </div>
+
         {/* Community Links */}
         <div className="max-w-4xl mx-auto mb-16 grid md:grid-cols-2 gap-6">
           {/* Discord */}
