@@ -50,7 +50,7 @@ export default function FloatingPlayer() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
                   <p className="text-white font-bold text-base truncate drop-shadow-lg">
-                    {hasValidTrack ? nowPlaying.song.title : 'The Rock Salt Radio'}
+                    {nowPlaying?.song.title || 'The Rock Salt Radio'}
                   </p>
                   {isPlaying && (
                     <span className="flex items-center gap-1.5 px-2.5 py-1 bg-red-500 text-white rounded-full text-xs font-bold animate-pulse shadow-lg">
@@ -59,9 +59,14 @@ export default function FloatingPlayer() {
                       LIVE
                     </span>
                   )}
+                  {nowPlaying && !hasValidTrack && (
+                    <span className="px-2 py-0.5 bg-gray-500/80 text-white rounded-full text-xs font-semibold">
+                      OFFLINE
+                    </span>
+                  )}
                 </div>
                 <p className="text-white/90 text-sm truncate drop-shadow-md">
-                  {hasValidTrack ? nowPlaying.song.artist : 'Salt Lake\'s Music Hub'}
+                  {nowPlaying?.song.artist || 'Salt Lake\'s Music Hub'}
                 </p>
                 {nowPlaying?.live.is_live && nowPlaying.live.streamer_name && (
                   <p className="text-yellow-300 text-xs font-semibold mt-0.5 flex items-center gap-1">
