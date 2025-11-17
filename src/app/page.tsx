@@ -25,10 +25,10 @@ export default function HomePage() {
         <div className="flex flex-col items-center mb-16 animate-fade-in">
           <Logo className="w-64 md:w-80 h-auto mb-8" priority />
           <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 text-center tracking-tight">
-            Salt Lake's Music Hub
+            Utah's Music Memory
           </h1>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 text-center max-w-2xl leading-relaxed px-4">
-            Discover local artists, live radio, upcoming shows, and everything happening in Utah's vibrant music scene.
+            Utah makes more noise than you think. We've been documenting it since 2002, back when message boards were the algorithm. Live radio • Opinionated coverage • All 29 counties, not just Salt Lake.
           </p>
           <div className="flex flex-col items-center gap-2">
             <p className="text-xs text-gray-500 dark:text-gray-500 font-medium uppercase tracking-wide">
@@ -81,22 +81,33 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Featured Band of the Day */}
+          {/* Featured Band */}
           <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl shadow-xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
               </svg>
-              Featured Band
+              This Week: Power of Intent
             </h3>
-            <div className="text-center mb-4">
-              <div className="w-32 h-32 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
-                <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-                </svg>
+            <div className="space-y-4">
+              <p className="text-lg leading-relaxed">
+                Power of Intent weaponizes reverb. Their latest single "Animal Nature" sounds like My Bloody Valentine got lost in Little Cottonwood Canyon and decided the echo was better than the exit. Worth the drive from anywhere in the valley.
+              </p>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <iframe
+                  style={{ borderRadius: '12px' }}
+                  src="https://open.spotify.com/embed/track/4cNzwiPOLzL2XjyXzMhFOi?utm_source=generator&theme=0"
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allowFullScreen
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                />
               </div>
-              <p className="text-lg font-semibold">Coming Soon</p>
-              <p className="text-sm text-white/80">Check back for today's featured artist</p>
+              <p className="text-sm text-white/80 italic">
+                📍 Photo op: Shoot your own "Animal Nature" cover at Bonneville Salt Flats during golden hour.
+              </p>
             </div>
           </div>
         </div>
@@ -124,7 +135,7 @@ export default function HomePage() {
               Submit Your Music
             </h2>
             <p className="text-lg mb-10 text-white/90">
-              Are you a Utah artist? We want to hear from you!
+              Make music in Utah? We're listening. No genre gatekeeping, no pay-to-play bullshit. Submit your stuff. We spin it or tell you why we didn't.
             </p>
             <Button
               href="https://forms.gle/ZkniH6q2HZdEUJbo9"

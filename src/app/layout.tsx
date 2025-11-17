@@ -20,10 +20,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "The Rock Salt | Salt Lake's Music Hub",
+    default: "The Rock Salt | Utah's Music Memory",
     template: "%s | The Rock Salt"
   },
-  description: "Salt Lake's Music Hub. Discover local artists, upcoming shows, live radio, and everything happening in Utah's vibrant music scene.",
+  description: "Utah's Music Memory. Since the phpBB Era. Live radio, opinionated coverage, and all 29 counties—not just Salt Lake.",
   keywords: ["Utah music", "Salt Lake City music", "SLC bands", "local artists", "Utah music scene", "independent music", "live music", "regional music"],
   authors: [{ name: "The Rock Salt" }],
   creator: "The Rock Salt",
