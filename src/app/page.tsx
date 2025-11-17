@@ -140,7 +140,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto mb-16 grid md:grid-cols-2 gap-6">
           {/* Discord */}
           <a
-            href="https://discord.gg/QWW5uD25r5"
+            href="https://discord.gg/9qRatCBJ"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-4 p-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transform transition-all hover:scale-105"
