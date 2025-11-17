@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   try {
     const apiKey = process.env.X_API_Key
-    const stationId = '1' // Your station ID
+    const stationId = '693' // The Rock Salt station ID
 
     if (!apiKey) {
       return NextResponse.json(
