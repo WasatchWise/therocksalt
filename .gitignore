@@ -49,3 +49,6 @@ node_modules.bak.*/
 
 # supabase branches (development)
 supabase/.branches/
+
+# nested project directory
+/the-rock-salt
