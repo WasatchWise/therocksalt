@@ -157,19 +157,22 @@ export default function HomePage() {
               The forums are back. Not Discord. Not Facebook groups. An actual message board. Like it's 2002.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
+              <a
                 href="https://therocksalt.discourse.group"
-                size="lg"
-                className="bg-white text-[#8b9b47] hover:bg-gray-100"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-white text-[#8b9b47] hover:bg-gray-100 rounded-lg font-bold text-lg transition-colors text-center"
               >
                 Enter The Vault
-              </Button>
-              <button
-                onClick={() => window.open('https://therocksalt.discourse.group/categories', '_blank')}
-                className="px-6 py-3 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold text-lg transition-colors"
+              </a>
+              <a
+                href="https://therocksalt.discourse.group/categories"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 border-2 border-white text-white hover:bg-white/20 rounded-lg font-bold text-lg transition-colors text-center"
               >
                 Browse Categories
-              </button>
+              </a>
             </div>
             <p className="text-sm text-white/70 mt-6 italic">
               First 100 members get the "Salt Miner" badge
