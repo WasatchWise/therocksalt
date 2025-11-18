@@ -75,16 +75,20 @@ export default function RootLayout({
           <InstallPrompt />
 
           {/* Global Salt Vault Banner - Very Top */}
-          <div className="bg-gradient-to-r from-gray-800 to-gray-900 border-b border-gray-700">
-            <div className="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between text-xs">
-              <p className="text-gray-300 font-medium">
-                💬 Join the conversation in the Salt Vault
-              </p>
+          <div className="bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-700 border-b-2 border-yellow-400 shadow-lg">
+            <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🏛️</span>
+                <p className="text-white font-bold text-sm md:text-base">
+                  Join the conversation in the Salt Vault
+                  <span className="hidden md:inline text-emerald-200 ml-2">• Utah's Music Forum</span>
+                </p>
+              </div>
               <a
                 href="https://therocksalt.discourse.group"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-semibold transition-colors"
+                className="px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-gray-900 rounded-lg font-bold text-sm transition-all hover:scale-105 shadow-md"
               >
                 Enter →
               </a>
