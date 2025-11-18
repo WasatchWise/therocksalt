@@ -122,10 +122,10 @@ export default function BandSearchFilter({ bands }: BandSearchFilterProps) {
 
       {/* Render filtered bands */}
       <>
-        {/* ROCK & ROLL HALL OF FAME TIER - Full width, massive cards */}
+        {/* ROCK & ROLL HALL OF FAME TIER - Full width, prominent but refined */}
         {filteredBands.filter(b => b.tier === 'hof').length > 0 && (
-          <section className="mb-16">
-            <div className="space-y-8">
+          <section className="mb-12">
+            <div className="space-y-4">
               {filteredBands.filter(b => b.tier === 'hof').map((band) => (
                 <BandCard key={band.id} band={band} />
               ))}
@@ -133,9 +133,9 @@ export default function BandSearchFilter({ bands }: BandSearchFilterProps) {
           </section>
         )}
 
-        {/* REGULAR BANDS LIST */}
+        {/* REGULAR BANDS GRID */}
         {filteredBands.filter(b => b.tier !== 'hof').length > 0 && (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredBands.filter(b => b.tier !== 'hof').map((band) => (
               <BandCard key={band.id} band={band} />
             ))}

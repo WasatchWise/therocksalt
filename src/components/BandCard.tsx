@@ -33,19 +33,16 @@ function StatusBadge({ status }: { status: string | null | undefined }) {
 
   const badgeConfig = {
     hiatus: {
-      label: 'ON HIATUS',
-      icon: '⏸',
-      className: 'bg-gradient-to-r from-orange-400 to-amber-500 text-white border-2 border-white',
+      label: 'On Hiatus',
+      className: 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border-orange-300 dark:border-orange-700',
     },
     dissolved: {
-      label: 'SALT VAULT',
-      icon: '📚',
-      className: 'bg-gradient-to-r from-gray-600 to-gray-800 text-white border-2 border-gray-400',
+      label: 'Salt Vault',
+      className: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600',
     },
     reunited: {
-      label: 'REUNITED',
-      icon: '🔥',
-      className: 'bg-gradient-to-r from-green-500 to-emerald-600 text-white border-2 border-white',
+      label: 'Reunited',
+      className: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-300 dark:border-green-700',
     },
   }
 
@@ -53,122 +50,58 @@ function StatusBadge({ status }: { status: string | null | undefined }) {
   if (!config) return null
 
   return (
-    <div className={`absolute top-3 right-3 z-10 px-3 py-1.5 rounded-full font-black text-xs uppercase shadow-lg ${config.className}`}>
-      <span className="mr-1">{config.icon}</span>
+    <div className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-md text-xs font-semibold border ${config.className}`}>
       {config.label}
     </div>
+  )
+}
+
+function TierBadge({ tier }: { tier: string }) {
+  const badges = {
+    hof: { label: 'Hall of Fame', className: 'bg-yellow-500 text-white' },
+    platinum: { label: 'Platinum', className: 'bg-purple-500 text-white' },
+    national_act: { label: 'National Act', className: 'bg-blue-500 text-white' },
+    headliner: { label: 'Featured', className: 'bg-yellow-400 text-gray-900' },
+    featured: { label: 'Featured', className: 'bg-yellow-400 text-gray-900' },
+    garage: { label: 'Garage', className: 'bg-orange-500 text-white' },
+  }
+
+  const badge = badges[tier as keyof typeof badges]
+  if (!badge) return null
+
+  return (
+    <span className={`inline-block px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wide ${badge.className}`}>
+      {badge.label}
+    </span>
   )
 }
 
 export default function BandCard({ band }: BandCardProps) {
   const tier = band.tier || 'anon'
 
-  // ROCK & ROLL HALL OF FAME TIER
+  // ROCK & ROLL HALL OF FAME TIER - Still special but more refined
   if (tier === 'hof') {
     return (
       <Link
         href={`/bands/${band.slug}`}
-        className="block relative bg-gradient-to-br from-red-900 via-purple-900 to-red-900 border-8 border-yellow-400 rounded-3xl overflow-hidden shadow-2xl hover:shadow-yellow-400/70 transition-all duration-500 hover:scale-[1.02]"
+        className="group relative block bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-l-4 border-yellow-400 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.01]"
       >
         <StatusBadge status={band.status} />
 
-        {/* PREMIUM BADGE */}
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 text-gray-900 px-8 py-3 rounded-full font-black text-xl uppercase shadow-2xl border-4 border-white">
-          ⭐ ROCK & ROLL HALL OF FAME ⭐
-        </div>
-
-        {/* SPOTLIGHT BARS */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-yellow-400 via-red-500 via-purple-500 to-yellow-400"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-yellow-400 via-red-500 via-purple-500 to-yellow-400"></div>
-
-        <div className="p-8 md:p-12 pt-20">
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
-            {/* LEFT: Band Info */}
-            <div className="flex-1">
-              <h2 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400 mb-6 leading-tight tracking-tight uppercase">
+        <div className="p-6">
+          <div className="flex items-start justify-between gap-4 mb-3">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-2">
+                <TierBadge tier={tier} />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-2 leading-tight">
                 {band.name}
               </h2>
-
-              {band.bio && (
-                <p className="text-white text-xl mb-6 leading-relaxed line-clamp-3">
-                  {band.bio}
-                </p>
-              )}
-
-              {band.band_genres?.length ? (
-                <div className="flex flex-wrap gap-3 mb-6">
-                  <span className="text-lg font-black text-yellow-300 uppercase tracking-wide">
-                    Genres:
-                  </span>
-                  {band.band_genres
-                    ?.map((bg) => bg.genre?.name)
-                    .filter(Boolean)
-                    .map((genre, index) => (
-                      <span
-                        key={index}
-                        className="px-6 py-3 text-lg bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-full font-black uppercase shadow-xl border-2 border-white"
-                      >
-                        {genre}
-                      </span>
-                    ))}
-                </div>
-              ) : null}
             </div>
-
-            {/* RIGHT: Links */}
-            {band.band_links?.length ? (
-              <div className="flex-shrink-0">
-                <div className="bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-400 text-gray-900 rounded-3xl p-8 shadow-2xl border-8 border-white">
-                  <h3 className="text-2xl font-black uppercase tracking-wider mb-4">Listen Now</h3>
-                  <div className="flex flex-col gap-3">
-                    {band.band_links.map((link) => (
-                      <a
-                        key={link.id}
-                        href={link.url ?? '#'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white text-lg font-black rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 uppercase border-2 border-yellow-400"
-                      >
-                        {link.label || 'Link'}
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ) : null}
           </div>
-        </div>
-      </Link>
-    )
-  }
-
-  // PLATINUM TIER
-  if (tier === 'platinum') {
-    return (
-      <Link
-        href={`/bands/${band.slug}`}
-        className="block relative bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-900 border-6 border-purple-400 rounded-2xl overflow-hidden shadow-xl hover:shadow-purple-400/60 transition-all duration-500 hover:scale-[1.03]"
-      >
-        <StatusBadge status={band.status} />
-
-        {/* PLATINUM BADGE */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-purple-400 via-purple-300 to-purple-400 text-gray-900 px-6 py-2 rounded-full font-black text-lg uppercase shadow-xl border-2 border-white">
-          💎 PLATINUM 💎
-        </div>
-
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-400 via-indigo-500 to-purple-400"></div>
-
-        <div className="p-8 pt-16">
-          <h2 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-200 to-purple-400 mb-4 leading-tight tracking-tight uppercase">
-            {band.name}
-          </h2>
 
           {band.bio && (
-            <p className="text-white text-lg mb-4 leading-relaxed line-clamp-2">
+            <p className="text-white/80 text-sm mb-4 line-clamp-2 leading-relaxed">
               {band.bio}
             </p>
           )}
@@ -181,7 +114,7 @@ export default function BandCard({ band }: BandCardProps) {
                 .map((genre, index) => (
                   <span
                     key={index}
-                    className="px-4 py-2 bg-gradient-to-r from-purple-400 to-purple-500 text-white rounded-full font-bold uppercase shadow-lg"
+                    className="px-2.5 py-1 text-xs font-medium bg-yellow-400/20 text-yellow-300 rounded-md border border-yellow-400/30"
                   >
                     {genre}
                   </span>
@@ -191,19 +124,83 @@ export default function BandCard({ band }: BandCardProps) {
 
           {band.band_links?.length ? (
             <div className="flex flex-wrap gap-2">
-              {band.band_links.map((link) => (
+              {band.band_links.slice(0, 3).map((link) => (
                 <a
                   key={link.id}
                   href={link.url ?? '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg transition-all shadow-lg hover:scale-105 font-bold"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-yellow-400 hover:bg-yellow-300 text-gray-900 rounded-md transition-colors"
                 >
                   {link.label || 'Link'}
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
+                </a>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </Link>
+    )
+  }
+
+  // PLATINUM TIER - Clean and refined
+  if (tier === 'platinum') {
+    return (
+      <Link
+        href={`/bands/${band.slug}`}
+        className="group relative block bg-white dark:bg-gray-800 border-l-4 border-purple-500 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
+      >
+        <StatusBadge status={band.status} />
+
+        <div className="p-5">
+          <div className="flex items-start justify-between gap-3 mb-2">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1.5">
+                <TierBadge tier={tier} />
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white truncate">
+                {band.name}
+              </h2>
+            </div>
+          </div>
+
+          {band.bio && (
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
+              {band.bio}
+            </p>
+          )}
+
+          {band.band_genres?.length ? (
+            <div className="flex flex-wrap gap-1.5 mb-3">
+              {band.band_genres
+                ?.map((bg) => bg.genre?.name)
+                .filter(Boolean)
+                .map((genre, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-0.5 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded"
+                  >
+                    {genre}
+                  </span>
+                ))}
+            </div>
+          ) : null}
+
+          {band.band_links?.length ? (
+            <div className="flex flex-wrap gap-2">
+              {band.band_links.slice(0, 2).map((link) => (
+                <a
+                  key={link.id}
+                  href={link.url ?? '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium bg-purple-600 hover:bg-purple-700 text-white rounded transition-colors"
+                >
+                  {link.label || 'Link'}
                 </a>
               ))}
             </div>
@@ -218,117 +215,105 @@ export default function BandCard({ band }: BandCardProps) {
     return (
       <Link
         href={`/bands/${band.slug}`}
-        className="block relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 border-4 border-blue-400 rounded-xl p-6 shadow-xl hover:shadow-blue-400/50 transition-all hover:scale-[1.05]"
+        className="group relative block bg-white dark:bg-gray-800 border-l-4 border-blue-500 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
       >
         <StatusBadge status={band.status} />
 
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-cyan-500 to-blue-400 rounded-t-xl"></div>
+        <div className="p-5">
+          <div className="flex items-center gap-2 mb-2">
+            <TierBadge tier={tier} />
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white truncate flex-1">
+              {band.name}
+            </h2>
+          </div>
 
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-blue-400 text-2xl">🎤</span>
-          <h2 className="text-xl font-black text-white uppercase truncate">
-            {band.name}
-          </h2>
-        </div>
-
-        {band.band_genres?.length ? (
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-2">
+          {band.band_genres?.length ? (
+            <div className="flex flex-wrap gap-1.5 mb-2">
               {band.band_genres
                 ?.map((bg) => bg.genre?.name)
                 .filter(Boolean)
                 .map((genre, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 text-xs font-black bg-blue-400 text-gray-900 rounded-full uppercase"
+                    className="px-2 py-0.5 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded"
                   >
                     {genre}
                   </span>
                 ))}
             </div>
-          </div>
-        ) : null}
+          ) : null}
 
-        {band.band_links?.length ? (
-          <div className="flex flex-wrap gap-2">
-            {band.band_links.map((link) => (
-              <a
-                key={link.id}
-                href={link.url ?? '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-bold"
-              >
-                {link.label || 'Link'}
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            ))}
-          </div>
-        ) : null}
-      </Link>
-    )
-  }
-
-  // HEADLINER TIER
-  if (tier === 'headliner' || tier === 'featured') {
-    return (
-      <Link
-        href={`/bands/${band.slug}`}
-        className="block relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-4 border-yellow-400 rounded-xl p-6 shadow-xl hover:shadow-yellow-400/50 transition-all hover:scale-[1.05]"
-      >
-        <StatusBadge status={band.status} />
-
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 rounded-t-xl"></div>
-
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-yellow-400 text-2xl">★</span>
-          <h2 className="text-xl font-black text-white uppercase truncate">
-            {band.name}
-          </h2>
-        </div>
-
-        {band.band_genres?.length ? (
-          <div className="mb-4">
+          {band.band_links?.length ? (
             <div className="flex flex-wrap gap-2">
-              {band.band_genres
-                ?.map((bg) => bg.genre?.name)
-                .filter(Boolean)
-                .map((genre, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 text-xs font-black bg-yellow-400 text-gray-900 rounded-full uppercase"
-                  >
-                    {genre}
-                  </span>
-                ))}
-            </div>
-          </div>
-        ) : null}
-
-        {band.band_links?.length ? (
-          <div className="space-y-2">
-            <div className="flex flex-wrap gap-2">
-              {band.band_links.map((link) => (
+              {band.band_links.slice(0, 2).map((link) => (
                 <a
                   key={link.id}
                   href={link.url ?? '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 text-sm bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors font-bold"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
                 >
                   {link.label || 'Link'}
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
                 </a>
               ))}
             </div>
+          ) : null}
+        </div>
+      </Link>
+    )
+  }
+
+  // HEADLINER/FEATURED TIER
+  if (tier === 'headliner' || tier === 'featured') {
+    return (
+      <Link
+        href={`/bands/${band.slug}`}
+        className="group relative block bg-white dark:bg-gray-800 border-l-4 border-yellow-400 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
+      >
+        <StatusBadge status={band.status} />
+
+        <div className="p-5">
+          <div className="flex items-center gap-2 mb-2">
+            <TierBadge tier={tier} />
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white truncate flex-1">
+              {band.name}
+            </h2>
           </div>
-        ) : null}
+
+          {band.band_genres?.length ? (
+            <div className="flex flex-wrap gap-1.5 mb-2">
+              {band.band_genres
+                ?.map((bg) => bg.genre?.name)
+                .filter(Boolean)
+                .map((genre, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-0.5 text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded"
+                  >
+                    {genre}
+                  </span>
+                ))}
+            </div>
+          ) : null}
+
+          {band.band_links?.length ? (
+            <div className="flex flex-wrap gap-2">
+              {band.band_links.slice(0, 2).map((link) => (
+                <a
+                  key={link.id}
+                  href={link.url ?? '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded transition-colors"
+                >
+                  {link.label || 'Link'}
+                </a>
+              ))}
+            </div>
+          ) : null}
+        </div>
       </Link>
     )
   }
@@ -338,116 +323,101 @@ export default function BandCard({ band }: BandCardProps) {
     return (
       <Link
         href={`/bands/${band.slug}`}
-        className="relative bg-white dark:bg-gray-800 border-2 border-orange-400 dark:border-orange-500 rounded-lg p-6 shadow-md hover:shadow-lg transition-all hover:scale-[1.03] block"
+        className="group relative block bg-white dark:bg-gray-800 border-l-4 border-orange-400 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.01]"
       >
         <StatusBadge status={band.status} />
 
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-orange-500 text-xl">🎸</span>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white truncate">
-            {band.name}
-          </h2>
-        </div>
+        <div className="p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <TierBadge tier={tier} />
+            <h2 className="text-base font-semibold text-gray-900 dark:text-white truncate flex-1">
+              {band.name}
+            </h2>
+          </div>
 
-        {band.band_genres?.length ? (
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-2">
+          {band.band_genres?.length ? (
+            <div className="flex flex-wrap gap-1.5 mb-2">
               {band.band_genres
                 ?.map((bg) => bg.genre?.name)
                 .filter(Boolean)
                 .map((genre, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 text-xs font-bold bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded-full"
+                    className="px-2 py-0.5 text-xs font-medium bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded"
                   >
                     {genre}
                   </span>
                 ))}
             </div>
-          </div>
-        ) : null}
+          ) : null}
 
-        {band.band_links?.length ? (
-          <div className="space-y-2">
+          {band.band_links?.length ? (
             <div className="flex flex-wrap gap-2">
-              {band.band_links.map((link) => (
+              {band.band_links.slice(0, 2).map((link) => (
                 <a
                   key={link.id}
                   href={link.url ?? '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 text-sm bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors font-medium"
+                  className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-orange-500 hover:bg-orange-600 text-white rounded transition-colors"
                 >
                   {link.label || 'Link'}
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
                 </a>
               ))}
             </div>
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </Link>
     )
   }
 
-  // ANON TIER (and legacy 'free' tier)
+  // ANON TIER (default)
   return (
     <Link
       href={`/bands/${band.slug}`}
-      className="relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-all hover:scale-[1.02] block"
+      className="group relative block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.01]"
     >
       <StatusBadge status={band.status} />
 
-      <div className="flex items-center gap-2 mb-3">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white truncate">
+      <div className="p-4">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-2 truncate">
           {band.name}
         </h2>
-      </div>
 
-      {band.band_genres?.length ? (
-        <div className="mb-4">
-          <div className="flex flex-wrap gap-2">
+        {band.band_genres?.length ? (
+          <div className="flex flex-wrap gap-1.5 mb-2">
             {band.band_genres
               ?.map((bg) => bg.genre?.name)
               .filter(Boolean)
               .map((genre, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 text-xs font-medium bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 rounded-full"
+                  className="px-2 py-0.5 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded"
                 >
                   {genre}
                 </span>
               ))}
           </div>
-        </div>
-      ) : null}
+        ) : null}
 
-      {band.band_links?.length ? (
-        <div className="space-y-2">
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-            Listen:
-          </h3>
+        {band.band_links?.length ? (
           <div className="flex flex-wrap gap-2">
-            {band.band_links.map((link) => (
+            {band.band_links.slice(0, 2).map((link) => (
               <a
                 key={link.id}
                 href={link.url ?? '#'}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+                className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded transition-colors"
               >
                 {link.label || 'Link'}
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
               </a>
             ))}
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </Link>
   )
 }

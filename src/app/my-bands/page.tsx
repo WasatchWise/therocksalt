@@ -68,26 +68,7 @@ export default function MyBandsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      {/* Header */}
-      <header className="border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex justify-between items-center">
-            <div>
-              <Link href="/" className="text-2xl font-bold text-indigo-600">
-                The Rock Salt
-              </Link>
-            </div>
-            <Link
-              href="/bands"
-              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold"
-            >
-              Explore Bands
-            </Link>
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-12">
         {/* Page Header */}

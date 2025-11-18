@@ -6,6 +6,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { getLocationEvents as getBandsinTownEvents } from './bandsintown'
 import { searchEventsByLocation as getSongkickEvents, SALT_LAKE_CITY_METRO_ID, getMetroAreaEvents, getVenueEvents as getSongkickVenueEvents } from './songkick'
+import { fetchAllSlugMagEvents } from './slugmag'
+import { fetchAllCityWeeklyEvents } from './cityweekly'
 import { UTAH_VENUES } from './utah-venues'
 import type { Tables } from '@/types/database'
 
@@ -19,7 +21,7 @@ interface CuratedEvent {
   venue_address: string | null
   ticket_url: string | null
   external_id: string
-  source: 'bandsintown' | 'songkick'
+  source: 'bandsintown' | 'songkick' | 'slugmag' | 'cityweekly'
   age_restriction: string | null
 }
 
@@ -61,7 +63,13 @@ export async function curateEvents(): Promise<{
     // Combine all Songkick events
     const songkickEvents = [...songkickMetroEvents, ...songkickVenueEvents]
 
-    console.log(`Found ${bandsinTownEvents.length} Bandsintown events, ${songkickEvents.length} Songkick events (${songkickVenueEvents.length} from specific venues)`)
+    console.log('Fetching events from SLUG Magazine...')
+    const slugMagEvents = await fetchAllSlugMagEvents(3) // Fetch first 3 pages
+
+    console.log('Fetching events from City Weekly...')
+    const cityWeeklyEvents = await fetchAllCityWeeklyEvents()
+
+    console.log(`Found ${bandsinTownEvents.length} Bandsintown events, ${songkickEvents.length} Songkick events (${songkickVenueEvents.length} from specific venues), ${slugMagEvents.length} SLUG Magazine events, ${cityWeeklyEvents.length} City Weekly events`)
 
     // Get all venues from database
     const { data: venues } = await supabase
@@ -119,6 +127,64 @@ export async function curateEvents(): Promise<{
         await upsertEvent(supabase, curatedEvent, venueMap, results)
       } catch (error) {
         results.errors.push(`Songkick event ${event.id}: ${error}`)
+      }
+    }
+
+    // Process SLUG Magazine events (already filtered to music events)
+    for (const event of slugMagEvents) {
+      try {
+        // Parse venue address to extract city and state
+        const { city, state } = parseVenueLocation(event.venue_address, event.venue)
+        
+        // Only include Utah events
+        if (state !== 'UT') continue
+
+        const curatedEvent: CuratedEvent = {
+          name: event.title,
+          description: event.category ? `Category: ${event.category}` : null,
+          start_time: event.date,
+          venue_name: event.venue,
+          venue_city: city,
+          venue_state: state,
+          venue_address: event.venue_address,
+          ticket_url: event.url,
+          external_id: `slugmag-${event.title}-${event.date}-${event.venue}`.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+          source: 'slugmag',
+          age_restriction: null
+        }
+
+        await upsertEvent(supabase, curatedEvent, venueMap, results)
+      } catch (error) {
+        results.errors.push(`SLUG Magazine event ${event.title}: ${error}`)
+      }
+    }
+
+    // Process City Weekly events (already filtered to music events)
+    for (const event of cityWeeklyEvents) {
+      try {
+        // Parse venue address to extract city and state
+        const { city, state } = parseVenueLocation(event.venue_address, event.venue)
+        
+        // Only include Utah events (City Weekly is Salt Lake City focused)
+        if (state !== 'UT') continue
+
+        const curatedEvent: CuratedEvent = {
+          name: event.title,
+          description: event.category ? `Category: ${event.category}` : null,
+          start_time: event.date,
+          venue_name: event.venue,
+          venue_city: city,
+          venue_state: state,
+          venue_address: event.venue_address,
+          ticket_url: event.url,
+          external_id: `cityweekly-${event.title}-${event.date}-${event.venue}`.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+          source: 'cityweekly',
+          age_restriction: null
+        }
+
+        await upsertEvent(supabase, curatedEvent, venueMap, results)
+      } catch (error) {
+        results.errors.push(`City Weekly event ${event.title}: ${error}`)
       }
     }
 
@@ -212,4 +278,50 @@ async function upsertEvent(
 
     results.created++
   }
+}
+
+/**
+ * Parse city and state from venue address
+ * Handles formats like "Address, City, State ZIP" or "City, State"
+ */
+function parseVenueLocation(address: string | null, venueName: string): { city: string; state: string } {
+  // Default to Salt Lake City, UT if we can't parse
+  let city = 'Salt Lake City'
+  let state = 'UT'
+
+  if (address) {
+    // Try to extract state (2-letter code) and city
+    // Common format: "Address, City, State ZIP" or "City, State ZIP"
+    const stateMatch = address.match(/,?\s*([A-Z]{2})\s+\d{5}/)
+    if (stateMatch) {
+      state = stateMatch[1]
+      
+      // Try to extract city (text before state)
+      const cityMatch = address.match(/,?\s*([^,]+?),\s*[A-Z]{2}\s+\d{5}/)
+      if (cityMatch) {
+        city = cityMatch[1].trim()
+      }
+    } else {
+      // Try simpler format: "City, State"
+      const simpleMatch = address.match(/,?\s*([^,]+?),\s*([A-Z]{2})\b/)
+      if (simpleMatch) {
+        city = simpleMatch[1].trim()
+        state = simpleMatch[2]
+      }
+    }
+  }
+
+  // Common Utah city names to check
+  const utahCities = ['Salt Lake City', 'South Salt Lake', 'Ogden', 'Provo', 'Park City', 'Sandy', 'West Valley City', 'Orem', 'St. George', 'Logan', 'Murray', 'Layton', 'Taylorsville', 'Draper', 'Riverton', 'Lehi', 'Spanish Fork', 'Cedar City', 'Midvale', 'Cottonwood Heights']
+  
+  // If we found a known Utah city, use it
+  for (const utahCity of utahCities) {
+    if (address?.includes(utahCity) || venueName.includes(utahCity)) {
+      city = utahCity
+      state = 'UT'
+      break
+    }
+  }
+
+  return { city, state }
 }

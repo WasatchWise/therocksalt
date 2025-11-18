@@ -58,41 +58,39 @@ export default async function BandPage({ params }: Props) {
 
   return (
     <Container className="py-12">
-      {/* ROCK & ROLL HALL OF FAME BANNER */}
+      {/* ROCK & ROLL HALL OF FAME BANNER - Refined */}
       {isHOF && (
-        <div className="mb-8 relative bg-gradient-to-br from-red-900 via-purple-900 to-red-900 border-8 border-yellow-400 rounded-3xl overflow-hidden shadow-2xl p-8">
-          <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-yellow-400 via-red-500 via-purple-500 to-yellow-400 animate-pulse"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-r from-yellow-400 via-red-500 via-purple-500 to-yellow-400 animate-pulse"></div>
-
-          <div className="text-center">
-            <div className="inline-block bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 text-gray-900 px-8 py-3 rounded-full font-black text-2xl uppercase shadow-2xl border-4 border-white mb-4">
-              ⭐ ROCK & ROLL HALL OF FAME ⭐
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400 mb-4 leading-tight tracking-tight uppercase">
-              {band.name}
-            </h1>
-            {band.hometown && (
-              <p className="text-yellow-300 text-xl font-bold mb-4">{band.hometown}</p>
-            )}
+        <div className="mb-8 relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-l-4 border-yellow-400 rounded-lg overflow-hidden shadow-xl p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400"></div>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="px-3 py-1 bg-yellow-400 text-gray-900 rounded-md text-xs font-black uppercase">
+              Hall of Fame
+            </span>
           </div>
+          <h1 className="text-4xl md:text-5xl font-black text-white mb-2 leading-tight">
+            {band.name}
+          </h1>
+          {band.hometown && (
+            <p className="text-yellow-300 text-lg font-semibold">{band.hometown}</p>
+          )}
         </div>
       )}
 
-      {/* PLATINUM TIER BANNER */}
+      {/* PLATINUM TIER BANNER - Refined */}
       {isPlatinum && (
-        <div className="mb-8 relative bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-900 border-6 border-purple-400 rounded-2xl overflow-hidden shadow-xl p-8">
-          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-400 via-indigo-500 to-purple-400 animate-pulse"></div>
-          <div className="text-center">
-            <div className="inline-block bg-gradient-to-r from-purple-400 via-purple-300 to-purple-400 text-gray-900 px-6 py-2 rounded-full font-black text-xl uppercase shadow-xl border-2 border-white mb-4">
-              💎 PLATINUM ARTIST 💎
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-200 to-purple-400 mb-4 leading-tight tracking-tight uppercase">
-              {band.name}
-            </h1>
-            {band.hometown && (
-              <p className="text-purple-300 text-xl font-bold mb-4">{band.hometown}</p>
-            )}
+        <div className="mb-8 relative bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-900 border-l-4 border-purple-400 rounded-lg overflow-hidden shadow-xl p-6">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 via-purple-300 to-purple-400"></div>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="px-3 py-1 bg-purple-400 text-gray-900 rounded-md text-xs font-black uppercase">
+              Platinum
+            </span>
           </div>
+          <h1 className="text-4xl md:text-5xl font-black text-white mb-2 leading-tight">
+            {band.name}
+          </h1>
+          {band.hometown && (
+            <p className="text-purple-300 text-lg font-semibold">{band.hometown}</p>
+          )}
         </div>
       )}
 
@@ -101,9 +99,11 @@ export default async function BandPage({ params }: Props) {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             {isFeatured && (
-              <span className="text-yellow-500 text-3xl" title="Featured Artist">★</span>
+              <span className="px-2 py-1 bg-yellow-400 text-gray-900 rounded text-xs font-bold uppercase">
+                Featured
+              </span>
             )}
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
               {band.name}
             </h1>
           </div>

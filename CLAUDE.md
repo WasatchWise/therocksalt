@@ -1,0 +1,1 @@
+- Yes, allow reading from NSIRD_screencaptureui
