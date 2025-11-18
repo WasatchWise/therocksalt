@@ -7,33 +7,30 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Compact Hero - Left Aligned */}
+        {/* Compact Hero */}
         <div className="mb-8">
-          <div className="flex items-start gap-6 mb-4">
-            <Logo className="w-32 h-auto" priority />
-            <div>
-              <h1 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">
-                Utah's Music Memory
-              </h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 max-w-2xl">
-                Documenting Utah's music scene since 2002. Live radio • Opinionated coverage • All 29 counties.
-              </p>
-              <div className="flex gap-2">
-                <a href="/artists" className="px-4 py-1.5 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-semibold text-sm transition-colors">
-                  Browse Artists
-                </a>
-                <a href="/events" className="px-4 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-full font-semibold text-sm transition-colors">
-                  See Shows
-                </a>
-                <a href="https://forms.gle/ZkniH6q2HZdEUJbo9" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 border-2 border-gray-800 dark:border-white text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full font-semibold text-sm transition-colors">
-                  Submit Music
-                </a>
-              </div>
+          <div className="mb-4">
+            <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">
+              Utah's Music Memory
+            </h1>
+            <p className="text-base text-gray-600 dark:text-gray-400 mb-4 max-w-3xl">
+              Documenting Utah's music scene since 2002. Live radio • Opinionated coverage • All 29 counties.
+            </p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              <a href="/artists" className="px-5 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-semibold text-sm transition-colors">
+                Browse Artists
+              </a>
+              <a href="/events" className="px-5 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-full font-semibold text-sm transition-colors">
+                See Shows
+              </a>
+              <a href="https://forms.gle/ZkniH6q2HZdEUJbo9" target="_blank" rel="noopener noreferrer" className="px-5 py-2 border-2 border-gray-800 dark:border-white text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full font-semibold text-sm transition-colors">
+                Submit Music
+              </a>
             </div>
-          </div>
-          <div className="flex items-center gap-3 mt-2">
-            <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">A show on</span>
-            <UMRPartnership variant="inline" />
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">A show on</span>
+              <UMRPartnership variant="inline" />
+            </div>
           </div>
         </div>
 
