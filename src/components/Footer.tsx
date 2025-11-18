@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-800 text-gray-300 mt-auto border-t-4 border-emerald-600 shadow-xl">
+    <footer className="bg-gray-800 text-gray-300 mt-auto border-t-4 border-emerald-600 shadow-xl mb-24">
       <Container>
         <div className="py-8">
           {/* Single compact row */}

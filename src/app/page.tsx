@@ -94,7 +94,12 @@ export default async function HomePage() {
                   </a>
                 </>
               ) : (
-                <p className="text-xs opacity-75">No upcoming shows yet. Check back soon!</p>
+                <div className="text-xs opacity-90 space-y-1.5">
+                  <p>Events auto-sync every 6 hours from Utah venues.</p>
+                  <a href="/events" className="block text-center pt-1 opacity-90 hover:opacity-100 underline">
+                    Submit a show →
+                  </a>
+                </div>
               )}
             </div>
           </div>
