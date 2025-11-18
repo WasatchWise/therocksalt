@@ -73,6 +73,24 @@ export default function RootLayout({
         <AudioPlayerProvider>
           <PWAInstall />
           <InstallPrompt />
+
+          {/* Global Salt Vault Banner - Very Top */}
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 border-b border-gray-700">
+            <div className="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between text-xs">
+              <p className="text-gray-300 font-medium">
+                💬 Join the conversation in the Salt Vault
+              </p>
+              <a
+                href="https://therocksalt.discourse.group"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-semibold transition-colors"
+              >
+                Enter →
+              </a>
+            </div>
+          </div>
+
           <Header />
           <main className="flex-1 pb-24">
             {children}

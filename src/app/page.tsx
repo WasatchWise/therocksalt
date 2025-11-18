@@ -6,23 +6,6 @@ import UMRPartnership from '@/components/UMRPartnership'
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      {/* Sticky Discourse Banner */}
-      <div className="sticky top-0 z-40 bg-gradient-to-r from-[#8b9b47] to-[#a4a654] border-b-2 border-[#6b7a37] shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-          <p className="text-white font-bold text-sm">
-            💬 Join the conversation. Now.
-          </p>
-          <a
-            href="https://therocksalt.discourse.group"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-1.5 bg-white text-[#8b9b47] hover:bg-gray-100 rounded-full font-bold text-sm transition-colors"
-          >
-            Salt Vault →
-          </a>
-        </div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 py-6">
         {/* Compact Hero - Left Aligned */}
         <div className="mb-8">
