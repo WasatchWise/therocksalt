@@ -92,7 +92,7 @@ export default function RootLayout({
           </div>
 
           <Header />
-          <main className="flex-1 pb-32">
+          <main className="flex-1 pb-40">
             {children}
           </main>
           <Footer />
