@@ -1,9 +1,25 @@
-'use client'
-
-import Logo from '@/components/Logo'
+import { getBands, getEvents } from '@/lib/supabase/queries'
 import UMRPartnership from '@/components/UMRPartnership'
 
-export default function HomePage() {
+export const revalidate = 60
+
+export default async function HomePage() {
+  // Fetch real data
+  const allBands = await getBands(100)
+  const allEvents = await getEvents(50)
+
+  // Get featured band (prefer HOF, then featured tier, then any with Spotify)
+  const featuredBand = allBands.find(b => b.tier === 'hof') ||
+                      allBands.find(b => b.tier === 'featured') ||
+                      allBands.find(b => b.spotify_url)
+
+  // Get upcoming events (today and future only)
+  const now = new Date()
+  const upcomingEvents = allEvents
+    .filter(e => e.start_time && new Date(e.start_time) >= now)
+    .sort((a, b) => new Date(a.start_time!).getTime() - new Date(b.start_time!).getTime())
+    .slice(0, 2) // Just next 2 shows
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-6">
@@ -37,27 +53,49 @@ export default function HomePage() {
         {/* Dashboard Grid */}
         <div className="grid md:grid-cols-2 gap-3 mb-4">
           {/* Featured Artist Card */}
-          <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg p-3 text-white shadow-lg border-2 border-purple-700">
-            <h3 className="font-bold text-base mb-1.5">⭐ This Week</h3>
-            <p className="text-sm font-bold mb-0.5">Power of Intent</p>
-            <p className="text-xs opacity-90 line-clamp-2">Shoegaze that weaponizes reverb. Worth the drive.</p>
-          </div>
+          {featuredBand ? (
+            <a
+              href={`/bands/${featuredBand.slug}`}
+              className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg p-3 text-white shadow-lg border-2 border-purple-700 hover:scale-[1.02] transition-transform"
+            >
+              <h3 className="font-bold text-base mb-1.5">⭐ Featured Artist</h3>
+              <p className="text-sm font-bold mb-0.5">{featuredBand.name}</p>
+              <p className="text-xs opacity-90 line-clamp-2">
+                {featuredBand.description || `${featuredBand.origin_city || 'Utah'} • ${featuredBand.status || 'Active'}`}
+              </p>
+            </a>
+          ) : (
+            <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg p-3 text-white shadow-lg border-2 border-purple-700">
+              <h3 className="font-bold text-base mb-1.5">⭐ Featured Artist</h3>
+              <p className="text-xs opacity-90">Check back soon!</p>
+            </div>
+          )}
 
           {/* Tonight Card */}
           <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg p-3 text-white shadow-lg border-2 border-blue-700">
-            <h3 className="font-bold text-base mb-2">🎸 Tonight in Utah</h3>
+            <h3 className="font-bold text-base mb-2">🎸 Upcoming Shows</h3>
             <div className="space-y-1.5 text-xs">
-              <div className="flex items-center justify-between">
-                <span className="font-semibold">TBA @ Kilby Court</span>
-                <span className="opacity-75">8pm</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-semibold">Open Mic @ Urban Lounge</span>
-                <span className="opacity-75">9pm</span>
-              </div>
-              <a href="/events" className="block text-center pt-1 opacity-90 hover:opacity-100 underline text-xs">
-                See all shows →
-              </a>
+              {upcomingEvents.length > 0 ? (
+                <>
+                  {upcomingEvents.map((event, idx) => {
+                    const eventDate = new Date(event.start_time!)
+                    const time = eventDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+                    return (
+                      <div key={idx} className="flex items-center justify-between">
+                        <span className="font-semibold truncate">
+                          {event.name} @ {event.venue?.name || 'TBA'}
+                        </span>
+                        <span className="opacity-75 flex-shrink-0 ml-2">{time}</span>
+                      </div>
+                    )
+                  })}
+                  <a href="/events" className="block text-center pt-1 opacity-90 hover:opacity-100 underline text-xs">
+                    See all shows →
+                  </a>
+                </>
+              ) : (
+                <p className="text-xs opacity-75">No upcoming shows yet. Check back soon!</p>
+              )}
             </div>
           </div>
         </div>
