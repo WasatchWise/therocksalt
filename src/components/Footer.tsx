@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
             <div className="flex flex-col md:flex-row items-center gap-4">
               <p className="text-gray-400">
-                &copy; {currentYear} The Rock Salt · Utah&apos;s Music Memory
+                &copy; {currentYear} The Rock Salt · Salt Lake&apos;s Music Hub
               </p>
               <div className="flex items-center gap-4">
                 <Link href="/about" className="text-gray-400 hover:text-white transition-colors">

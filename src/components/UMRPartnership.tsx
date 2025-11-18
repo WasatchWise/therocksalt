@@ -74,18 +74,18 @@ export default function UMRPartnership({
       href="https://www.utahmusicradio.com"
       target="_blank"
       rel="noopener noreferrer"
-      className={`${baseClasses} px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 ${className}`}
+      className={`${baseClasses} px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 ${className}`}
       title="The Rock Salt is a show on Utah Music Radio"
     >
-      <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-        On
+      <span className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
+        Utah Music Radio
       </span>
       <Image
         src="/UMR.png"
         alt="Utah Music Radio"
-        width={90}
-        height={30}
-        className="h-5 w-auto object-contain"
+        width={80}
+        height={27}
+        className="h-6 w-auto object-contain"
       />
     </Link>
   )

@@ -27,7 +27,7 @@ export default async function HomePage() {
         <div className="mb-8">
           <div className="mb-4">
             <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">
-              Utah's Music Memory
+              Salt Lake's Music Hub
             </h1>
             <p className="text-base text-gray-600 dark:text-gray-400 mb-4 max-w-3xl">
               Documenting Utah's music scene since 2002. Live radio • Opinionated coverage • All 29 counties.
