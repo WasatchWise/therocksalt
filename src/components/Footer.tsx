@@ -6,9 +6,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-auto border-t border-gray-800">
+    <footer className="bg-gray-800 text-gray-300 mt-auto border-t-4 border-emerald-600 shadow-xl">
       <Container>
-        <div className="py-6">
+        <div className="py-8">
           {/* Single compact row */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
             <div className="flex flex-col md:flex-row items-center gap-4">
