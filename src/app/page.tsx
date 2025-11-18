@@ -48,51 +48,62 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
-            <span>A show on</span>
+          <div className="flex items-center gap-3 mt-2">
+            <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">A show on</span>
             <UMRPartnership variant="inline" />
           </div>
         </div>
 
         {/* Dashboard Grid */}
-        <div className="grid md:grid-cols-3 gap-4 mb-6">
+        <div className="grid md:grid-cols-3 gap-3 mb-4">
           {/* Radio Schedule Card */}
-          <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-xl p-4 text-white shadow-lg">
-            <h3 className="font-bold text-lg mb-2">🔴 Radio Schedule</h3>
-            <p className="text-sm mb-1">Rock Salt Radio Live</p>
+          <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-lg p-3 text-white shadow-lg border-2 border-red-700">
+            <h3 className="font-bold text-base mb-1.5">🔴 Radio Schedule</h3>
+            <p className="text-xs mb-0.5 opacity-90">Rock Salt Radio Live</p>
             <p className="text-sm font-bold">Tue & Thu • 11am-1pm</p>
           </div>
 
           {/* Featured Artist Card */}
-          <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl p-4 text-white shadow-lg">
-            <h3 className="font-bold text-lg mb-2">⭐ This Week</h3>
-            <p className="text-sm font-bold mb-1">Power of Intent</p>
+          <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg p-3 text-white shadow-lg border-2 border-purple-700">
+            <h3 className="font-bold text-base mb-1.5">⭐ This Week</h3>
+            <p className="text-sm font-bold mb-0.5">Power of Intent</p>
             <p className="text-xs opacity-90 line-clamp-2">Shoegaze that weaponizes reverb. Worth the drive.</p>
           </div>
 
           {/* Tonight Card */}
-          <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl p-4 text-white shadow-lg">
-            <h3 className="font-bold text-lg mb-2">🎸 Tonight in Utah</h3>
-            <p className="text-xs">Events calendar coming soon</p>
+          <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg p-3 text-white shadow-lg border-2 border-blue-700">
+            <h3 className="font-bold text-base mb-2">🎸 Tonight in Utah</h3>
+            <div className="space-y-1.5 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="font-semibold">TBA @ Kilby Court</span>
+                <span className="opacity-75">8pm</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-semibold">Open Mic @ Urban Lounge</span>
+                <span className="opacity-75">9pm</span>
+              </div>
+              <a href="/events" className="block text-center pt-1 opacity-90 hover:opacity-100 underline text-xs">
+                See all shows →
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Main Content Row */}
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          {/* Live Stream */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3">
-              <h3 className="font-bold text-white text-sm">📹 Salt Sessions</h3>
-            </div>
-            <div className="aspect-video bg-gray-900">
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/eGU3aMSN94c"
-                title="Live Stream"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+          {/* Radio Schedule - Expanded */}
+          <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-xl p-6 text-white shadow-lg">
+            <h3 className="font-bold text-2xl mb-4">🔴 On Air</h3>
+            <div className="space-y-3">
+              <div>
+                <p className="text-sm opacity-90 mb-1">Rock Salt Radio Live</p>
+                <p className="text-xl font-bold">Tuesday & Thursday</p>
+                <p className="text-lg">11am - 1pm MST</p>
+              </div>
+              <div className="pt-3 border-t border-white/20">
+                <p className="text-sm opacity-90 mb-2">ALL LOCAL - ALL DAY</p>
+                <p className="text-xs opacity-75">AutoDJ spinning Utah artists 24/7 when we're not live</p>
+              </div>
             </div>
           </div>
 
