@@ -140,3 +140,33 @@ export async function getArtistEvents(artistId: number): Promise<SongkickEvent[]
 
 // Salt Lake City metro area ID
 export const SALT_LAKE_CITY_METRO_ID = 17318
+
+/**
+ * Get events for a specific venue
+ */
+export async function getVenueEvents(venueId: number): Promise<SongkickEvent[]> {
+  if (!API_KEY) {
+    console.error('SONGKICK_API_KEY not configured')
+    return []
+  }
+
+  try {
+    const response = await fetch(
+      `${SONGKICK_API_URL}/venues/${venueId}/calendar.json?apikey=${API_KEY}`,
+      {
+        next: { revalidate: 3600 }
+      }
+    )
+
+    if (!response.ok) {
+      console.error(`Songkick venue calendar error:`, response.status)
+      return []
+    }
+
+    const data = await response.json()
+    return data.resultsPage?.results?.event || []
+  } catch (error) {
+    console.error(`Error fetching venue events:`, error)
+    return []
+  }
+}

@@ -5,7 +5,8 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { getLocationEvents as getBandsinTownEvents } from './bandsintown'
-import { searchEventsByLocation as getSongkickEvents, SALT_LAKE_CITY_METRO_ID, getMetroAreaEvents } from './songkick'
+import { searchEventsByLocation as getSongkickEvents, SALT_LAKE_CITY_METRO_ID, getMetroAreaEvents, getVenueEvents as getSongkickVenueEvents } from './songkick'
+import { UTAH_VENUES } from './utah-venues'
 import type { Tables } from '@/types/database'
 
 interface CuratedEvent {
@@ -45,10 +46,22 @@ export async function curateEvents(): Promise<{
     console.log('Fetching events from Bandsintown...')
     const bandsinTownEvents = await getBandsinTownEvents('Salt Lake City', 'UT', 50)
 
-    console.log('Fetching events from Songkick...')
-    const songkickEvents = await getMetroAreaEvents(SALT_LAKE_CITY_METRO_ID)
+    console.log('Fetching events from Songkick metro area...')
+    const songkickMetroEvents = await getMetroAreaEvents(SALT_LAKE_CITY_METRO_ID)
 
-    console.log(`Found ${bandsinTownEvents.length} Bandsintown events, ${songkickEvents.length} Songkick events`)
+    // Fetch venue-specific events from Songkick
+    console.log('Fetching events from specific Utah venues...')
+    const venueEventPromises = UTAH_VENUES
+      .filter(v => v.songkick_id)
+      .map(v => getSongkickVenueEvents(v.songkick_id!))
+
+    const venueEventsArrays = await Promise.all(venueEventPromises)
+    const songkickVenueEvents = venueEventsArrays.flat()
+
+    // Combine all Songkick events
+    const songkickEvents = [...songkickMetroEvents, ...songkickVenueEvents]
+
+    console.log(`Found ${bandsinTownEvents.length} Bandsintown events, ${songkickEvents.length} Songkick events (${songkickVenueEvents.length} from specific venues)`)
 
     // Get all venues from database
     const { data: venues } = await supabase
