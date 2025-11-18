@@ -117,42 +117,21 @@ export default function FloatingPlayer() {
             }`}
           >
             <div className="pb-6 pt-2 border-t border-white/20">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Recently Played */}
-                <div className="group">
-                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-yellow-400/50 transition-all transform hover:scale-[1.02] shadow-xl">
-                    <div className="flex items-center gap-2 mb-3">
-                      <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                      </svg>
-                      <h4 className="text-white font-bold text-sm">Recently Played</h4>
-                    </div>
-                    <div className="h-40 overflow-y-auto rounded-lg bg-black/20">
-                      <iframe
-                        src="https://a8.asurahosting.com/public/therocksalt/history?theme=dark"
-                        className="w-full h-64 border-0"
-                        title="Recently Played"
-                      />
-                    </div>
+              {/* Request a Song - Full Width */}
+              <div className="max-w-2xl mx-auto">
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-yellow-400/50 transition-all shadow-xl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
+                    </svg>
+                    <h4 className="text-white font-bold text-sm">Request a Song</h4>
                   </div>
-                </div>
-
-                {/* Request a Song */}
-                <div className="group">
-                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-yellow-400/50 transition-all transform hover:scale-[1.02] shadow-xl">
-                    <div className="flex items-center gap-2 mb-3">
-                      <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
-                      </svg>
-                      <h4 className="text-white font-bold text-sm">Request a Song</h4>
-                    </div>
-                    <div className="h-40 overflow-y-auto rounded-lg bg-black/20">
-                      <iframe
-                        src="https://a8.asurahosting.com/public/therocksalt/embed-requests?theme=dark"
-                        className="w-full h-64 border-0"
-                        title="Request Songs"
-                      />
-                    </div>
+                  <div className="h-40 overflow-y-auto rounded-lg bg-black/20">
+                    <iframe
+                      src="https://a8.asurahosting.com/public/therocksalt/embed-requests?theme=dark"
+                      className="w-full h-64 border-0"
+                      title="Request Songs"
+                    />
                   </div>
                 </div>
               </div>

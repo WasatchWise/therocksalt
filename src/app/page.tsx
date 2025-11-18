@@ -35,14 +35,7 @@ export default function HomePage() {
         </div>
 
         {/* Dashboard Grid */}
-        <div className="grid md:grid-cols-3 gap-3 mb-4">
-          {/* Radio Schedule Card */}
-          <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-lg p-3 text-white shadow-lg border-2 border-red-700">
-            <h3 className="font-bold text-base mb-1.5">🔴 Radio Schedule</h3>
-            <p className="text-xs mb-0.5 opacity-90">Rock Salt Radio Live</p>
-            <p className="text-sm font-bold">Tue & Thu • 11am-1pm</p>
-          </div>
-
+        <div className="grid md:grid-cols-2 gap-3 mb-4">
           {/* Featured Artist Card */}
           <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg p-3 text-white shadow-lg border-2 border-purple-700">
             <h3 className="font-bold text-base mb-1.5">⭐ This Week</h3>
@@ -82,7 +75,19 @@ export default function HomePage() {
               </div>
               <div className="pt-3 border-t border-white/20">
                 <p className="text-sm opacity-90 mb-2">ALL LOCAL - ALL DAY</p>
-                <p className="text-xs opacity-75">AutoDJ spinning Utah artists 24/7 when we're not live</p>
+                <p className="text-xs opacity-75 mb-3">AutoDJ spinning Utah artists 24/7 when we're not live</p>
+
+                {/* Recently Played */}
+                <div className="mt-4">
+                  <h4 className="text-sm font-bold mb-2 opacity-90">Recently Played</h4>
+                  <div className="rounded-lg bg-black/20 overflow-hidden">
+                    <iframe
+                      src="https://a8.asurahosting.com/public/therocksalt/history?theme=dark"
+                      className="w-full h-48 border-0"
+                      title="Recently Played"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
