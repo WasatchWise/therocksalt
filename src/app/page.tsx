@@ -87,25 +87,20 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Featured Band Spotify */}
+          {/* Featured Playlist */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 p-4">
-            <h3 className="font-bold text-gray-900 dark:text-white mb-3">🎵 Power of Intent - Animal Nature</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              My Bloody Valentine vibes in Little Cottonwood Canyon.
-            </p>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-3">🎵 Featured Playlist</h3>
             <iframe
+              data-testid="embed-iframe"
               style={{ borderRadius: '12px' }}
-              src="https://open.spotify.com/embed/track/4cNzwiPOLzL2XjyXzMhFOi?utm_source=generator&theme=0"
+              src="https://open.spotify.com/embed/playlist/6uTuAYkMZJuFDpvEDUo3Iz?utm_source=generator"
               width="100%"
-              height="152"
+              height="352"
               frameBorder="0"
               allowFullScreen
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 italic">
-              📍 Photo op: Bonneville Salt Flats at golden hour
-            </p>
           </div>
         </div>
       </div>
