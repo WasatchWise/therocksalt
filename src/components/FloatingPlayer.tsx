@@ -16,127 +16,98 @@ export default function FloatingPlayer() {
       {/* Glow effect */}
       <div className="absolute inset-0 bg-gradient-to-t from-orange-500/20 via-pink-500/20 to-transparent blur-xl -z-10 pointer-events-none" />
 
-      <div className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 border-t-4 border-yellow-400 shadow-2xl backdrop-blur-lg">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Main Player Bar */}
-          <div className="flex items-center justify-between py-4 gap-4">
-            {/* Left: Album Art + Now Playing */}
-            <div className="flex items-center gap-4 flex-1 min-w-0">
-              {/* Album Art */}
-              <div className="relative group">
-                {hasValidTrack && nowPlaying.song.art ? (
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-yellow-400 rounded-lg blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-                    <img
-                      src={nowPlaying.song.art}
-                      alt="Album Art"
-                      className="relative w-14 h-14 rounded-lg shadow-xl border-2 border-yellow-400 object-cover transform group-hover:scale-105 transition-transform"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none'
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center border-2 border-yellow-400 shadow-xl">
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-                    </svg>
-                  </div>
-                )}
-              </div>
-
-              {/* Track Info */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <p className="text-white font-bold text-base truncate drop-shadow-lg">
-                    {nowPlaying?.song.title || 'The Rock Salt Radio'}
-                  </p>
-                  {isPlaying && (
-                    <span className="flex items-center gap-1.5 px-2.5 py-1 bg-red-500 text-white rounded-full text-xs font-bold animate-pulse shadow-lg">
-                      <span className="w-2 h-2 bg-white rounded-full animate-ping absolute"></span>
-                      <span className="w-2 h-2 bg-white rounded-full relative"></span>
-                      LIVE
-                    </span>
-                  )}
-                  {nowPlaying && !hasValidTrack && (
-                    <span className="px-2 py-0.5 bg-gray-500/80 text-white rounded-full text-xs font-semibold">
-                      OFFLINE
-                    </span>
-                  )}
-                </div>
-                <p className="text-white/90 text-sm truncate drop-shadow-md">
-                  {nowPlaying?.song.artist || 'Salt Lake\'s Music Hub'}
-                </p>
-                {nowPlaying?.live.is_live && nowPlaying.live.streamer_name && (
-                  <p className="text-yellow-300 text-xs font-semibold mt-0.5 flex items-center gap-1">
-                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
-                    </svg>
-                    {nowPlaying.live.streamer_name}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Center: Play Button */}
+      <div className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 border-t-2 border-yellow-400 shadow-2xl backdrop-blur-lg">
+        <div className="max-w-7xl mx-auto px-3">
+          {/* Compact Player Bar */}
+          <div className="flex items-center gap-3 py-2">
+            {/* Play Button - Far Left */}
             <button
               onClick={togglePlay}
               disabled={isLoading}
-              className="relative w-16 h-16 flex items-center justify-center bg-white hover:bg-yellow-50 text-orange-600 rounded-full transition-all transform hover:scale-110 active:scale-95 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed border-3 border-yellow-400 group"
+              className="relative w-12 h-12 flex items-center justify-center bg-white hover:bg-yellow-50 text-orange-600 rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed border-2 border-yellow-400 group flex-shrink-0"
               aria-label={isPlaying ? 'Pause stream' : 'Play stream'}
             >
-              {/* Glow effect on play button */}
-              <div className="absolute inset-0 bg-yellow-400 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
-
               {isLoading ? (
-                <svg className="relative w-8 h-8 animate-spin" fill="none" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
               ) : isPlaying ? (
-                <svg className="relative w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
                 </svg>
               ) : (
-                <svg className="relative w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
               )}
             </button>
 
-            {/* Right: UMR Logo & Expand Button */}
-            <div className="flex items-center gap-4">
+            {/* Now Playing Info */}
+            <div className="flex-1 min-w-0 flex items-center gap-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <p className="text-white font-bold text-sm truncate">
+                    {nowPlaying?.song.title || 'The Rock Salt Radio'}
+                  </p>
+                  {isPlaying && (
+                    <span className="flex items-center gap-1 px-2 py-0.5 bg-red-500 text-white rounded-full text-xs font-bold">
+                      <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+                      LIVE
+                    </span>
+                  )}
+                </div>
+                <p className="text-white/80 text-xs truncate">
+                  {nowPlaying?.song.artist || 'Utah\'s Music Memory'}
+                </p>
+              </div>
+
+              {/* Request Song Link - Hidden on mobile */}
               <a
-                href="https://www.utahmusicradio.com"
+                href="https://a8.asurahosting.com/public/therocksalt/embed-requests"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:block transform hover:scale-105 transition-transform"
+                className="hidden md:flex items-center gap-1 text-white/90 hover:text-yellow-400 text-sm font-semibold transition-colors flex-shrink-0"
               >
-                <Image
-                  src="/UMR.png"
-                  alt="Utah Music Radio"
-                  width={100}
-                  height={33}
-                  className="h-8 w-auto hover:opacity-80 transition-opacity drop-shadow-lg"
-                />
-              </a>
-
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-white hover:text-yellow-400 transition-all transform hover:scale-110"
-                aria-label={isExpanded ? 'Collapse player' : 'Expand player'}
-              >
-                <svg
-                  className={`w-7 h-7 transition-transform duration-300 drop-shadow-lg ${isExpanded ? 'rotate-180' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={3}
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                <span>Request a Song</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </button>
+              </a>
             </div>
+
+            {/* UMR Logo */}
+            <a
+              href="https://www.utahmusicradio.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:block flex-shrink-0"
+            >
+              <Image
+                src="/UMR.png"
+                alt="Utah Music Radio"
+                width={80}
+                height={27}
+                className="h-6 w-auto hover:opacity-80 transition-opacity"
+              />
+            </a>
+
+            {/* Expand Button */}
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-white hover:text-yellow-400 transition-colors flex-shrink-0"
+              aria-label={isExpanded ? 'Collapse player' : 'Expand player'}
+            >
+              <svg
+                className={`w-5 h-5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+              </svg>
+            </button>
           </div>
 
           {/* Expanded View */}
