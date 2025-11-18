@@ -55,12 +55,12 @@ export default function UMRPartnership({
         <Image
           src="/UMR.png"
           alt="Utah Music Radio"
-          width={100}
-          height={33}
-          className="h-6 w-auto object-contain"
+          width={150}
+          height={50}
+          className="h-10 w-auto object-contain"
         />
         {showText && (
-          <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+          <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
             Network Partner
           </span>
         )}
