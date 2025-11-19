@@ -83,11 +83,11 @@ export default async function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
             </Link>
 
-            <Link 
+            <Link
               href="/events"
               className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 hover:bg-white/20 text-white font-bold text-lg rounded-full transition-all duration-300 transform hover:scale-105"
             >
-              SEE SHOWS
+              SEE EVENTS
             </Link>
 
             <Link 
