@@ -26,12 +26,12 @@ export default function Footer() {
                   Privacy
                 </Link>
                 <a
-                  href="https://therocksalt.discourse.group"
+                  href="https://discord.gg/2kA7ctt5"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Salt Vault
+                  Discord
                 </a>
               </div>
             </div>
