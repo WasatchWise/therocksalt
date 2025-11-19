@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rock-salt-v1';
+const CACHE_NAME = 'rock-salt-v2';
 const urlsToCache = [
   '/',
   '/logotransparent.png',
