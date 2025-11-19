@@ -158,7 +158,7 @@ function SuccessContent() {
               Email Us
             </a>
             <Link
-              href="https://discord.gg/therocksalt"
+              href="https://discord.gg/2kA7ctt5"
               className="inline-flex items-center justify-center px-6 py-3 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 font-semibold"
             >
               Join Discord

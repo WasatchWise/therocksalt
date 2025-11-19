@@ -85,7 +85,7 @@ export default function AboutPage() {
               music scene, we&apos;d love to have you join our community. Connect with us on Discord
               to stay updated, share music, and be part of the conversation.
             </p>
-            <Button href="https://discord.gg/pjd27acM" size="lg">
+            <Button href="https://discord.gg/2kA7ctt5" size="lg">
               Join our Discord Community
             </Button>
           </section>

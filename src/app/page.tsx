@@ -342,7 +342,7 @@ export default async function HomePage() {
                 Connect with local musicians, find bandmates, share shows, and talk shit about that one venue.
               </p>
               <a
-                href="https://discord.gg/pjd27acM"
+                href="https://discord.gg/2kA7ctt5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105"
