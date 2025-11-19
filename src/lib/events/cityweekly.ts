@@ -21,7 +21,7 @@ interface CityWeeklyEvent {
 export async function fetchCityWeeklyEvents(): Promise<CityWeeklyEvent[]> {
   try {
     // City Weekly events page
-    const url = 'https://events.cityweekly.net/'
+    const url = 'https://events.cityweekly.net/calendars/all-events'
 
     const response = await fetch(url, {
       next: { revalidate: 3600 } // Cache for 1 hour
