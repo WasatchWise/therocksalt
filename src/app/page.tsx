@@ -275,10 +275,20 @@ export default async function HomePage() {
                 href="https://a8.asurahosting.com/public/therocksalt/app/requests"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-sm rounded-full transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-sm rounded-full transition-all mb-4"
               >
                 Submit Request →
               </a>
+              <div className="pt-3 border-t border-white/20">
+                <p className="text-xs font-bold uppercase tracking-wider text-white/70 mb-2">Recently Played</p>
+                <div className="rounded-lg bg-black/30 overflow-hidden">
+                  <iframe
+                    src="https://a8.asurahosting.com/public/therocksalt/history?theme=dark"
+                    className="w-full h-24 border-0"
+                    title="Recently Played"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Card 2: Watch Live */}
@@ -322,6 +332,16 @@ export default async function HomePage() {
               <p className="text-sm text-white/70 mb-3">
                 Connect with local musicians and find bandmates.
               </p>
+              <div className="rounded-lg overflow-hidden mb-3">
+                <iframe
+                  src="https://discord.com/widget?id=1422863431064883230&theme=dark"
+                  width="100%"
+                  height="200"
+                  frameBorder="0"
+                  sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                  title="Discord Community"
+                />
+              </div>
               <a
                 href="https://discord.gg/2kA7ctt5"
                 target="_blank"
@@ -335,9 +355,13 @@ export default async function HomePage() {
             {/* Card 5: Submit Music */}
             <div className="bg-gradient-to-br from-amber-900/80 to-orange-900/80 backdrop-blur-md border-2 border-amber-500/50 rounded-2xl p-5">
               <h3 className="text-lg font-black uppercase mb-2">🎤 Submit Music</h3>
-              <p className="text-sm text-white/70 mb-3">
+              <p className="text-sm text-white/70 mb-2">
                 Get your band featured on The Rock Salt.
               </p>
+              <div className="text-xs text-white/50 mb-3 space-y-1">
+                <p>• MP3/WAV files play on the stream 24/7</p>
+                <p>• Spotify links only during live shows</p>
+              </div>
               <Link
                 href="https://forms.gle/ZkniH6q2HZdEUJbo9"
                 target="_blank"
