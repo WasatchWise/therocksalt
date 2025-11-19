@@ -307,9 +307,10 @@ export default async function HomePage() {
                 <span className="text-3xl">🎬</span>
                 <h3 className="text-3xl font-black uppercase">Watch Live</h3>
               </div>
-              <div className="mb-4">
-                <p className="text-white/90 font-bold">Rock Salt Radio Live</p>
-                <p className="text-white/70 text-sm">Tuesday & Thursday • 11am - 1pm MST</p>
+              <div className="mb-6 bg-black/30 rounded-xl p-4 border border-white/20">
+                <p className="text-white font-black text-xl mb-1">Rock Salt Radio Live</p>
+                <p className="text-yellow-400 font-bold text-lg">Tuesday & Thursday</p>
+                <p className="text-yellow-400 font-bold text-2xl">11am - 1pm MST</p>
               </div>
               <div className="rounded-xl overflow-hidden bg-black/30 aspect-video">
                 <iframe
