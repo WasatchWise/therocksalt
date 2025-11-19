@@ -401,11 +401,11 @@ export default async function HomePage() {
       </section>
 
       {/* UMR Partnership Footer */}
-      <section className="relative py-8 bg-black">
+      <section className="relative py-12 bg-black">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-sm text-white/50">A show on</span>
-            <UMRPartnership variant="inline" />
+          <div className="flex items-center justify-center gap-4">
+            <span className="text-lg text-white/50">A show on</span>
+            <UMRPartnership variant="inline" className="scale-[2] origin-left" />
           </div>
         </div>
       </section>
