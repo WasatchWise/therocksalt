@@ -264,7 +264,7 @@ export default async function HomePage() {
       {/* RADIO + PLAYLIST SECTION - Side by Side */}
       <section className="relative py-16 bg-gradient-to-b from-black via-gray-900 to-black">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Song Requests */}
             <div className="bg-gradient-to-br from-red-900/80 to-orange-900/80 backdrop-blur-md border-4 border-red-500/50 rounded-3xl p-8">
               <div className="flex items-center gap-3 mb-6">
@@ -322,6 +322,30 @@ export default async function HomePage() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   loading="lazy"
                   title="The Rock Salt Live"
+                />
+              </div>
+            </div>
+
+            {/* Spotify Playlist */}
+            <div className="bg-gradient-to-br from-green-900/80 to-emerald-900/80 backdrop-blur-md border-4 border-green-500/50 rounded-3xl p-8 md:col-span-2 lg:col-span-1">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🎧</span>
+                <h3 className="text-3xl font-black uppercase">Local Playlist</h3>
+              </div>
+              <p className="text-white/70 mb-4">
+                Utah bands you should be listening to right now.
+              </p>
+              <div className="rounded-xl overflow-hidden">
+                <iframe
+                  style={{ borderRadius: '12px' }}
+                  src="https://open.spotify.com/embed/playlist/6uTuAYkMZJuFDpvEDUo3Iz?utm_source=generator&theme=0"
+                  width="100%"
+                  height="352"
+                  frameBorder="0"
+                  allowFullScreen
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  title="Utah Local Music Playlist"
                 />
               </div>
             </div>
