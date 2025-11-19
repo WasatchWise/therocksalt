@@ -265,27 +265,35 @@ export default async function HomePage() {
       <section className="relative py-16 bg-gradient-to-b from-black via-gray-900 to-black">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Radio Schedule */}
+            {/* Song Requests */}
             <div className="bg-gradient-to-br from-red-900/80 to-orange-900/80 backdrop-blur-md border-4 border-red-500/50 rounded-3xl p-8">
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-3xl">🔴</span>
-                <h3 className="text-3xl font-black uppercase">On Air</h3>
+                <span className="text-3xl">🎵</span>
+                <h3 className="text-3xl font-black uppercase">Request a Song</h3>
               </div>
               <div className="space-y-4">
-                <div>
-                  <p className="text-white/90 font-bold text-lg mb-1">Rock Salt Radio Live</p>
-                  <p className="text-white/70">Tuesday & Thursday</p>
-                  <p className="text-white/70">11am - 1pm MST</p>
-                </div>
-                <div className="pt-4 border-t border-white/20">
-                  <p className="text-sm font-bold uppercase tracking-wider text-white/90 mb-2">ALL LOCAL - ALL DAY</p>
-                  <p className="text-xs text-white/70 mb-4">AutoDJ spinning Utah artists 24/7 when we're not live</p>
-                  
-                  {/* Recently Played */}
+                <p className="text-white/90 text-lg mb-4">
+                  Want to hear your favorite local band? Request a song and we'll play it on the air!
+                </p>
+                <p className="text-white/70 mb-6">
+                  All requests go directly to the DJ during live shows, or get added to the AutoDJ queue.
+                </p>
+                <a
+                  href="https://a8.asurahosting.com/public/therocksalt/app/requests"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-bold rounded-full transition-all duration-300 transform hover:scale-105"
+                >
+                  Submit Request →
+                </a>
+
+                {/* Recently Played */}
+                <div className="pt-6 border-t border-white/20 mt-6">
+                  <p className="text-sm font-bold uppercase tracking-wider text-white/90 mb-3">Recently Played</p>
                   <div className="rounded-lg bg-black/30 overflow-hidden">
                     <iframe
                       src="https://a8.asurahosting.com/public/therocksalt/history?theme=dark"
-                      className="w-full h-48 border-0"
+                      className="w-full h-40 border-0"
                       title="Recently Played"
                     />
                   </div>
@@ -293,11 +301,15 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Featured Video */}
+            {/* Watch Live Video */}
             <div className="bg-gradient-to-br from-purple-900/80 to-pink-900/80 backdrop-blur-md border-4 border-purple-500/50 rounded-3xl p-8 overflow-hidden">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl">🎬</span>
                 <h3 className="text-3xl font-black uppercase">Watch Live</h3>
+              </div>
+              <div className="mb-4">
+                <p className="text-white/90 font-bold">Rock Salt Radio Live</p>
+                <p className="text-white/70 text-sm">Tuesday & Thursday • 11am - 1pm MST</p>
               </div>
               <div className="rounded-xl overflow-hidden bg-black/30 aspect-video">
                 <iframe
