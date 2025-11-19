@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { fetchAllSlugMagEvents } from '@/lib/events/slugmag'
 import { fetchAllCityWeeklyEvents } from '@/lib/events/cityweekly'
 import { fetchAllSoundwellEvents } from '@/lib/events/soundwell'
 import { fetchAllPiperDownEvents } from '@/lib/events/piperdown'
 
-// Create admin client for database operations
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE!
-)
+// Create admin client for database operations (lazy init)
+function getSupabaseClient(): SupabaseClient {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE!
+  )
+}
 
 interface ScrapedEvent {
   title: string
@@ -109,6 +111,8 @@ export async function POST(request: NextRequest) {
  * Handles venue matching and deduplication
  */
 async function saveEvent(event: ScrapedEvent): Promise<boolean> {
+  const supabase = getSupabaseClient()
+
   // Find or create venue
   const venueId = await findOrCreateVenue(event.venue, event.venue_address)
 
@@ -153,6 +157,8 @@ async function saveEvent(event: ScrapedEvent): Promise<boolean> {
  * Find existing venue or create a new one
  */
 async function findOrCreateVenue(venueName: string, address: string | null): Promise<string> {
+  const supabase = getSupabaseClient()
+
   // Normalize venue name for matching
   const normalizedName = venueName.toLowerCase().trim()
 
