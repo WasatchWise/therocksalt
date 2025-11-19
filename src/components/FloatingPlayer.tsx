@@ -88,7 +88,7 @@ export default function FloatingPlayer() {
                 alt="Utah Music Radio"
                 width={80}
                 height={27}
-                className="h-6 w-auto hover:opacity-80 transition-opacity"
+                className="h-10 w-auto hover:opacity-80 transition-opacity"
               />
             </a>
 

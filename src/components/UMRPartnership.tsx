@@ -37,7 +37,7 @@ export default function UMRPartnership({
             alt="Utah Music Radio"
             width={200}
             height={67}
-            className="h-14 w-auto object-contain"
+            className="h-20 w-auto object-contain"
           />
         </Link>
       </div>
@@ -57,7 +57,7 @@ export default function UMRPartnership({
           alt="Utah Music Radio"
           width={150}
           height={50}
-          className="h-10 w-auto object-contain"
+          className="h-16 w-auto object-contain"
         />
         {showText && (
           <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
@@ -85,7 +85,7 @@ export default function UMRPartnership({
         alt="Utah Music Radio"
         width={80}
         height={27}
-        className="h-6 w-auto object-contain"
+        className="h-10 w-auto object-contain"
       />
     </Link>
   )
