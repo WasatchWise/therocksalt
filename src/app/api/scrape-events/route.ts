@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Run all scrapers in parallel
+    // Note: Piper Down disabled - Squarespace site needs different approach
     const [slugEvents, cityWeeklyEvents, soundwellEvents, piperDownEvents] = await Promise.all([
       fetchAllSlugMagEvents().catch(err => {
         results.errors.push(`SLUG Magazine: ${err.message}`)
@@ -58,10 +59,12 @@ export async function POST(request: NextRequest) {
         results.errors.push(`Soundwell: ${err.message}`)
         return []
       }),
-      fetchAllPiperDownEvents().catch(err => {
-        results.errors.push(`Piper Down: ${err.message}`)
-        return []
-      })
+      // Disabled: Squarespace site with client-side rendering
+      Promise.resolve([])
+      // fetchAllPiperDownEvents().catch(err => {
+      //   results.errors.push(`Piper Down: ${err.message}`)
+      //   return []
+      // })
     ])
 
     results.slugmag.scraped = slugEvents.length
