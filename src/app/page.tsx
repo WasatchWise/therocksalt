@@ -107,7 +107,7 @@ export default async function HomePage() {
             <div className="w-px h-8 bg-white/20"></div>
             <div className="flex items-center gap-2">
               <span className="text-3xl font-black text-red-400">{totalEvents}</span>
-              <span className="text-white/70">Upcoming Shows</span>
+              <span className="text-white/70">Upcoming Events</span>
             </div>
             <div className="w-px h-8 bg-white/20"></div>
             <div className="flex items-center gap-2">
@@ -213,7 +213,7 @@ export default async function HomePage() {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
                 <span className="text-3xl">🎸</span>
-                <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">Upcoming Shows</h2>
+                <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">Upcoming Events</h2>
               </div>
               <Link 
                 href="/events"
@@ -261,58 +261,31 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* RADIO + PLAYLIST SECTION - Side by Side */}
-      <section className="relative py-16 bg-gradient-to-b from-black via-gray-900 to-black">
+      {/* COMPACT 3x2 DASHBOARD GRID */}
+      <section className="relative py-12 bg-gradient-to-b from-black via-gray-900 to-black">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Song Requests */}
-            <div className="bg-gradient-to-br from-red-900/80 to-orange-900/80 backdrop-blur-md border-4 border-red-500/50 rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-3xl">🎵</span>
-                <h3 className="text-3xl font-black uppercase">Request a Song</h3>
-              </div>
-              <div className="space-y-4">
-                <p className="text-white/90 text-lg mb-4">
-                  Want to hear your favorite local band? Request a song and we'll play it on the air!
-                </p>
-                <p className="text-white/70 mb-6">
-                  All requests go directly to the DJ during live shows, or get added to the AutoDJ queue.
-                </p>
-                <a
-                  href="https://a8.asurahosting.com/public/therocksalt/app/requests"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-bold rounded-full transition-all duration-300 transform hover:scale-105"
-                >
-                  Submit Request →
-                </a>
-
-                {/* Recently Played */}
-                <div className="pt-6 border-t border-white/20 mt-6">
-                  <p className="text-sm font-bold uppercase tracking-wider text-white/90 mb-3">Recently Played</p>
-                  <div className="rounded-lg bg-black/30 overflow-hidden">
-                    <iframe
-                      src="https://a8.asurahosting.com/public/therocksalt/history?theme=dark"
-                      className="w-full h-40 border-0"
-                      title="Recently Played"
-                    />
-                  </div>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Card 1: Request a Song */}
+            <div className="bg-gradient-to-br from-red-900/80 to-orange-900/80 backdrop-blur-md border-2 border-red-500/50 rounded-2xl p-5">
+              <h3 className="text-lg font-black uppercase mb-2">🎵 Request a Song</h3>
+              <p className="text-sm text-white/70 mb-3">
+                Request your favorite local band on the air!
+              </p>
+              <a
+                href="https://a8.asurahosting.com/public/therocksalt/app/requests"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-sm rounded-full transition-all"
+              >
+                Submit Request →
+              </a>
             </div>
 
-            {/* Watch Live Video */}
-            <div className="bg-gradient-to-br from-purple-900/80 to-pink-900/80 backdrop-blur-md border-4 border-purple-500/50 rounded-3xl p-8 overflow-hidden">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🎬</span>
-                <h3 className="text-3xl font-black uppercase">Watch Live</h3>
-              </div>
-              <div className="mb-6 bg-black/30 rounded-xl p-4 border border-white/20">
-                <p className="text-white font-black text-xl mb-1">Rock Salt Radio Live</p>
-                <p className="text-yellow-400 font-bold text-lg">Tuesday & Thursday</p>
-                <p className="text-yellow-400 font-bold text-2xl">11am - 1pm MST</p>
-              </div>
-              <div className="rounded-xl overflow-hidden bg-black/30 aspect-video">
+            {/* Card 2: Watch Live */}
+            <div className="bg-gradient-to-br from-purple-900/80 to-pink-900/80 backdrop-blur-md border-2 border-purple-500/50 rounded-2xl p-5">
+              <h3 className="text-lg font-black uppercase mb-2">🎬 Watch Live</h3>
+              <p className="text-sm text-yellow-400 font-bold mb-3">Tue & Thu • 11am-1pm MST</p>
+              <div className="rounded-lg overflow-hidden bg-black/30 aspect-video">
                 <iframe
                   src="https://www.youtube.com/embed/qruWdpjrJIs"
                   width="100%"
@@ -326,100 +299,87 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Spotify Playlist */}
-            <div className="bg-gradient-to-br from-green-900/80 to-emerald-900/80 backdrop-blur-md border-4 border-green-500/50 rounded-3xl p-8 md:col-span-2 lg:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🎧</span>
-                <h3 className="text-3xl font-black uppercase">Local Playlist</h3>
-              </div>
-              <p className="text-white/70 mb-4">
-                Utah bands you should be listening to right now.
-              </p>
-              <div className="rounded-xl overflow-hidden">
+            {/* Card 3: Spotify Playlist */}
+            <div className="bg-gradient-to-br from-green-900/80 to-emerald-900/80 backdrop-blur-md border-2 border-green-500/50 rounded-2xl p-5">
+              <h3 className="text-lg font-black uppercase mb-2">🎧 Local Playlist</h3>
+              <p className="text-sm text-white/70 mb-3">Utah bands you should hear.</p>
+              <div className="rounded-lg overflow-hidden">
                 <iframe
-                  style={{ borderRadius: '12px' }}
                   src="https://open.spotify.com/embed/playlist/6uTuAYkMZJuFDpvEDUo3Iz?utm_source=generator&theme=0"
                   width="100%"
-                  height="352"
+                  height="152"
                   frameBorder="0"
-                  allowFullScreen
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                   loading="lazy"
-                  title="Utah Local Music Playlist"
+                  className="rounded"
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* DISCORD COMMUNITY SECTION */}
-      <section className="relative py-16 bg-gradient-to-b from-black via-indigo-950/30 to-black">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">💬</span>
-                <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">Join The Community</h2>
-              </div>
-              <p className="text-xl text-white/70 mb-6">
-                Connect with local musicians, find bandmates, share shows, and talk shit about that one venue.
+            {/* Card 4: Discord Community */}
+            <div className="bg-gradient-to-br from-indigo-900/80 to-blue-900/80 backdrop-blur-md border-2 border-indigo-500/50 rounded-2xl p-5">
+              <h3 className="text-lg font-black uppercase mb-2">💬 Join Discord</h3>
+              <p className="text-sm text-white/70 mb-3">
+                Connect with local musicians and find bandmates.
               </p>
               <a
                 href="https://discord.gg/2kA7ctt5"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm rounded-full transition-all"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-                Join Discord
+                Join Community →
               </a>
             </div>
 
-            {/* Discord Widget */}
-            <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden">
-              <iframe
-                src="https://discord.com/widget?id=1422863431064883230&theme=dark"
-                width="100%"
-                height="350"
-                allowTransparency={true}
-                frameBorder="0"
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                title="Discord Community"
-              />
+            {/* Card 5: Submit Music */}
+            <div className="bg-gradient-to-br from-amber-900/80 to-orange-900/80 backdrop-blur-md border-2 border-amber-500/50 rounded-2xl p-5">
+              <h3 className="text-lg font-black uppercase mb-2">🎤 Submit Music</h3>
+              <p className="text-sm text-white/70 mb-3">
+                Get your band featured on The Rock Salt.
+              </p>
+              <Link
+                href="https://forms.gle/ZkniH6q2HZdEUJbo9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-sm rounded-full transition-all"
+              >
+                Submit Now →
+              </Link>
+            </div>
+
+            {/* Card 6: Upcoming Events Preview */}
+            <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-md border-2 border-white/20 rounded-2xl p-5">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-lg font-black uppercase">🎸 Next Events</h3>
+                <Link href="/events" className="text-xs text-white/50 hover:text-white">
+                  See all →
+                </Link>
+              </div>
+              {upcomingEvents.length > 0 ? (
+                <div className="space-y-2">
+                  {upcomingEvents.slice(0, 3).map((event) => (
+                    <div key={event.id} className="text-sm">
+                      <div className="font-bold text-white/90 truncate">{event.name}</div>
+                      <div className="text-xs text-white/50">
+                        {event.venue?.name}
+                        {event.start_time && ` • ${new Date(event.start_time).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-white/50">No upcoming events</p>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA SECTION - Clear Next Steps */}
-      <section className="relative py-20 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-black mb-6 uppercase tracking-tight">
-            Submit Your Music
-          </h2>
-          <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-            Get your band on the site, submit shows, and be part of the directory.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link 
-              href="https://forms.gle/ZkniH6q2HZdEUJbo9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black font-black text-lg rounded-full transition-all duration-300 transform hover:scale-110 shadow-2xl"
-            >
-              SUBMIT MUSIC
-            </Link>
-            <Link 
-              href="/events#submit"
-              className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 hover:bg-white/20 text-white font-bold text-lg rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-              SUBMIT SHOW
-            </Link>
-          </div>
-          <div className="mt-8 flex items-center justify-center gap-3">
+      {/* UMR Partnership Footer */}
+      <section className="relative py-8 bg-black">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-3">
             <span className="text-sm text-white/50">A show on</span>
             <UMRPartnership variant="inline" />
           </div>
