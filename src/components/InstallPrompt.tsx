@@ -59,7 +59,7 @@ export default function InstallPrompt() {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-r from-indigo-600 to-purple-700 text-white shadow-2xl animate-slide-up">
+    <div className="fixed bottom-16 left-0 right-0 z-50 p-4 bg-gradient-to-r from-indigo-600 to-purple-700 text-white shadow-2xl animate-slide-up">
       <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 flex-1">
           <div className="bg-white rounded-full p-1 flex-shrink-0">
