@@ -815,10 +815,10 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.13.0.tgz#8d38855560b98baf45d3a4f302ad9999ccf212a9"
   integrity sha512-2ih5qGw5SZJ+2fLZxP6Lr6Na2NTIgPRL/7Kmyuw0uIyBQnuhQ8fi8fzUTd38eIQmqp+GYLC00cI6WgtqHxBwmw==
 
-"@stripe/stripe-js@^8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-8.5.1.tgz#8a6b45783c55020c721e2635fb6e12e89f5e174b"
-  integrity sha512-xtWTQgebE9wMZxaSjSOcTo1tNJPqWiG3z2g9hlJK6LQ6FExd1eadH3pjdsaLXOVh/WmFlKhF5s9j/18aTXSn4g==
+"@stripe/stripe-js@^8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-8.5.2.tgz#15c147de18f1b9c954b91ab77c37004372ee8386"
+  integrity sha512-Y4FZjOCYS5kf9dhSEQNUXo4oYc8sgwq2LK9hValXaykl/VfTkiwFb2WbyqnI3EFjNwoxm0KSmyMhz3Wji4My3Q==
 
 "@supabase/auth-js@2.75.0":
   version "2.75.0"
