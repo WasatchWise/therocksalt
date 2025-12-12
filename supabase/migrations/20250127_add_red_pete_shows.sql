@@ -98,12 +98,15 @@ BEGIN
     RETURNING id INTO v_event1_id;
   END IF;
 
-  -- Link bands to Event 1
-  INSERT INTO public.event_bands (event_id, band_id, slot_order, is_headliner)
-  VALUES 
-    (v_event1_id, v_red_pete_id, 0, true),
-    (v_event1_id, v_smarter_than_katie_id, 1, false)
-  ON CONFLICT (event_id, band_id) DO NOTHING;
+  -- Link bands to Event 1 (check if not already linked)
+  IF NOT EXISTS (SELECT 1 FROM public.event_bands WHERE event_id = v_event1_id AND band_id = v_red_pete_id) THEN
+    INSERT INTO public.event_bands (event_id, band_id, slot_order, is_headliner)
+    VALUES (v_event1_id, v_red_pete_id, 0, true);
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM public.event_bands WHERE event_id = v_event1_id AND band_id = v_smarter_than_katie_id) THEN
+    INSERT INTO public.event_bands (event_id, band_id, slot_order, is_headliner)
+    VALUES (v_event1_id, v_smarter_than_katie_id, 1, false);
+  END IF;
 
   -- Create Event 2 if it doesn't exist
   SELECT id INTO v_event2_id 
@@ -118,12 +121,18 @@ BEGIN
     RETURNING id INTO v_event2_id;
   END IF;
 
-  -- Link bands to Event 2
-  INSERT INTO public.event_bands (event_id, band_id, slot_order, is_headliner)
-  VALUES 
-    (v_event2_id, v_perfectly_flawed_id, 0, true),
-    (v_event2_id, v_dealin_in_dirt_id, 1, false),
-    (v_event2_id, v_red_pete_id, 2, false)
-  ON CONFLICT (event_id, band_id) DO NOTHING;
+  -- Link bands to Event 2 (check if not already linked)
+  IF NOT EXISTS (SELECT 1 FROM public.event_bands WHERE event_id = v_event2_id AND band_id = v_perfectly_flawed_id) THEN
+    INSERT INTO public.event_bands (event_id, band_id, slot_order, is_headliner)
+    VALUES (v_event2_id, v_perfectly_flawed_id, 0, true);
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM public.event_bands WHERE event_id = v_event2_id AND band_id = v_dealin_in_dirt_id) THEN
+    INSERT INTO public.event_bands (event_id, band_id, slot_order, is_headliner)
+    VALUES (v_event2_id, v_dealin_in_dirt_id, 1, false);
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM public.event_bands WHERE event_id = v_event2_id AND band_id = v_red_pete_id) THEN
+    INSERT INTO public.event_bands (event_id, band_id, slot_order, is_headliner)
+    VALUES (v_event2_id, v_red_pete_id, 2, false);
+  END IF;
 
 END $$;
