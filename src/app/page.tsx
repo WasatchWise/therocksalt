@@ -1,4 +1,4 @@
-import { getBands, getEvents } from '@/lib/supabase/queries'
+import { getBands, getEvents, getBandBySlug } from '@/lib/supabase/queries'
 import UMRPartnership from '@/components/UMRPartnership'
 import Link from 'next/link'
 import NowPlaying from '@/components/NowPlaying'
@@ -7,13 +7,14 @@ export const revalidate = 60
 
 export default async function HomePage() {
   // Fetch real data
-  const allBands = await getBands(100)
-  const allEvents = await getEvents(50)
+  const [allBands, allEvents, brobecks] = await Promise.all([
+    getBands(100),
+    getEvents(50),
+    getBandBySlug('the-brobecks')
+  ])
 
-  // Get featured band - The Brobecks (manually curated)
-  const featuredBand = allBands.find(b => b.slug === 'the-brobecks') ||
-                      allBands.find(b => b.featured) ||
-                      allBands[0]
+  // Featured band - The Brobecks (fetched directly to avoid alphabetical limit)
+  const featuredBand = brobecks || allBands[0]
 
   // Get upcoming events (today and future only)
   const now = new Date()
