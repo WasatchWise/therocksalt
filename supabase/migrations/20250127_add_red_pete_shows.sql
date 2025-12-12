@@ -16,16 +16,41 @@ DECLARE
   v_event1_id uuid;
   v_event2_id uuid;
 BEGIN
-  -- Get venue IDs
+  -- Get or create venues
+  -- Piper Down
   SELECT id INTO v_piper_down_id FROM public.venues WHERE slug = 'piper-down' LIMIT 1;
-  SELECT id INTO v_ice_haus_id FROM public.venues WHERE slug = 'ice-haus' LIMIT 1;
-
   IF v_piper_down_id IS NULL THEN
-    RAISE EXCEPTION 'Venue piper-down not found';
+    INSERT INTO public.venues (name, slug, address, city, state, venue_type)
+    VALUES (
+      'Piper Down Olde World Pub',
+      'piper-down',
+      '1492 South State Street',
+      'Salt Lake City',
+      'UT',
+      'bar'
+    )
+    ON CONFLICT (slug) DO NOTHING;
+    
+    -- Get the ID (whether it was just created or already existed)
+    SELECT id INTO v_piper_down_id FROM public.venues WHERE slug = 'piper-down' LIMIT 1;
   END IF;
 
+  -- Ice Haus
+  SELECT id INTO v_ice_haus_id FROM public.venues WHERE slug = 'ice-haus' LIMIT 1;
   IF v_ice_haus_id IS NULL THEN
-    RAISE EXCEPTION 'Venue ice-haus not found';
+    INSERT INTO public.venues (name, slug, address, city, state, venue_type)
+    VALUES (
+      'Ice Haus',
+      'ice-haus',
+      '7 E. 4800 S.',
+      'Salt Lake City',
+      'UT',
+      'club'
+    )
+    ON CONFLICT (slug) DO NOTHING;
+    
+    -- Get the ID (whether it was just created or already existed)
+    SELECT id INTO v_ice_haus_id FROM public.venues WHERE slug = 'ice-haus' LIMIT 1;
   END IF;
 
   -- Get or create bands
