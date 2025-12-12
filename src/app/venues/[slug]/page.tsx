@@ -6,7 +6,7 @@ import Button from '@/components/Button'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-export const revalidate = 3600 // Cache for 1 hour (Google Places API calls)
+export const dynamic = 'force-dynamic' // Required for async params in Next.js 16
 
 // Extended venue type to handle fields that may exist in DB but not in generated types
 interface ExtendedVenue {
@@ -32,9 +32,7 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
-export async function generateStaticParams() {
-  return []
-}
+// Removed generateStaticParams to allow fully dynamic rendering
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
