@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation'
-import { getBandBySlug, getBandEvents, getAllBandSlugs } from '@/lib/supabase/queries'
+import { getBandBySlug, getBandEvents, getAllBandSlugs, getEventsByBandName } from '@/lib/supabase/queries'
 import Container from '@/components/Container'
 import AudioPlayer from '@/components/AudioPlayer'
 import ClaimBandButton from '@/components/ClaimBandButton'
+import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const revalidate = 0 // Force dynamic rendering
@@ -17,11 +18,28 @@ export async function generateStaticParams() {
   return []
 }
 
+// Convert slug to readable band name (e.g., "cattle-decapitation" -> "Cattle Decapitation")
+function slugToName(slug: string): string {
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const band = await getBandBySlug(slug)
 
   if (!band) {
+    // Check if band appears in events
+    const bandName = slugToName(slug)
+    const events = await getEventsByBandName(bandName)
+    if (events.length > 0) {
+      return {
+        title: bandName,
+        description: `${bandName} - Utah local artist with upcoming shows`,
+      }
+    }
     return {
       title: 'Band Not Found'
     }
@@ -37,7 +55,137 @@ export default async function BandPage({ params }: Props) {
   const { slug } = await params
   const band = await getBandBySlug(slug)
 
+  // If band not in database, check if they appear in events
   if (!band) {
+    const bandName = slugToName(slug)
+    const events = await getEventsByBandName(bandName)
+
+    if (events.length > 0) {
+      // Show auto-generated stub page for bands appearing in events
+      const now = new Date()
+      const upcomingEvents = events.filter(e => e.start_time && new Date(e.start_time) >= now)
+      const pastEvents = events.filter(e => e.start_time && new Date(e.start_time) < now)
+
+      return (
+        <Container className="py-12">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="px-2 py-1 bg-gray-500 text-white rounded text-xs font-bold uppercase">
+                Auto-Generated
+              </span>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+                {bandName}
+              </h1>
+            </div>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              This band appears in our events calendar but hasn't claimed their profile yet.
+            </p>
+          </div>
+
+          {/* Call to Action */}
+          <div className="mb-12 p-6 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl border-2 border-indigo-300 dark:border-indigo-700">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Are you {bandName}?
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Claim this page to add your bio, photos, music, and upcoming shows. It's free!
+            </p>
+            <Link
+              href="/submit"
+              className="inline-block px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors"
+            >
+              Claim Your Page →
+            </Link>
+          </div>
+
+          {/* Shows */}
+          {upcomingEvents.length > 0 && (
+            <section className="mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Upcoming Shows
+              </h2>
+              <div className="space-y-4">
+                {upcomingEvents.map(event => (
+                  <div
+                    key={event.id}
+                    className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6"
+                  >
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      {event.name || 'Untitled Event'}
+                    </h3>
+                    {event.start_time && (
+                      <p className="text-gray-600 dark:text-gray-400 mb-2">
+                        {new Date(event.start_time).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          month: 'long',
+                          day: 'numeric',
+                          year: 'numeric',
+                          hour: 'numeric',
+                          minute: '2-digit'
+                        })}
+                      </p>
+                    )}
+                    {event.venue && (
+                      <p className="text-gray-600 dark:text-gray-400">
+                        <Link href={`/venues/${event.venue.id}`} className="text-indigo-600 hover:underline">
+                          {event.venue.name}
+                        </Link>
+                        {event.venue.city && ` • ${event.venue.city}, ${event.venue.state || 'UT'}`}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {pastEvents.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Past Shows ({pastEvents.length})
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {pastEvents.slice(0, 6).map(event => (
+                  <div
+                    key={event.id}
+                    className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4"
+                  >
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                      {event.name || 'Untitled Event'}
+                    </h3>
+                    {event.start_time && (
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {new Date(event.start_time).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </p>
+                    )}
+                    {event.venue && (
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {event.venue.name}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Info about claiming */}
+          <div className="mt-12 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>
+              This page was auto-generated from our events calendar.
+              <br />
+              <Link href="/submit" className="text-indigo-600 hover:underline">Submit your band</Link> to add photos, music, bio, and more.
+            </p>
+          </div>
+        </Container>
+      )
+    }
+
+    // No band found anywhere
     notFound()
   }
 

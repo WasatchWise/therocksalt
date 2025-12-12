@@ -373,3 +373,36 @@ export async function getAllVenueSlugs(): Promise<string[]> {
   }
   return (data ?? []).map(venue => venue.slug).filter(Boolean) as string[]
 }
+
+// Search events for a band name (for auto-generated band stub pages)
+export async function getEventsByBandName(bandName: string): Promise<EventWithRelations[]> {
+  const supabase = await createServerClient()
+
+  // Search for events where the name contains the band name (case-insensitive)
+  const { data, error } = await supabase
+    .from('events')
+    .select(`
+      *,
+      venue:venues ( id, name, city, state, address ),
+      event_bands (
+        slot_order,
+        is_headliner,
+        band:bands (
+          id,
+          name,
+          slug
+        )
+      )
+    `)
+    .ilike('name', `%${bandName}%`)
+    .order('start_time', { ascending: false })
+    .limit(20)
+
+  if (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error searching events by band name:', error)
+    }
+    return []
+  }
+  return (data ?? []) as EventWithRelations[]
+}
