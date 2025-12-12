@@ -10,10 +10,10 @@ export default async function HomePage() {
   const allBands = await getBands(100)
   const allEvents = await getEvents(50)
 
-  // Get featured band (prefer HOF, then featured tier, then any with Spotify)
-  const featuredBand = allBands.find(b => b.tier === 'hof') ||
-                      allBands.find(b => b.tier === 'featured') ||
-                      allBands.find(b => b.spotify_url)
+  // Get featured band - The Brobecks (manually curated)
+  const featuredBand = allBands.find(b => b.slug === 'the-brobecks') ||
+                      allBands.find(b => b.featured) ||
+                      allBands[0]
 
   // Get upcoming events (today and future only)
   const now = new Date()
