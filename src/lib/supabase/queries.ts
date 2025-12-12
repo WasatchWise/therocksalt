@@ -284,11 +284,7 @@ export async function getVenues(limit = 50): Promise<VenueWithRelations[]> {
   const supabase = await createServerClient()
   const { data, error } = await supabase
     .from('venues')
-    .select(`
-      *,
-      venue_links ( * ),
-      venue_photos ( * )
-    `)
+    .select('*')
     .order('name', { ascending: true })
     .limit(limit)
 
@@ -305,11 +301,7 @@ export async function getVenueBySlug(slug: string): Promise<VenueWithFullDetails
   const supabase = await createServerClient()
   const { data, error } = await supabase
     .from('venues')
-    .select(`
-      *,
-      venue_links ( * ),
-      venue_photos ( * )
-    `)
+    .select('*')
     .eq('slug', slug)
     .single()
 
