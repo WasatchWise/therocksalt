@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getBandBySlug, getBandEvents, getAllBandSlugs, getEventsByBandName } from '@/lib/supabase/queries'
+import { getArtistDetailsCached, type ArtistDetails } from '@/lib/apis/spotify'
 import Container from '@/components/Container'
 import AudioPlayer from '@/components/AudioPlayer'
 import ClaimBandButton from '@/components/ClaimBandButton'
@@ -66,20 +67,58 @@ export default async function BandPage({ params }: Props) {
       const upcomingEvents = events.filter(e => e.start_time && new Date(e.start_time) >= now)
       const pastEvents = events.filter(e => e.start_time && new Date(e.start_time) < now)
 
+      // Try to fetch artist photo from Spotify
+      const spotifyArtist = await getArtistDetailsCached(null, bandName)
+
       return (
         <Container className="py-12">
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-2 py-1 bg-gray-500 text-white rounded text-xs font-bold uppercase">
-                Auto-Generated
-              </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-                {bandName}
-              </h1>
+          <div className="mb-8 flex flex-col md:flex-row gap-6 items-start">
+            {/* Spotify Artist Photo */}
+            {spotifyArtist?.imageUrl && (
+              <div className="flex-shrink-0">
+                <img
+                  src={spotifyArtist.imageUrl}
+                  alt={bandName}
+                  className="w-48 h-48 object-cover rounded-lg shadow-lg"
+                />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+                  Photo from Spotify
+                </p>
+              </div>
+            )}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-2 py-1 bg-gray-500 text-white rounded text-xs font-bold uppercase">
+                  Auto-Generated
+                </span>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+                  {bandName}
+                </h1>
+              </div>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                This band appears in our events calendar but hasn't claimed their profile yet.
+              </p>
+              {spotifyArtist && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {spotifyArtist.genres.slice(0, 4).map((genre) => (
+                    <span
+                      key={genre}
+                      className="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm rounded-full"
+                    >
+                      {genre}
+                    </span>
+                  ))}
+                  <a
+                    href={spotifyArtist.spotifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-3 py-1 bg-green-600 text-white text-sm rounded-full hover:bg-green-700"
+                  >
+                    Listen on Spotify
+                  </a>
+                </div>
+              )}
             </div>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              This band appears in our events calendar but hasn't claimed their profile yet.
-            </p>
           </div>
 
           {/* Call to Action */}
@@ -196,8 +235,35 @@ export default async function BandPage({ params }: Props) {
   const upcomingEvents = events.filter(e => e.start_time && new Date(e.start_time) >= now)
   const pastEvents = events.filter(e => e.start_time && new Date(e.start_time) < now)
 
-  // Get featured/primary photo
+  // Get featured/primary photo from database
   const primaryPhoto = band.band_photos?.find(p => p.is_primary) || band.band_photos?.[0]
+
+  // If no database photo, try to fetch from Spotify
+  let spotifyArtist: ArtistDetails | null = null
+  if (!primaryPhoto) {
+    // Look for Spotify link in band_links
+    const spotifyLink = band.band_links?.find(
+      link => link.label?.toLowerCase().includes('spotify') ||
+              link.url?.includes('spotify.com')
+    )
+
+    // Fetch artist details from Spotify (by URL or by band name search)
+    spotifyArtist = await getArtistDetailsCached(
+      spotifyLink?.url || null,
+      band.name
+    )
+  }
+
+  // Use Spotify image if no database photo
+  const displayPhoto = primaryPhoto ? {
+    url: primaryPhoto.url,
+    caption: primaryPhoto.caption,
+    source_attribution: primaryPhoto.source_attribution
+  } : spotifyArtist?.imageUrl ? {
+    url: spotifyArtist.imageUrl,
+    caption: null,
+    source_attribution: `Photo from Spotify`
+  } : null
 
   // Check if HOF tier
   const isHOF = band.tier === 'hof'
@@ -334,8 +400,8 @@ export default async function BandPage({ params }: Props) {
 
       {/* CONTENT SECTION */}
       <div className="mb-12">
-        <div className="flex items-start justify-between gap-6 mb-6">
-          <div className="flex-1">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-6 mb-6">
+          <div className="flex-1 w-full md:w-auto">
             {/* Genres */}
             {band.band_genres && band.band_genres.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-6">
@@ -405,19 +471,19 @@ export default async function BandPage({ params }: Props) {
             )}
           </div>
 
-          {/* Primary Photo */}
-          {primaryPhoto && (
-            <div className="flex-shrink-0">
+          {/* Primary Photo (from database or Spotify) */}
+          {displayPhoto && (
+            <div className="flex-shrink-0 w-full md:w-auto flex flex-col items-center md:items-start">
               <img
-                src={primaryPhoto.url}
-                alt={primaryPhoto.caption || band.name}
-                className={`w-64 h-64 object-cover rounded-lg shadow-lg ${
+                src={displayPhoto.url}
+                alt={displayPhoto.caption || band.name}
+                className={`w-full md:w-64 h-auto md:h-64 object-cover rounded-lg shadow-lg ${
                   isHOF ? 'border-4 border-yellow-400' : isPlatinum ? 'border-4 border-purple-400' : ''
                 }`}
               />
-              {primaryPhoto.source_attribution && (
+              {displayPhoto.source_attribution && (
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
-                  {primaryPhoto.source_attribution}
+                  {displayPhoto.source_attribution}
                 </p>
               )}
             </div>
