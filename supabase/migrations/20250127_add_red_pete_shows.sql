@@ -93,8 +93,8 @@ BEGIN
   LIMIT 1;
 
   IF v_event1_id IS NULL THEN
-    INSERT INTO public.events (title, venue_id, venue_name, city, state, start_time, ticket_price, status)
-    VALUES ('RED PETE & SMARTER THAN KATIE', v_piper_down_id, 'Piper Down Olde World Pub', 'Salt Lake City', 'UT', '2025-12-27 21:00:00-07:00'::timestamptz, 5.00, 'scheduled')
+    INSERT INTO public.events (name, venue_id, start_time, description)
+    VALUES ('RED PETE & SMARTER THAN KATIE', v_piper_down_id, '2025-12-27 21:00:00-07:00'::timestamptz, '$5 cover')
     RETURNING id INTO v_event1_id;
   END IF;
 
@@ -113,8 +113,8 @@ BEGIN
   LIMIT 1;
 
   IF v_event2_id IS NULL THEN
-    INSERT INTO public.events (title, venue_id, venue_name, city, state, start_time, ticket_price, status)
-    VALUES ('PERFECTLY FLAWED, DEALIN'' IN DIRT, RED PETE', v_ice_haus_id, 'Ice Haus', 'Salt Lake City', 'UT', '2026-01-02 21:00:00-07:00'::timestamptz, 5.00, 'scheduled')
+    INSERT INTO public.events (name, venue_id, start_time, description)
+    VALUES ('PERFECTLY FLAWED, DEALIN'' IN DIRT, RED PETE', v_ice_haus_id, '2026-01-02 21:00:00-07:00'::timestamptz, '$5 cover')
     RETURNING id INTO v_event2_id;
   END IF;
 
