@@ -38,13 +38,16 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const venue = await getVenueBySlug(slug)
+  const venueData = await getVenueBySlug(slug)
 
-  if (!venue) {
+  if (!venueData) {
     return {
       title: 'Venue Not Found'
     }
   }
+
+  // Cast to extended type to access optional fields
+  const venue = venueData as unknown as ExtendedVenue
 
   return {
     title: `${venue.name} | Salt Lake City Music Venue | The Rock Salt`,
