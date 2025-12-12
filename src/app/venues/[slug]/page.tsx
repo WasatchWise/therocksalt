@@ -8,6 +8,26 @@ import Link from 'next/link'
 
 export const revalidate = 3600 // Cache for 1 hour (Google Places API calls)
 
+// Extended venue type to handle fields that may exist in DB but not in generated types
+interface ExtendedVenue {
+  id: string
+  name: string
+  slug: string
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  website?: string | null
+  capacity?: number | null
+  // Fields that may exist but aren't in generated types
+  image_url?: string | null
+  notes?: string | null
+  venue_type?: string | null
+  featured?: boolean | null
+  phone?: string | null
+  claimed_by?: string | null
+  venue_photos?: Array<{ id: string; url: string; caption?: string; is_primary?: boolean; photo_order?: number }> | null
+}
+
 type Props = {
   params: Promise<{ slug: string }>
 }
@@ -118,11 +138,14 @@ const VENUE_DESCRIPTIONS: Record<string, { vibe: string; expect: string; bestFor
 
 export default async function VenuePage({ params }: Props) {
   const { slug } = await params
-  const venue = await getVenueBySlug(slug)
+  const venueData = await getVenueBySlug(slug)
 
-  if (!venue) {
+  if (!venueData) {
     notFound()
   }
+
+  // Cast to extended type to access fields that may exist but aren't in generated types
+  const venue = venueData as unknown as ExtendedVenue
 
   const events = await getVenueEvents(venue.id)
 
