@@ -134,6 +134,11 @@ const VENUE_DESCRIPTIONS: Record<string, { vibe: string; expect: string; bestFor
     vibe: 'Brighton base area bar with live music. Ski town vibes.',
     expect: 'Apres-ski crowds, mountain air, casual atmosphere.',
     bestFor: 'Rock, country, apres-ski entertainment.'
+  },
+  'avalon-theatre': {
+    vibe: 'Historic 1946 theater with serious character. Old-school Salt Lake magic.',
+    expect: 'Intimate seated venue, rich history, 200-cap room with theater vibes.',
+    bestFor: 'All-ages shows, theater performances, intimate concerts, community events.'
   }
 }
 
