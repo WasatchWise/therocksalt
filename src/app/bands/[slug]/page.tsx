@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation'
 import { getBandBySlug, getBandEvents, getAllBandSlugs, getEventsByBandName } from '@/lib/supabase/queries'
-import { getArtistDetailsCached, type ArtistDetails } from '@/lib/apis/spotify'
+import { getArtistDetailsCached, extractArtistId, type ArtistDetails } from '@/lib/apis/spotify'
 import Container from '@/components/Container'
 import AudioPlayer from '@/components/AudioPlayer'
 import ClaimBandButton from '@/components/ClaimBandButton'
+import SpotifyEmbed from '@/components/SpotifyEmbed'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
@@ -238,23 +239,24 @@ export default async function BandPage({ params }: Props) {
   // Get featured/primary photo from database
   const primaryPhoto = band.band_photos?.find(p => p.is_primary) || band.band_photos?.[0]
 
-  // If no database photo, try to fetch from Spotify
-  let spotifyArtist: ArtistDetails | null = null
-  if (!primaryPhoto) {
-    // Look for Spotify link in band_links
-    const spotifyLink = band.band_links?.find(
-      link => link.label?.toLowerCase().includes('spotify') ||
-              link.url?.includes('spotify.com')
-    )
+  // Look for Spotify link in band_links
+  const spotifyLink = band.band_links?.find(
+    link => link.label?.toLowerCase().includes('spotify') ||
+            link.url?.includes('spotify.com/artist')
+  )
 
-    // Fetch artist details from Spotify (by URL or by band name search)
-    spotifyArtist = await getArtistDetailsCached(
-      spotifyLink?.url || null,
-      band.name
-    )
-  }
+  // Always fetch Spotify data for embeds and enrichment
+  const spotifyArtist = await getArtistDetailsCached(
+    spotifyLink?.url || null,
+    band.name
+  )
 
-  // Use Spotify image if no database photo
+  // Get Spotify artist ID for embed
+  const spotifyArtistId = spotifyLink?.url
+    ? extractArtistId(spotifyLink.url)
+    : spotifyArtist?.id || null
+
+  // Use database photo first, fall back to Spotify
   const displayPhoto = primaryPhoto ? {
     url: primaryPhoto.url,
     caption: primaryPhoto.caption,
@@ -264,6 +266,11 @@ export default async function BandPage({ params }: Props) {
     caption: null,
     source_attribution: `Photo from Spotify`
   } : null
+
+  // Combine genres from database and Spotify
+  const dbGenres = band.band_genres?.map(bg => bg.genre?.name).filter(Boolean) || []
+  const spotifyGenres = spotifyArtist?.genres || []
+  const allGenres = [...new Set([...dbGenres, ...spotifyGenres.slice(0, 3)])]
 
   // Check if HOF tier
   const isHOF = band.tier === 'hof'
@@ -402,27 +409,25 @@ export default async function BandPage({ params }: Props) {
       <div className="mb-12">
         <div className="flex flex-col md:flex-row items-start justify-between gap-6 mb-6">
           <div className="flex-1 w-full md:w-auto">
-            {/* Genres */}
-            {band.band_genres && band.band_genres.length > 0 && (
+            {/* Genres (combined from database + Spotify) */}
+            {allGenres.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-6">
                 <span className="text-sm font-bold text-gray-700 dark:text-gray-300 mr-2">GENRES:</span>
-                {band.band_genres
-                  .map(bg => bg.genre?.name)
-                  .filter(Boolean)
-                  .map((genre, idx) => (
-                    <span
-                      key={idx}
-                      className={`px-4 py-2 text-sm font-bold rounded-full ${
-                        isHOF
-                          ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 border-2 border-white shadow-lg'
-                          : isPlatinum
-                          ? 'bg-gradient-to-r from-purple-400 to-purple-500 text-white shadow-lg'
-                          : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200'
-                      }`}
-                    >
-                      {genre}
-                    </span>
-                  ))}
+                {allGenres.map((genre, idx) => (
+                  <Link
+                    key={idx}
+                    href={`/discover?genre=${encodeURIComponent(String(genre))}`}
+                    className={`px-4 py-2 text-sm font-bold rounded-full transition-all hover:scale-105 ${
+                      isHOF
+                        ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 border-2 border-white shadow-lg hover:shadow-xl'
+                        : isPlatinum
+                        ? 'bg-gradient-to-r from-purple-400 to-purple-500 text-white shadow-lg hover:shadow-xl'
+                        : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 hover:bg-indigo-200 dark:hover:bg-indigo-800'
+                    }`}
+                  >
+                    {genre}
+                  </Link>
+                ))}
               </div>
             )}
 
@@ -497,6 +502,36 @@ export default async function BandPage({ params }: Props) {
           isClaimed={!!band.claimed_by}
         />
       </div>
+
+      {/* LISTEN NOW - Spotify Embed */}
+      {spotifyArtistId && (
+        <section className="mb-12">
+          <div className={`p-6 rounded-xl ${
+            isHOF
+              ? 'bg-gradient-to-br from-green-900/30 to-green-800/30 border-2 border-yellow-400'
+              : isPlatinum
+              ? 'bg-gradient-to-br from-green-900/30 to-green-800/30 border-2 border-purple-400'
+              : 'bg-gradient-to-br from-green-900/30 to-green-800/30 border border-green-700'
+          }`}>
+            <div className="flex items-center gap-3 mb-4">
+              <svg className="w-8 h-8 text-green-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+              </svg>
+              <h2 className={`text-2xl font-black uppercase ${
+                isHOF ? 'text-yellow-400' : isPlatinum ? 'text-purple-400' : 'text-white'
+              }`}>
+                Listen Now
+              </h2>
+              {spotifyArtist && (
+                <span className="ml-auto text-sm text-gray-400">
+                  {spotifyArtist.followers.toLocaleString()} followers
+                </span>
+              )}
+            </div>
+            <SpotifyEmbed artistId={spotifyArtistId} theme="dark" />
+          </div>
+        </section>
+      )}
 
       {/* Band Members Section */}
       {band.band_members && band.band_members.length > 0 && (

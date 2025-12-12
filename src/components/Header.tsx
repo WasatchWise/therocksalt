@@ -19,11 +19,10 @@ export default function Header() {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Listen Live', href: '/live', highlight: true },
+    { name: 'Discover', href: '/discover', accent: true },
     { name: 'Artists', href: '/bands' },
     { name: 'Venues', href: '/venues' },
-    { name: 'Radio Episodes', href: '/episodes' },
     { name: 'Events', href: '/events' },
-    { name: 'About', href: '/about' },
   ]
 
   // Update saved bands count on mount and when bands are saved/unsaved
@@ -73,6 +72,8 @@ export default function Header() {
                 className={
                   item.highlight
                     ? "px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-all flex items-center gap-2 animate-pulse hover:animate-none"
+                    : item.accent
+                    ? "px-3 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold rounded-lg transition-all"
                     : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors"
                 }
               >
@@ -170,6 +171,8 @@ export default function Header() {
                   className={
                     item.highlight
                       ? "px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition-all flex items-center gap-2 animate-pulse hover:animate-none"
+                      : item.accent
+                      ? "px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg"
                       : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors"
                   }
                   onClick={() => setMobileMenuOpen(false)}
